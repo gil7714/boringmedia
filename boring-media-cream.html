@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boring Media — We Buy Media. It Converts.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3efe7;
+    --bg-elevated: #ebe7df;
+    --bg-card: #eae5dc;
+    --surface: #e4dfd6;
+    --black: #0a0a0a;
+    --black-soft: #1a1a1a;
+    --border: rgba(0,0,0,0.07);
+    --border-hover: rgba(0,0,0,0.12);
+    --text-primary: #0a0a0a;
+    --text-white: #0a0a0a;
+    --text-secondary: #6b6960;
+    --text-tertiary: #a09d95;
+    --cream: #0a0a0a;
+    --cream-dim: rgba(10,10,10,0.05);
+    --cream-subtle: rgba(10,10,10,0.02);
+    --font-primary: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-hover) var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--black);
+    color: var(--bg);
+  }
+
+  /* ===== SUBTLE GRAIN ===== */
+  .grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* ===== TOP LINE ACCENT ===== */
+  .top-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--black) 50%, transparent 100%);
+    opacity: 0.1;
+    z-index: 200;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 72px);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    background: rgba(243,239,231,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 72px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .logo {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    color: var(--text-white);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); }
+
+  .nav-cta {
+    background: var(--cream) !important;
+    color: var(--bg) !important;
+    padding: 8px 20px !important;
+    border-radius: 4px;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    transition: opacity 0.3s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: var(--black);
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 60px;
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(44px, 7.5vw, 96px);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero h1 .line { display: block; }
+
+  .hero h1 .outline {
+    -webkit-text-stroke: 1.5px rgba(10,10,10,0.3);
+    color: transparent;
+  }
+
+  .hero h1 .cream { color: var(--cream); }
+
+  .hero-sub {
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--text-secondary);
+    max-width: 480px;
+    line-height: 1.65;
+    font-weight: 350;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  .btn-primary {
+    background: var(--cream);
+    color: var(--bg);
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    letter-spacing: -0.005em;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    padding: 14px 32px;
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    letter-spacing: -0.005em;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.03);
+  }
+
+  /* ===== DIVIDER LINE ===== */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== TICKER ===== */
+  .ticker-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ticker {
+    display: flex;
+    animation: scroll 35s linear infinite;
+    width: max-content;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 32px;
+    white-space: nowrap;
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ticker-item .dot {
+    width: 3px; height: 3px;
+    background: var(--cream);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 120px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: var(--font-primary);
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+    font-weight: 350;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 64px;
+  }
+
+  .about-left .section-desc { margin-bottom: 24px; }
+
+  .stat-row {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat {
+    min-width: 100px;
+  }
+
+  .stat-num {
+    font-family: var(--font-primary);
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: var(--text-white);
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .principles {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .principle {
+    background: var(--bg-card);
+    padding: 28px;
+    transition: all 0.35s;
+    cursor: default;
+  }
+
+  .principle:hover {
+    background: var(--surface);
+  }
+
+  .principle-idx {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .principle h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+    color: var(--text-white);
+  }
+
+  .principle p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-weight: 350;
+  }
+
+  /* ===== VERTICALS ===== */
+  .verticals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 64px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .v-card {
+    background: var(--bg-card);
+    padding: 40px 32px;
+    transition: all 0.35s;
+    cursor: default;
+    position: relative;
+  }
+
+  .v-card:hover {
+    background: var(--surface);
+  }
+
+  .v-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--black);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .v-card:hover::after { opacity: 0.3; }
+
+  .v-card-icon {
+    width: 40px; height: 40px;
+    border-radius: 6px;
+    background: var(--cream-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--cream);
+  }
+
+  .v-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    color: var(--text-white);
+  }
+
+  .v-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-weight: 350;
+  }
+
+  .v-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ===== PROCESS ===== */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 64px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .p-step {
+    background: var(--bg-card);
+    padding: 40px 28px;
+    transition: all 0.35s;
+    cursor: default;
+  }
+
+  .p-step:hover { background: var(--surface); }
+
+  .p-step-num {
+    font-family: var(--font-primary);
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--text-primary);
+    opacity: 0.06;
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -0.04em;
+  }
+
+  .p-step h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    color: var(--text-white);
+  }
+
+  .p-step p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-weight: 350;
+  }
+
+  /* ===== MANIFESTO STRIP ===== */
+  .manifesto {
+    padding: 100px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 2;
+  }
+
+  .manifesto-inner {
+    max-width: 680px;
+  }
+
+  .manifesto blockquote {
+    font-family: var(--font-primary);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid var(--black);
+  }
+
+  .manifesto blockquote em {
+    font-style: normal;
+    color: var(--text-white);
+    font-weight: 500;
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    padding: 140px 0;
+    text-align: center;
+  }
+
+  .cta-section .section-title {
+    max-width: 580px;
+    margin: 0 auto 16px;
+  }
+
+  .cta-section .section-desc {
+    max-width: 420px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cta-email {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-top: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-email a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+
+  .cta-email a:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.01em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--text-secondary); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .verticals-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .verticals-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 24px; }
+    section { padding: 80px 0; }
+    .manifesto { padding: 64px 0; }
+    .cta-section { padding: 100px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="top-line"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Boring Media</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#verticals">Verticals</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
+    </ul>
+    <button class="mobile-menu-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">Performance Media Buying</div>
+    <h1>
+      <span class="line">We run ads</span>
+      <span class="line"><span class="outline">the boring way</span><span class="cream">.</span></span>
+    </h1>
+    <p class="hero-sub">No hype. No fluff. Just systems that convert traffic into revenue — predictably, repeatedly, at scale.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Work With Us</a>
+      <a href="#about" class="btn-ghost">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
+    <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
+    <div class="ticker-item"><span class="dot"></span>Performance Media</div>
+    <div class="ticker-item"><span class="dot"></span>Real-Time Bidding</div>
+    <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
+    <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
+    <div class="ticker-item"><span class="dot"></span>Paid Media</div>
+    <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
+    <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
+    <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
+    <div class="ticker-item"><span class="dot"></span>Performance Media</div>
+    <div class="ticker-item"><span class="dot"></span>Real-Time Bidding</div>
+    <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
+    <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
+    <div class="ticker-item"><span class="dot"></span>Paid Media</div>
+    <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">The boring stuff<br>that prints money.</h2>
+        <p class="section-desc">We buy media. We optimize funnels. We track every click, every conversion, every dollar. Then we do it again — better, faster, cheaper.</p>
+        <p class="section-desc">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Campaigns Live</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">&lt;1s</div>
+            <div class="stat-label">RTB Response</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Tests Running</div>
+          </div>
+        </div>
+      </div>
+      <div class="principles reveal">
+        <div class="principle">
+          <div class="principle-idx">01</div>
+          <h4>Systems Over Stunts</h4>
+          <p>Every campaign is a system — tested, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-idx">02</div>
+          <h4>Data Is the Creative</h4>
+          <p>The numbers tell us what works. We listen. Winning ads aren't the prettiest — they're the ones with the best unit economics.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-idx">03</div>
+          <h4>Scale What Works</h4>
+          <p>Find a winner, remove the ceiling, pour fuel on it. That's the whole strategy. It's boring. It works.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTICALS -->
+<section id="verticals">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Verticals</div>
+      <h2 class="section-title">Where we operate.</h2>
+      <p class="section-desc">High-intent, high-value verticals where performance media buying matters most.</p>
+    </div>
+    <div class="verticals-grid reveal">
+      <div class="v-card">
+        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
+        <h3>Auto Insurance</h3>
+        <p>Real-time bidding, lead qualification, and conversion optimization across the auto insurance ecosystem. We know the buyers, the flows, and the margins.</p>
+        <span class="v-tag">Primary Vertical</span>
+      </div>
+      <div class="v-card">
+        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M10 20v-5a2 2 0 1 1 4 0v5"/></svg></div>
+        <h3>Home Insurance</h3>
+        <p>High-value homeowner leads through precision targeting and optimized funnels. Quality traffic that converts to bound policies.</p>
+        <span class="v-tag">Expanding</span>
+      </div>
+      <div class="v-card">
+        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 5 5-9"/></svg></div>
+        <h3>Performance Verticals</h3>
+        <p>Our infrastructure supports any performance vertical where the math works. If it converts and scales, we can run it.</p>
+        <span class="v-tag">Growing</span>
+      </div>
+      <div class="v-card">
+        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><path d="M22 10a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/></svg></div>
+        <h3>Medicare</h3>
+        <p>Qualified Medicare leads at scale during AEP and year-round. Compliant funnels, verified intent, reliable volume for carriers and agents.</p>
+        <span class="v-tag">Growing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">How boring works.</h2>
+      <p class="section-desc">Four steps. Repeat forever. That's the secret — there is no secret.</p>
+    </div>
+    <div class="process-grid reveal">
+      <div class="p-step">
+        <div class="p-step-num">01</div>
+        <h4>Build</h4>
+        <p>Set up the infrastructure — tracking, bidding logic, offer routing, landing pages. Nothing flashy. Everything measurable.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">02</div>
+        <h4>Test</h4>
+        <p>Launch variants. Compare everything. Kill losers fast. The data decides, not opinions.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">03</div>
+        <h4>Optimize</h4>
+        <p>Squeeze every conversion point. Improve CPAs. Increase yield. Tiny gains compound into huge margins.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-step-num">04</div>
+        <h4>Scale</h4>
+        <p>Winners get budget. Proven systems get expanded. Then we go back to step two and do it all again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<div class="manifesto">
+  <div class="container">
+    <div class="manifesto-inner reveal">
+      <blockquote>
+        We don't need to stand out. We just need to <em>win</em>. The palette doesn't ask for attention. The results do the work.
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="text-align: center;">Let's Talk</div>
+      <h2 class="section-title">Ready for results that are<br>predictably boring?</h2>
+      <p class="section-desc">Whether you're a brand looking for performance media, or an operator who wants a partner that speaks numbers — we should talk.</p>
+      <div class="cta-actions">
+        <a href="mailto:hello@boringmedia.ai" class="btn-primary">Get In Touch</a>
+        <a href="#" class="btn-ghost">Book a Call</a>
+      </div>
+      <div class="cta-email">or email us directly at <a href="mailto:hello@boringmedia.ai">hello@boringmedia.ai</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">Boring Media</a>
+      <div class="footer-right">
+        <ul class="footer-links">
+          <li><a href="mailto:hello@boringmedia.ai">Contact</a></li>
+          <li><a href="#">boringmedia.ai</a></li>
+        </ul>
+        <span class="footer-copy">© 2025</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
