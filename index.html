@@ -24,6 +24,7 @@
     --cream-dim: rgba(10,10,10,0.05);
     --cream-subtle: rgba(10,10,10,0.02);
     --font-primary: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
 
@@ -38,7 +39,7 @@
   body {
     background: var(--bg);
     color: var(--text-primary);
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -123,6 +124,7 @@
   .nav-links a {
     color: var(--text-secondary);
     text-decoration: none;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -185,7 +187,7 @@
     font-size: clamp(44px, 7.5vw, 96px);
     font-weight: 800;
     line-height: 0.98;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.7s ease forwards 0.35s;
@@ -201,6 +203,7 @@
   .hero h1 .cream { color: var(--cream); }
 
   .hero-sub {
+    font-family: var(--font-body);
     font-size: clamp(16px, 1.8vw, 19px);
     color: var(--text-secondary);
     max-width: 480px;
@@ -225,7 +228,7 @@
     padding: 14px 32px;
     border: none;
     border-radius: 4px;
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -245,7 +248,7 @@
     padding: 14px 32px;
     border: 1px solid var(--border-hover);
     border-radius: 4px;
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -290,7 +293,7 @@
     gap: 16px;
     padding: 0 32px;
     white-space: nowrap;
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     font-size: 12px;
     font-weight: 500;
     color: var(--text-tertiary);
@@ -325,12 +328,13 @@
     font-family: var(--font-primary);
     font-size: clamp(30px, 4.5vw, 52px);
     font-weight: 700;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
     line-height: 1.08;
     margin-bottom: 16px;
   }
 
   .section-desc {
+    font-family: var(--font-body);
     font-size: 16px;
     color: var(--text-secondary);
     line-height: 1.7;
@@ -408,6 +412,7 @@
   }
 
   .principle h4 {
+    font-family: var(--font-primary);
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 6px;
@@ -416,6 +421,7 @@
   }
 
   .principle p {
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.6;
@@ -469,6 +475,7 @@
   }
 
   .v-card h3 {
+    font-family: var(--font-primary);
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -477,6 +484,7 @@
   }
 
   .v-card p {
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.65;
@@ -525,6 +533,7 @@
   }
 
   .p-step h4 {
+    font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
@@ -533,6 +542,7 @@
   }
 
   .p-step p {
+    font-family: var(--font-body);
     font-size: 13px;
     color: var(--text-secondary);
     line-height: 1.65;
@@ -553,7 +563,7 @@
   }
 
   .manifesto blockquote {
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     font-size: clamp(22px, 3vw, 32px);
     font-weight: 300;
     line-height: 1.5;
@@ -648,6 +658,7 @@
   }
 
   .footer-copy {
+    font-family: var(--font-body);
     font-size: 12px;
     color: var(--text-tertiary);
     letter-spacing: 0.01em;
@@ -660,6 +671,7 @@
   }
 
   .footer-links a {
+    font-family: var(--font-body);
     font-size: 12px;
     color: var(--text-tertiary);
     text-decoration: none;
@@ -752,18 +764,18 @@
     <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
     <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
     <div class="ticker-item"><span class="dot"></span>Performance Media</div>
-    <div class="ticker-item"><span class="dot"></span>Real-Time Bidding</div>
+    <div class="ticker-item"><span class="dot"></span>Paid Social</div>
     <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
     <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
-    <div class="ticker-item"><span class="dot"></span>Paid Media</div>
+    <div class="ticker-item"><span class="dot"></span>Campaign Automation</div>
     <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
     <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
     <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
     <div class="ticker-item"><span class="dot"></span>Performance Media</div>
-    <div class="ticker-item"><span class="dot"></span>Real-Time Bidding</div>
+    <div class="ticker-item"><span class="dot"></span>Paid Social</div>
     <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
     <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
-    <div class="ticker-item"><span class="dot"></span>Paid Media</div>
+    <div class="ticker-item"><span class="dot"></span>Campaign Automation</div>
     <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
   </div>
 </div>
@@ -775,7 +787,7 @@
       <div class="about-left reveal">
         <div class="section-label">What We Do</div>
         <h2 class="section-title">The boring stuff<br>that prints money.</h2>
-        <p class="section-desc">We buy media. We optimize funnels. We track every click, every conversion, every dollar. Then we do it again — better, faster, cheaper.</p>
+        <p class="section-desc">We buy media. We optimize funnels. We track every click, every conversion, every dollar — then we do it again, better, faster, cheaper.</p>
         <p class="section-desc">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
         <div class="stat-row">
           <div class="stat">
@@ -783,8 +795,8 @@
             <div class="stat-label">Campaigns Live</div>
           </div>
           <div class="stat">
-            <div class="stat-num">&lt;1s</div>
-            <div class="stat-label">RTB Response</div>
+            <div class="stat-num">Full</div>
+            <div class="stat-label">Funnel Owned</div>
           </div>
           <div class="stat">
             <div class="stat-num">∞</div>
@@ -825,13 +837,13 @@
       <div class="v-card">
         <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
         <h3>Auto Insurance</h3>
-        <p>Real-time bidding, lead qualification, and conversion optimization across the auto insurance ecosystem. We know the buyers, the flows, and the margins.</p>
+        <p>We generate exclusive, high-intent auto insurance leads and deliver them to carriers and agencies ready to bind policies — not just browse.</p>
         <span class="v-tag">Primary Vertical</span>
       </div>
       <div class="v-card">
         <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M10 20v-5a2 2 0 1 1 4 0v5"/></svg></div>
         <h3>Home Insurance</h3>
-        <p>High-value homeowner leads through precision targeting and optimized funnels. Quality traffic that converts to bound policies.</p>
+        <p>Qualified homeowner leads through precision targeting and optimized funnels. Traffic that converts to bound policies, not wasted clicks.</p>
         <span class="v-tag">Expanding</span>
       </div>
       <div class="v-card">
@@ -843,7 +855,7 @@
       <div class="v-card">
         <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><path d="M22 10a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/></svg></div>
         <h3>Medicare</h3>
-        <p>Qualified Medicare leads at scale during AEP and year-round. Compliant funnels, verified intent, reliable volume for carriers and agents.</p>
+        <p>Compliant, verified Medicare leads at scale — during AEP and year-round. Reliable volume for carriers, agencies, and agents who need qualified prospects, not tire-kickers.</p>
         <span class="v-tag">Growing</span>
       </div>
     </div>
@@ -862,7 +874,7 @@
       <div class="p-step">
         <div class="p-step-num">01</div>
         <h4>Build</h4>
-        <p>Set up the infrastructure — tracking, bidding logic, offer routing, landing pages. Nothing flashy. Everything measurable.</p>
+        <p>Set up the infrastructure — tracking, offer routing, landing pages, compliance. Nothing flashy. Everything measurable.</p>
       </div>
       <div class="p-step">
         <div class="p-step-num">02</div>
@@ -872,7 +884,7 @@
       <div class="p-step">
         <div class="p-step-num">03</div>
         <h4>Optimize</h4>
-        <p>Squeeze every conversion point. Improve CPAs. Increase yield. Tiny gains compound into huge margins.</p>
+        <p>Squeeze every conversion point. Lower costs. Improve quality. Tiny gains compound into outsized margins.</p>
       </div>
       <div class="p-step">
         <div class="p-step-num">04</div>
@@ -900,7 +912,7 @@
     <div class="reveal">
       <div class="section-label" style="text-align: center;">Let's Talk</div>
       <h2 class="section-title">Ready for results that are<br>predictably boring?</h2>
-      <p class="section-desc">Whether you're a brand looking for performance media, or an operator who wants a partner that speaks numbers — we should talk.</p>
+      <p class="section-desc">Whether you're a carrier, agency, or operator who wants a partner that speaks in numbers — we should talk.</p>
       <div class="cta-actions">
         <a href="mailto:hello@boringmedia.ai" class="btn-primary">Get In Touch</a>
         <a href="#" class="btn-ghost">Book a Call</a>
@@ -920,7 +932,7 @@
           <li><a href="mailto:hello@boringmedia.ai">Contact</a></li>
           <li><a href="#">boringmedia.ai</a></li>
         </ul>
-        <span class="footer-copy">© 2025</span>
+        <span class="footer-copy">© 2026</span>
       </div>
     </div>
   </div>
