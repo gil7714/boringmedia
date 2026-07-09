@@ -4,81 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boring Media — We Buy Media. It Converts.</title>
+<meta name="description" content="Performance media buying and lead generation. Auto insurance, home equity, Medicare. Systems that convert traffic into revenue.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f3efe7;
-    --bg-elevated: #ebe7df;
-    --bg-card: #eae5dc;
-    --surface: #e4dfd6;
-    --black: #0a0a0a;
-    --black-soft: #1a1a1a;
-    --border: rgba(0,0,0,0.07);
-    --border-hover: rgba(0,0,0,0.12);
-    --text-primary: #0a0a0a;
-    --text-white: #0a0a0a;
-    --text-secondary: #6b6960;
-    --text-tertiary: #a09d95;
-    --cream: #0a0a0a;
-    --cream-dim: rgba(10,10,10,0.05);
-    --cream-subtle: rgba(10,10,10,0.02);
-    --font-primary: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
-    --font-body: 'Inter', -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --bg: #07080b;
+    --bg-raise: #0c0e13;
+    --panel: #0e1117;
+    --panel-2: #12151d;
+    --border: rgba(255,255,255,0.07);
+    --border-strong: rgba(255,255,255,0.13);
+    --text: #eceef3;
+    --text-2: #99a0b0;
+    --text-3: #5c6372;
+    --blue: #6f9dff;
+    --blue-dim: rgba(111,157,255,0.12);
+    --green: #3ddc84;
+    --green-dim: rgba(61,220,132,0.10);
+    --amber: #ffc76f;
+    --sans: 'Geist', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: 'Geist Mono', 'SF Mono', monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html {
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-hover) var(--bg);
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
-    color: var(--text-primary);
-    font-family: var(--font-body);
+    color: var(--text);
+    font-family: var(--sans);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  ::selection {
-    background: var(--black);
-    color: var(--bg);
-  }
+  ::selection { background: var(--blue); color: var(--bg); }
 
-  /* ===== SUBTLE GRAIN ===== */
-  .grain {
+  /* ===== BACKGROUND GRID ===== */
+  .bg-grid {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0.12;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 256px 256px;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
   }
 
-  /* ===== TOP LINE ACCENT ===== */
-  .top-line {
+  .glow {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--black) 50%, transparent 100%);
-    opacity: 0.1;
-    z-index: 200;
+    top: -280px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 560px;
+    background: radial-gradient(ellipse at center, rgba(111,157,255,0.10) 0%, transparent 65%);
+    z-index: 0;
+    pointer-events: none;
   }
 
-  /* ===== CONTAINER ===== */
   .container {
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 0 clamp(24px, 5vw, 72px);
+    padding: 0 clamp(20px, 5vw, 64px);
     position: relative;
     z-index: 2;
   }
@@ -88,130 +82,146 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    backdrop-filter: blur(24px) saturate(1.2);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2);
-    background: rgba(243,239,231,0.8);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    background: rgba(7,8,11,0.72);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-inner {
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 0 clamp(24px, 5vw, 72px);
+    padding: 0 clamp(20px, 5vw, 64px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 62px;
   }
 
   .logo {
-    font-family: var(--font-primary);
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  .logo-mark {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--text);
+    border-radius: 5px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: var(--blue);
+    border-radius: 2px;
   }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 32px;
     list-style: none;
   }
 
   .nav-links a {
-    color: var(--text-secondary);
+    color: var(--text-2);
     text-decoration: none;
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    transition: color 0.3s;
+    font-size: 13.5px;
+    font-weight: 450;
+    transition: color 0.25s;
   }
-
-  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a:hover { color: var(--text); }
 
   .nav-cta {
-    background: var(--cream) !important;
+    background: var(--text) !important;
     color: var(--bg) !important;
-    padding: 8px 20px !important;
-    border-radius: 4px;
-    font-weight: 500 !important;
+    padding: 8px 18px !important;
+    border-radius: 6px;
+    font-weight: 600 !important;
     font-size: 13px !important;
-    transition: opacity 0.3s !important;
+    transition: opacity 0.25s !important;
   }
-
   .nav-cta:hover { opacity: 0.85; }
 
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-
-  .mobile-menu-btn span {
-    display: block;
-    width: 18px;
-    height: 1px;
-    background: var(--black);
-    margin: 5px 0;
-    transition: all 0.3s;
-  }
+  .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  .mobile-menu-btn span { display: block; width: 18px; height: 1.5px; background: var(--text); margin: 5px 0; }
 
   /* ===== HERO ===== */
   .hero {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 60px;
+    align-items: center;
+    padding: 130px 0 90px;
+    position: relative;
+    z-index: 2;
   }
 
-  .hero-label {
-    font-family: var(--font-mono);
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(40px, 5vw, 72px);
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
+    color: var(--text-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 30px;
+    background: rgba(255,255,255,0.02);
     opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.2s;
+    animation: fadeUp 0.7s ease forwards 0.15s;
+  }
+
+  .pulse-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(61,220,132,0.5);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
   }
 
   .hero h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(44px, 7.5vw, 96px);
+    font-size: clamp(42px, 6.2vw, 78px);
     font-weight: 800;
-    line-height: 0.98;
-    letter-spacing: -0.03em;
-    margin-bottom: 32px;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
     opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
+    animation: fadeUp 0.7s ease forwards 0.3s;
   }
 
-  .hero h1 .line { display: block; }
-
-  .hero h1 .outline {
-    -webkit-text-stroke: 1.5px rgba(10,10,10,0.3);
-    color: transparent;
-  }
-
-  .hero h1 .cream { color: var(--cream); }
+  .hero h1 .dim { color: var(--text-3); }
+  .hero h1 .accent { color: var(--blue); }
 
   .hero-sub {
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.8vw, 19px);
-    color: var(--text-secondary);
-    max-width: 480px;
-    line-height: 1.65;
-    font-weight: 350;
-    margin-bottom: 52px;
+    font-size: clamp(15px, 1.6vw, 17.5px);
+    color: var(--text-2);
+    max-width: 460px;
+    line-height: 1.7;
+    font-weight: 400;
+    margin-bottom: 40px;
     opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.5s;
+    animation: fadeUp 0.7s ease forwards 0.45s;
   }
 
   .hero-actions {
@@ -219,416 +229,447 @@
     gap: 12px;
     flex-wrap: wrap;
     opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
+    animation: fadeUp 0.7s ease forwards 0.6s;
   }
 
   .btn-primary {
-    background: var(--cream);
+    background: var(--text);
     color: var(--bg);
-    padding: 14px 32px;
+    padding: 13px 28px;
     border: none;
-    border-radius: 4px;
-    font-family: var(--font-body);
+    border-radius: 7px;
+    font-family: var(--sans);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.25s;
     text-decoration: none;
-    letter-spacing: -0.005em;
   }
-
-  .btn-primary:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-  }
+  .btn-primary:hover { opacity: 0.87; transform: translateY(-1px); }
 
   .btn-ghost {
     background: transparent;
-    color: var(--text-primary);
-    padding: 14px 32px;
-    border: 1px solid var(--border-hover);
-    border-radius: 4px;
-    font-family: var(--font-body);
+    color: var(--text);
+    padding: 13px 28px;
+    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    font-family: var(--sans);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.25s;
     text-decoration: none;
-    letter-spacing: -0.005em;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.03); }
+
+  /* ===== TERMINAL / LIVE FEED ===== */
+  .terminal {
+    background: linear-gradient(180deg, var(--panel-2) 0%, var(--panel) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.55s;
   }
 
-  .btn-ghost:hover {
-    border-color: rgba(0,0,0,0.2);
-    background: rgba(0,0,0,0.03);
+  .terminal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
   }
 
-  /* ===== DIVIDER LINE ===== */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
+  .term-dots { display: flex; gap: 6px; }
+  .term-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+
+  .term-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.05em;
+  }
+
+  .term-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    background: var(--green-dim);
+    border: 1px solid rgba(61,220,132,0.25);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  .terminal-body {
+    padding: 14px 6px 14px 14px;
+    height: 318px;
+    overflow: hidden;
     position: relative;
-    z-index: 2;
   }
 
-  /* ===== TICKER ===== */
+  .terminal-body::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: linear-gradient(transparent, var(--panel));
+    pointer-events: none;
+  }
+
+  .feed-row {
+    display: grid;
+    grid-template-columns: 62px 1fr 44px 70px;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 8px;
+    border-radius: 6px;
+    animation: rowIn 0.4s ease;
+  }
+
+  .feed-row:nth-child(odd) { background: rgba(255,255,255,0.015); }
+
+  .feed-time { color: var(--text-3); font-size: 11px; }
+  .feed-event { color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .feed-event b { color: var(--text); font-weight: 500; }
+  .feed-geo { color: var(--blue); font-size: 11px; text-align: center; background: var(--blue-dim); border-radius: 4px; padding: 2px 0; }
+  .feed-payout { color: var(--green); text-align: right; font-weight: 500; }
+
+  .terminal-foot {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+  .terminal-foot b { color: var(--text-2); font-weight: 500; }
+
+  /* ===== STACK TICKER ===== */
   .ticker-wrap {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 18px 0;
+    padding: 16px 0;
     overflow: hidden;
     position: relative;
     z-index: 2;
+    background: var(--bg-raise);
   }
 
-  .ticker {
-    display: flex;
-    animation: scroll 35s linear infinite;
-    width: max-content;
-  }
+  .ticker { display: flex; animation: scroll 40s linear infinite; width: max-content; }
 
   .ticker-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 0 32px;
+    gap: 14px;
+    padding: 0 30px;
     white-space: nowrap;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-tertiary);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .ticker-item .dot {
-    width: 3px; height: 3px;
-    background: var(--cream);
-    border-radius: 50%;
-    opacity: 0.3;
-  }
-
-  /* ===== SECTIONS ===== */
-  section {
-    padding: 120px 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .section-label {
-    font-family: var(--font-mono);
+    font-family: var(--mono);
     font-size: 11px;
+    font-weight: 400;
+    color: var(--text-3);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+  }
+  .ticker-item .dot { width: 3px; height: 3px; background: var(--blue); border-radius: 50%; }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 120px 0; position: relative; z-index: 2; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
     margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--blue);
+    opacity: 0.5;
   }
 
   .section-title {
-    font-family: var(--font-primary);
-    font-size: clamp(30px, 4.5vw, 52px);
-    font-weight: 700;
+    font-size: clamp(30px, 4.2vw, 50px);
+    font-weight: 750;
     letter-spacing: -0.03em;
     line-height: 1.08;
     margin-bottom: 16px;
   }
 
   .section-desc {
-    font-family: var(--font-body);
     font-size: 16px;
-    color: var(--text-secondary);
+    color: var(--text-2);
     line-height: 1.7;
-    max-width: 520px;
-    font-weight: 350;
+    max-width: 540px;
+    font-weight: 400;
   }
 
   /* ===== ABOUT ===== */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 72px;
     align-items: start;
-    margin-top: 64px;
+    margin-top: 56px;
   }
 
-  .about-left .section-desc { margin-bottom: 24px; }
+  .about-left .section-desc { margin-bottom: 22px; }
 
   .stat-row {
     display: flex;
-    gap: 40px;
-    margin-top: 48px;
-    padding-top: 40px;
+    gap: 44px;
+    margin-top: 44px;
+    padding-top: 36px;
     border-top: 1px solid var(--border);
   }
 
-  .stat {
-    min-width: 100px;
-  }
-
   .stat-num {
-    font-family: var(--font-primary);
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-family: var(--mono);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     line-height: 1;
-    margin-bottom: 6px;
-    color: var(--text-white);
+    margin-bottom: 8px;
+    color: var(--text);
   }
+  .stat-num em { font-style: normal; color: var(--blue); }
 
   .stat-label {
-    font-family: var(--font-mono);
+    font-family: var(--mono);
     font-size: 10px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.1em;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
   .principles {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    background: var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+    gap: 12px;
   }
 
   .principle {
-    background: var(--bg-card);
-    padding: 28px;
-    transition: all 0.35s;
-    cursor: default;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 28px;
+    transition: border-color 0.3s, background 0.3s;
   }
-
-  .principle:hover {
-    background: var(--surface);
-  }
+  .principle:hover { border-color: var(--border-strong); background: var(--panel-2); }
 
   .principle-idx {
-    font-family: var(--font-mono);
+    font-family: var(--mono);
     font-size: 10px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.1em;
+    color: var(--blue);
+    letter-spacing: 0.12em;
     margin-bottom: 12px;
   }
 
-  .principle h4 {
-    font-family: var(--font-primary);
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
-    color: var(--text-white);
-  }
-
-  .principle p {
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    font-weight: 350;
-  }
+  .principle h4 { font-size: 15.5px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .principle p { font-size: 14px; color: var(--text-2); line-height: 1.65; }
 
   /* ===== VERTICALS ===== */
   .verticals-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    margin-top: 64px;
-    background: var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 56px;
   }
 
   .v-card {
-    background: var(--bg-card);
-    padding: 40px 32px;
-    transition: all 0.35s;
-    cursor: default;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 34px 32px;
+    transition: border-color 0.3s, background 0.3s, transform 0.3s;
     position: relative;
+    overflow: hidden;
   }
 
   .v-card:hover {
-    background: var(--surface);
+    border-color: rgba(111,157,255,0.35);
+    background: var(--panel-2);
+    transform: translateY(-2px);
   }
 
-  .v-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: var(--black);
-    opacity: 0;
-    transition: opacity 0.35s;
+  .v-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
   }
-
-  .v-card:hover::after { opacity: 0.3; }
 
   .v-card-icon {
-    width: 40px; height: 40px;
-    border-radius: 6px;
-    background: var(--cream-dim);
+    width: 42px; height: 42px;
+    border-radius: 9px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(111,157,255,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
-    color: var(--cream);
-  }
-
-  .v-card h3 {
-    font-family: var(--font-primary);
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-    color: var(--text-white);
-  }
-
-  .v-card p {
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    font-weight: 350;
+    color: var(--blue);
   }
 
   .v-tag {
-    display: inline-block;
-    margin-top: 20px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.08em;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 4px 9px;
   }
+  .v-tag.hot { color: var(--green); border-color: rgba(61,220,132,0.3); background: var(--green-dim); }
+
+  .v-card h3 { font-size: 19px; font-weight: 650; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .v-card p { font-size: 14px; color: var(--text-2); line-height: 1.68; }
 
   /* ===== PROCESS ===== */
   .process-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    margin-top: 64px;
-    background: var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+    gap: 14px;
+    margin-top: 56px;
   }
 
   .p-step {
-    background: var(--bg-card);
-    padding: 40px 28px;
-    transition: all 0.35s;
-    cursor: default;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px 26px;
+    transition: border-color 0.3s;
+    position: relative;
   }
-
-  .p-step:hover { background: var(--surface); }
+  .p-step:hover { border-color: var(--border-strong); }
 
   .p-step-num {
-    font-family: var(--font-primary);
-    font-size: 44px;
-    font-weight: 800;
-    color: var(--text-primary);
-    opacity: 0.06;
-    line-height: 1;
-    margin-bottom: 20px;
-    letter-spacing: -0.04em;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    margin-bottom: 44px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .p-step-num::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
   }
 
-  .p-step h4 {
-    font-family: var(--font-primary);
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
-    color: var(--text-white);
-  }
+  .p-step h4 { font-size: 16.5px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .p-step p { font-size: 13.5px; color: var(--text-2); line-height: 1.66; }
 
-  .p-step p {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    font-weight: 350;
-  }
-
-  /* ===== MANIFESTO STRIP ===== */
-  .manifesto {
-    padding: 100px 0;
+  /* ===== COMPLIANCE STRIP ===== */
+  .compliance {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    background: var(--bg-raise);
+    padding: 56px 0;
     position: relative;
     z-index: 2;
   }
 
-  .manifesto-inner {
-    max-width: 680px;
+  .compliance-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .compliance-icon {
+    width: 54px; height: 54px;
+    border-radius: 12px;
+    background: var(--green-dim);
+    border: 1px solid rgba(61,220,132,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+  }
+
+  .compliance h3 { font-size: 19px; font-weight: 650; margin-bottom: 8px; letter-spacing: -0.015em; }
+  .compliance p { font-size: 14.5px; color: var(--text-2); line-height: 1.65; max-width: 720px; }
+
+  /* ===== MANIFESTO ===== */
+  .manifesto {
+    padding: 110px 0;
+    position: relative;
+    z-index: 2;
   }
 
   .manifesto blockquote {
-    font-family: var(--font-body);
     font-size: clamp(22px, 3vw, 32px);
-    font-weight: 300;
+    font-weight: 350;
     line-height: 1.5;
     letter-spacing: -0.02em;
-    color: var(--text-secondary);
-    position: relative;
+    color: var(--text-2);
+    max-width: 700px;
     padding-left: 28px;
-    border-left: 2px solid var(--black);
+    border-left: 2px solid var(--blue);
   }
-
-  .manifesto blockquote em {
-    font-style: normal;
-    color: var(--text-white);
-    font-weight: 500;
-  }
+  .manifesto blockquote em { font-style: normal; color: var(--text); font-weight: 550; }
 
   /* ===== CTA ===== */
   .cta-section {
     padding: 140px 0;
     text-align: center;
+    position: relative;
   }
 
-  .cta-section .section-title {
-    max-width: 580px;
-    margin: 0 auto 16px;
+  .cta-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 720px; height: 420px;
+    background: radial-gradient(ellipse at center, rgba(111,157,255,0.08) 0%, transparent 65%);
+    pointer-events: none;
   }
 
-  .cta-section .section-desc {
-    max-width: 420px;
-    margin: 0 auto 48px;
-    text-align: center;
-  }
+  .cta-section .section-title { max-width: 620px; margin: 0 auto 16px; }
+  .cta-section .section-desc { max-width: 440px; margin: 0 auto 44px; }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::before { display: none; }
 
-  .cta-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
   .cta-email {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--text-tertiary);
-    margin-top: 24px;
-    letter-spacing: 0.02em;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-3);
+    margin-top: 26px;
   }
-
   .cta-email a {
-    color: var(--text-secondary);
+    color: var(--text-2);
     text-decoration: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-strong);
     padding-bottom: 2px;
-    transition: all 0.3s;
+    transition: color 0.25s, border-color 0.25s;
   }
-
-  .cta-email a:hover {
-    color: var(--text-primary);
-    border-color: var(--text-secondary);
-  }
+  .cta-email a:hover { color: var(--text); border-color: var(--text-2); }
 
   /* ===== FOOTER ===== */
   footer {
     border-top: 1px solid var(--border);
-    padding: 40px 0;
+    padding: 36px 0;
     position: relative;
     z-index: 2;
   }
@@ -641,49 +682,51 @@
     gap: 16px;
   }
 
+  .footer-left { display: flex; align-items: center; gap: 14px; }
+
   .footer-logo {
-    font-family: var(--font-primary);
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    color: var(--text-tertiary);
+    font-size: 12.5px;
+    letter-spacing: 0.07em;
+    color: var(--text-2);
     text-transform: uppercase;
     text-decoration: none;
   }
 
-  .footer-right {
+  .footer-status {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  .footer-copy {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: var(--text-tertiary);
-    letter-spacing: 0.01em;
-  }
+  .footer-right { display: flex; align-items: center; gap: 28px; }
 
-  .footer-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
+  .footer-links { display: flex; gap: 22px; list-style: none; }
+  .footer-links a { font-size: 12.5px; color: var(--text-3); text-decoration: none; transition: color 0.25s; }
+  .footer-links a:hover { color: var(--text-2); }
 
-  .footer-links a {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: var(--text-tertiary);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .footer-links a:hover { color: var(--text-secondary); }
+  .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
 
   /* ===== ANIMATIONS ===== */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.45); }
+    70% { box-shadow: 0 0 0 7px rgba(61,220,132,0); }
+    100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); }
   }
 
   @keyframes scroll {
@@ -693,19 +736,22 @@
 
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(22px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .hero-badge, .hero h1, .hero-sub, .hero-actions, .terminal { opacity: 1; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
   }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
-    .verticals-grid { grid-template-columns: 1fr 1fr; }
     .process-grid { grid-template-columns: 1fr 1fr; }
   }
 
@@ -714,22 +760,26 @@
     .mobile-menu-btn { display: block; }
     .verticals-grid { grid-template-columns: 1fr; }
     .process-grid { grid-template-columns: 1fr; }
-    .stat-row { flex-direction: column; gap: 24px; }
+    .stat-row { flex-wrap: wrap; gap: 28px; }
     section { padding: 80px 0; }
-    .manifesto { padding: 64px 0; }
+    .manifesto { padding: 70px 0; }
     .cta-section { padding: 100px 0; }
+    .compliance-inner { grid-template-columns: 1fr; gap: 22px; }
+    .feed-row { grid-template-columns: 54px 1fr 60px; }
+    .feed-geo { display: none; }
+    .hero { padding: 110px 0 70px; }
   }
 </style>
 </head>
 <body>
 
-<div class="grain"></div>
-<div class="top-line"></div>
+<div class="bg-grid"></div>
+<div class="glow"></div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo">Boring Media</a>
+    <a href="#" class="logo"><span class="logo-mark"></span>Boring Media</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#verticals">Verticals</a></li>
@@ -745,38 +795,43 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-label">Performance Media Buying</div>
-    <h1>
-      <span class="line">We run ads</span>
-      <span class="line"><span class="outline">the boring way</span><span class="cream">.</span></span>
-    </h1>
-    <p class="hero-sub">No hype. No fluff. Just systems that convert traffic into revenue — predictably, repeatedly, at scale.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Work With Us</a>
-      <a href="#about" class="btn-ghost">How It Works</a>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="pulse-dot"></span>Systems Online — Performance Media Buying</div>
+        <h1>We run ads<br><span class="dim">the boring way</span><span class="accent">.</span></h1>
+        <p class="hero-sub">No hype. No fluff. Just engineered systems that convert traffic into revenue — predictably, repeatedly, at scale.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Work With Us</a>
+          <a href="#about" class="btn-ghost">How It Works</a>
+        </div>
+      </div>
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-head">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-title">conversions.log</div>
+          <div class="term-live"><span class="pulse-dot"></span>LIVE</div>
+        </div>
+        <div class="terminal-body" id="feed"></div>
+        <div class="terminal-foot">
+          <span>PIXEL <b>OK</b> · WEBHOOKS <b>OK</b> · ROUTING <b>OK</b></span>
+          <span>UPTIME <b>99.98%</b></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
+<!-- STACK TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker">
-    <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
-    <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
-    <div class="ticker-item"><span class="dot"></span>Performance Media</div>
-    <div class="ticker-item"><span class="dot"></span>Paid Social</div>
+  <div class="ticker" id="ticker">
+    <div class="ticker-item"><span class="dot"></span>Real-Time Tracking</div>
     <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
-    <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
-    <div class="ticker-item"><span class="dot"></span>Campaign Automation</div>
-    <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
-    <div class="ticker-item"><span class="dot"></span>Auto Insurance</div>
-    <div class="ticker-item"><span class="dot"></span>Home Insurance</div>
-    <div class="ticker-item"><span class="dot"></span>Performance Media</div>
+    <div class="ticker-item"><span class="dot"></span>Pay-Per-Call Routing</div>
+    <div class="ticker-item"><span class="dot"></span>TCPA Compliance</div>
     <div class="ticker-item"><span class="dot"></span>Paid Social</div>
-    <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
-    <div class="ticker-item"><span class="dot"></span>Conversion Optimization</div>
-    <div class="ticker-item"><span class="dot"></span>Campaign Automation</div>
-    <div class="ticker-item"><span class="dot"></span>Affiliate Marketing</div>
+    <div class="ticker-item"><span class="dot"></span>Conversion APIs</div>
+    <div class="ticker-item"><span class="dot"></span>Funnel Automation</div>
+    <div class="ticker-item"><span class="dot"></span>Signal Optimization</div>
   </div>
 </div>
 
@@ -787,36 +842,36 @@
       <div class="about-left reveal">
         <div class="section-label">What We Do</div>
         <h2 class="section-title">The boring stuff<br>that prints money.</h2>
-        <p class="section-desc">We buy media. We optimize funnels. We track every click, every conversion, every dollar — then we do it again, better, faster, cheaper.</p>
+        <p class="section-desc">We buy media. We build funnels. We track every click, every call, every conversion, every dollar — then we do it again, better, faster, cheaper.</p>
         <p class="section-desc">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
         <div class="stat-row">
           <div class="stat">
-            <div class="stat-num">24/7</div>
+            <div class="stat-num">24<em>/</em>7</div>
             <div class="stat-label">Campaigns Live</div>
           </div>
           <div class="stat">
-            <div class="stat-num">Full</div>
+            <div class="stat-num">100<em>%</em></div>
             <div class="stat-label">Funnel Owned</div>
           </div>
           <div class="stat">
-            <div class="stat-num">∞</div>
+            <div class="stat-num"><em>∞</em></div>
             <div class="stat-label">Tests Running</div>
           </div>
         </div>
       </div>
       <div class="principles reveal">
         <div class="principle">
-          <div class="principle-idx">01</div>
+          <div class="principle-idx">PRINCIPLE_01</div>
           <h4>Systems Over Stunts</h4>
-          <p>Every campaign is a system — tested, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p>
+          <p>Every campaign is a system — tracked, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p>
         </div>
         <div class="principle">
-          <div class="principle-idx">02</div>
+          <div class="principle-idx">PRINCIPLE_02</div>
           <h4>Data Is the Creative</h4>
           <p>The numbers tell us what works. We listen. Winning ads aren't the prettiest — they're the ones with the best unit economics.</p>
         </div>
         <div class="principle">
-          <div class="principle-idx">03</div>
+          <div class="principle-idx">PRINCIPLE_03</div>
           <h4>Scale What Works</h4>
           <p>Find a winner, remove the ceiling, pour fuel on it. That's the whole strategy. It's boring. It works.</p>
         </div>
@@ -835,28 +890,36 @@
     </div>
     <div class="verticals-grid reveal">
       <div class="v-card">
-        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
+        <div class="v-card-top">
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M9 14h6"/><path d="M12 11v6"/></svg></div>
+          <span class="v-tag hot">Primary</span>
+        </div>
+        <h3>Home Equity &amp; Refinance</h3>
+        <p>Exclusive, verified home equity and cash-out refinance leads — delivered in real time to lenders and loan officers ready to close, not chase.</p>
+      </div>
+      <div class="v-card">
+        <div class="v-card-top">
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
+          <span class="v-tag">Established</span>
+        </div>
         <h3>Auto Insurance</h3>
-        <p>We generate exclusive, high-intent auto insurance leads and deliver them to carriers and agencies ready to bind policies — not just browse.</p>
-        <span class="v-tag">Primary Vertical</span>
+        <p>High-intent auto insurance leads and inbound calls, routed to carriers and agencies ready to bind policies — not just browse.</p>
       </div>
       <div class="v-card">
-        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M10 20v-5a2 2 0 1 1 4 0v5"/></svg></div>
-        <h3>Home Insurance</h3>
-        <p>Qualified homeowner leads through precision targeting and optimized funnels. Traffic that converts to bound policies, not wasted clicks.</p>
-        <span class="v-tag">Expanding</span>
-      </div>
-      <div class="v-card">
-        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 5 5-9"/></svg></div>
-        <h3>Performance Verticals</h3>
-        <p>Our infrastructure supports any performance vertical where the math works. If it converts and scales, we can run it.</p>
-        <span class="v-tag">Growing</span>
-      </div>
-      <div class="v-card">
-        <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><path d="M22 10a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/></svg></div>
+        <div class="v-card-top">
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><path d="M22 10a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/></svg></div>
+          <span class="v-tag">Growing</span>
+        </div>
         <h3>Medicare</h3>
-        <p>Compliant, verified Medicare leads at scale — during AEP and year-round. Reliable volume for carriers, agencies, and agents who need qualified prospects, not tire-kickers.</p>
-        <span class="v-tag">Growing</span>
+        <p>Compliant, verified Medicare leads at scale — during AEP and year-round. Reliable volume for carriers, agencies, and agents who need qualified prospects.</p>
+      </div>
+      <div class="v-card">
+        <div class="v-card-top">
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <span class="v-tag">Growing</span>
+        </div>
+        <h3>Pay-Per-Call</h3>
+        <p>Live, qualified inbound calls routed in real time by geo, intent, and buyer capacity. Callers with a problem — connected to the people who solve it.</p>
       </div>
     </div>
   </div>
@@ -872,22 +935,22 @@
     </div>
     <div class="process-grid reveal">
       <div class="p-step">
-        <div class="p-step-num">01</div>
+        <div class="p-step-num">STEP_01</div>
         <h4>Build</h4>
         <p>Set up the infrastructure — tracking, offer routing, landing pages, compliance. Nothing flashy. Everything measurable.</p>
       </div>
       <div class="p-step">
-        <div class="p-step-num">02</div>
+        <div class="p-step-num">STEP_02</div>
         <h4>Test</h4>
         <p>Launch variants. Compare everything. Kill losers fast. The data decides, not opinions.</p>
       </div>
       <div class="p-step">
-        <div class="p-step-num">03</div>
+        <div class="p-step-num">STEP_03</div>
         <h4>Optimize</h4>
         <p>Squeeze every conversion point. Lower costs. Improve quality. Tiny gains compound into outsized margins.</p>
       </div>
       <div class="p-step">
-        <div class="p-step-num">04</div>
+        <div class="p-step-num">STEP_04</div>
         <h4>Scale</h4>
         <p>Winners get budget. Proven systems get expanded. Then we go back to step two and do it all again.</p>
       </div>
@@ -895,12 +958,25 @@
   </div>
 </section>
 
+<!-- COMPLIANCE -->
+<div class="compliance">
+  <div class="container">
+    <div class="compliance-inner reveal">
+      <div class="compliance-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div>
+        <h3>Compliance isn't a feature. It's the foundation.</h3>
+        <p>Every lead carries an independent certificate of consent. TCPA-compliant capture, verified phone numbers, and a full audit trail on every record — so our buyers scale with confidence, not exposure.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MANIFESTO -->
 <div class="manifesto">
   <div class="container">
-    <div class="manifesto-inner reveal">
+    <div class="reveal">
       <blockquote>
-        We don't need to stand out. We just need to <em>win</em>. The palette doesn't ask for attention. The results do the work.
+        We don't need to stand out. We just need to <em>win</em>. The design doesn't ask for attention. The results do the work.
       </blockquote>
     </div>
   </div>
@@ -908,11 +984,12 @@
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
   <div class="container">
     <div class="reveal">
-      <div class="section-label" style="text-align: center;">Let's Talk</div>
+      <div class="section-label">Let's Talk</div>
       <h2 class="section-title">Ready for results that are<br>predictably boring?</h2>
-      <p class="section-desc">Whether you're a carrier, agency, or operator who wants a partner that speaks in numbers — we should talk.</p>
+      <p class="section-desc">Whether you're a carrier, lender, agency, or operator who wants a partner that speaks in numbers — we should talk.</p>
       <div class="cta-actions">
         <a href="mailto:hello@boringmedia.ai" class="btn-primary">Get In Touch</a>
         <a href="#" class="btn-ghost">Book a Call</a>
@@ -926,7 +1003,10 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <a href="#" class="footer-logo">Boring Media</a>
+      <div class="footer-left">
+        <a href="#" class="footer-logo">Boring Media</a>
+        <span class="footer-status"><span class="pulse-dot"></span>All Systems Operational</span>
+      </div>
       <div class="footer-right">
         <ul class="footer-links">
           <li><a href="mailto:hello@boringmedia.ai">Contact</a></li>
@@ -939,21 +1019,70 @@
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  // ---- Scroll reveals ----
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  reveals.forEach(function(el) { observer.observe(el); });
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth' });
+  // ---- Smooth anchor scrolling ----
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
+
+  // ---- Duplicate ticker items for a seamless loop ----
+  var ticker = document.getElementById('ticker');
+  ticker.innerHTML += ticker.innerHTML;
+
+  // ---- Live conversion feed (simulated) ----
+  var feed = document.getElementById('feed');
+  var events = [
+    { label: '<b>LEAD_SOLD</b> · home_equity', min: 35, max: 95 },
+    { label: '<b>CALL_CONNECTED</b> · auto_ins', min: 18, max: 55 },
+    { label: '<b>LEAD_SOLD</b> · cashout_refi', min: 40, max: 110 },
+    { label: '<b>FORM_VERIFIED</b> · consent_ok', min: 0, max: 0 },
+    { label: '<b>LEAD_SOLD</b> · medicare', min: 12, max: 38 },
+    { label: '<b>CALL_BILLABLE</b> · 04:22 dur', min: 25, max: 70 },
+    { label: '<b>PIXEL_FIRED</b> · purchase', min: 0, max: 0 },
+    { label: '<b>LEAD_SOLD</b> · auto_ins', min: 10, max: 32 }
+  ];
+  var geos = ['FL', 'TX', 'GA', 'NC', 'AZ', 'OH', 'TN', 'CA', 'SC', 'NV'];
+
+  function pad(n) { return n < 10 ? '0' + n : n; }
+
+  function addRow() {
+    var e = events[Math.floor(Math.random() * events.length)];
+    var d = new Date();
+    var time = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    var geo = geos[Math.floor(Math.random() * geos.length)];
+    var payout = e.max > 0
+      ? '+$' + (e.min + Math.random() * (e.max - e.min)).toFixed(2)
+      : '—';
+
+    var row = document.createElement('div');
+    row.className = 'feed-row';
+    row.innerHTML =
+      '<span class="feed-time">' + time + '</span>' +
+      '<span class="feed-event">' + e.label + '</span>' +
+      '<span class="feed-geo">' + geo + '</span>' +
+      '<span class="feed-payout">' + payout + '</span>';
+
+    feed.insertBefore(row, feed.firstChild);
+    while (feed.children.length > 12) feed.removeChild(feed.lastChild);
+  }
+
+  // Seed a few rows so it never looks empty, then stream
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (var i = 0; i < 8; i++) addRow();
+  if (!reduced) {
+    setInterval(addRow, 1600 + Math.random() * 800);
+  }
 </script>
 
 </body>
