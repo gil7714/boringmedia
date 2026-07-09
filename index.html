@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boring Media — We Buy Media. It Converts.</title>
-<meta name="description" content="Performance media buying and lead generation. Auto insurance, home equity, Medicare. Systems that convert traffic into revenue.">
+<meta name="description" content="Performance media buying and lead generation. Home equity, debt settlement, auto insurance, ecommerce. Systems that convert traffic into revenue.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='8' fill='%2312151d' stroke='rgba(255,255,255,0.18)'/%3E%3Crect x='10' y='8' width='3' height='16' rx='1' fill='%23eceef3'/%3E%3Cpath d='M13 8h4a4 4 0 0 1 0 8h-4z' fill='%23eceef3'/%3E%3Cpath d='M13 16h5a4 4 0 0 1 0 8h-5z' fill='%236f9dff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -110,19 +111,20 @@
     text-transform: uppercase;
   }
 
-  .logo-mark {
-    width: 22px; height: 22px;
-    border: 1.5px solid var(--text);
-    border-radius: 5px;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .logo-mark::after {
-    content: '';
-    position: absolute;
-    inset: 5px;
+  .logo svg { flex-shrink: 0; display: block; }
+
+  .logo-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 13px;
     background: var(--blue);
-    border-radius: 2px;
+    margin-left: 2px;
+    animation: blink 1.2s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
   }
 
   .nav-links {
@@ -779,7 +781,15 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo"><span class="logo-mark"></span>Boring Media</a>
+    <a href="#" class="logo">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="30" height="30" rx="8" fill="#12151d" stroke="rgba(255,255,255,0.18)"/>
+        <rect x="10" y="8" width="3" height="16" rx="1" fill="#eceef3"/>
+        <path d="M13 8h4a4 4 0 0 1 0 8h-4z" fill="#eceef3"/>
+        <path d="M13 16h5a4 4 0 0 1 0 8h-5z" fill="#6f9dff"/>
+      </svg>
+      Boring Media<span class="logo-cursor" aria-hidden="true"></span>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#verticals">Verticals</a></li>
@@ -826,7 +836,7 @@
   <div class="ticker" id="ticker">
     <div class="ticker-item"><span class="dot"></span>Real-Time Tracking</div>
     <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
-    <div class="ticker-item"><span class="dot"></span>Pay-Per-Call Routing</div>
+    <div class="ticker-item"><span class="dot"></span>Creative Testing</div>
     <div class="ticker-item"><span class="dot"></span>TCPA Compliance</div>
     <div class="ticker-item"><span class="dot"></span>Paid Social</div>
     <div class="ticker-item"><span class="dot"></span>Conversion APIs</div>
@@ -899,6 +909,14 @@
       </div>
       <div class="v-card">
         <div class="v-card-top">
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div>
+          <span class="v-tag">Growing</span>
+        </div>
+        <h3>Debt Settlement</h3>
+        <p>Qualified debt relief leads from consumers actively looking for a way out — verified, consent-backed, and delivered to settlement firms ready to enroll.</p>
+      </div>
+      <div class="v-card">
+        <div class="v-card-top">
           <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
           <span class="v-tag">Established</span>
         </div>
@@ -907,19 +925,11 @@
       </div>
       <div class="v-card">
         <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><path d="M22 10a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/></svg></div>
+          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/></svg></div>
           <span class="v-tag">Growing</span>
         </div>
-        <h3>Medicare</h3>
-        <p>Compliant, verified Medicare leads at scale — during AEP and year-round. Reliable volume for carriers, agencies, and agents who need qualified prospects.</p>
-      </div>
-      <div class="v-card">
-        <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <span class="v-tag">Growing</span>
-        </div>
-        <h3>Pay-Per-Call</h3>
-        <p>Live, qualified inbound calls routed in real time by geo, intent, and buyer capacity. Callers with a problem — connected to the people who solve it.</p>
+        <h3>Ecommerce</h3>
+        <p>Direct response media buying for products that sell on cold traffic. Creative testing, conversion tracking, and scaling — the same system, pointed at a storefront.</p>
       </div>
     </div>
   </div>
@@ -1004,7 +1014,15 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left">
-        <a href="#" class="footer-logo">Boring Media</a>
+        <a href="#" class="footer-logo" style="display:flex;align-items:center;gap:9px;">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="8" fill="#12151d" stroke="rgba(255,255,255,0.18)"/>
+            <rect x="10" y="8" width="3" height="16" rx="1" fill="#eceef3"/>
+            <path d="M13 8h4a4 4 0 0 1 0 8h-4z" fill="#eceef3"/>
+            <path d="M13 16h5a4 4 0 0 1 0 8h-5z" fill="#6f9dff"/>
+          </svg>
+          Boring Media
+        </a>
         <span class="footer-status"><span class="pulse-dot"></span>All Systems Operational</span>
       </div>
       <div class="footer-right">
@@ -1042,24 +1060,44 @@
 
   // ---- Live conversion feed (simulated) ----
   var feed = document.getElementById('feed');
+
+  // "weight" controls how often each event shows up.
+  // Real logs are mostly plumbing (pixels, verifications, filters) with
+  // the occasional sale — so sales get lower weights.
   var events = [
-    { label: '<b>LEAD_SOLD</b> · home_equity', min: 35, max: 95 },
-    { label: '<b>CALL_CONNECTED</b> · auto_ins', min: 18, max: 55 },
-    { label: '<b>LEAD_SOLD</b> · cashout_refi', min: 40, max: 110 },
-    { label: '<b>FORM_VERIFIED</b> · consent_ok', min: 0, max: 0 },
-    { label: '<b>LEAD_SOLD</b> · medicare', min: 12, max: 38 },
-    { label: '<b>CALL_BILLABLE</b> · 04:22 dur', min: 25, max: 70 },
-    { label: '<b>PIXEL_FIRED</b> · purchase', min: 0, max: 0 },
-    { label: '<b>LEAD_SOLD</b> · auto_ins', min: 10, max: 32 }
+    { label: '<b>PIXEL_FIRED</b> · purchase',        min: 0,  max: 0,   weight: 5 },
+    { label: '<b>FORM_VERIFIED</b> · consent_ok',    min: 0,  max: 0,   weight: 4 },
+    { label: '<b>OTP_VERIFIED</b> · sms',            min: 0,  max: 0,   weight: 3 },
+    { label: '<b>BOT_FILTERED</b> · dropped',        min: 0,  max: 0,   weight: 2 },
+    { label: '<b>DUPLICATE</b> · rejected',          min: 0,  max: 0,   weight: 1 },
+    { label: '<b>CALL_CONNECTED</b> · auto_ins',     min: 18, max: 55,  weight: 2 },
+    { label: '<b>LEAD_SOLD</b> · home_equity',       min: 35, max: 95,  weight: 2 },
+    { label: '<b>LEAD_SOLD</b> · cashout_refi',      min: 40, max: 110, weight: 1 },
+    { label: '<b>LEAD_SOLD</b> · debt_settlement',   min: 20, max: 65,  weight: 1 },
+    { label: '<b>LEAD_SOLD</b> · auto_ins',          min: 10, max: 32,  weight: 2 },
+    { label: '<b>PURCHASE</b> · ecom_dtc',           min: 29, max: 120, weight: 1 }
   ];
-  var geos = ['FL', 'TX', 'GA', 'NC', 'AZ', 'OH', 'TN', 'CA', 'SC', 'NV'];
+  var geos = ['FL', 'FL', 'FL', 'TX', 'GA', 'NC', 'AZ', 'OH', 'TN', 'CA', 'SC', 'NV'];
+
+  var totalWeight = events.reduce(function(sum, e) { return sum + e.weight; }, 0);
+
+  function pickEvent() {
+    var r = Math.random() * totalWeight;
+    for (var i = 0; i < events.length; i++) {
+      r -= events[i].weight;
+      if (r < 0) return events[i];
+    }
+    return events[0];
+  }
 
   function pad(n) { return n < 10 ? '0' + n : n; }
 
-  function addRow() {
-    var e = events[Math.floor(Math.random() * events.length)];
-    var d = new Date();
-    var time = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  function formatTime(d) {
+    return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  function addRow(date) {
+    var e = pickEvent();
     var geo = geos[Math.floor(Math.random() * geos.length)];
     var payout = e.max > 0
       ? '+$' + (e.min + Math.random() * (e.max - e.min)).toFixed(2)
@@ -1068,7 +1106,7 @@
     var row = document.createElement('div');
     row.className = 'feed-row';
     row.innerHTML =
-      '<span class="feed-time">' + time + '</span>' +
+      '<span class="feed-time">' + formatTime(date || new Date()) + '</span>' +
       '<span class="feed-event">' + e.label + '</span>' +
       '<span class="feed-geo">' + geo + '</span>' +
       '<span class="feed-payout">' + payout + '</span>';
@@ -1077,12 +1115,35 @@
     while (feed.children.length > 12) feed.removeChild(feed.lastChild);
   }
 
-  // Seed a few rows so it never looks empty, then stream
+  // Seed the feed with back-dated rows at irregular intervals,
+  // so on page load it already looks like a log that's been running.
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  for (var i = 0; i < 8; i++) addRow();
-  if (!reduced) {
-    setInterval(addRow, 1600 + Math.random() * 800);
+  var t = Date.now();
+  var seedTimes = [];
+  for (var i = 0; i < 9; i++) {
+    t -= (1 + Math.random() * 14) * 1000; // 1–15s gaps, randomly
+    seedTimes.push(t);
   }
+  // Insert oldest first so the newest ends up on top
+  seedTimes.reverse().forEach(function(ts) { addRow(new Date(ts)); });
+
+  // Stream new rows on an irregular schedule:
+  // sometimes a quick burst, usually a normal gap, sometimes a lull.
+  function nextDelay() {
+    var r = Math.random();
+    if (r < 0.30) return 250 + Math.random() * 1000;    // burst: events stack up
+    if (r < 0.75) return 1800 + Math.random() * 4200;   // normal traffic
+    return 6000 + Math.random() * 10000;                // quiet stretch
+  }
+
+  function scheduleNext() {
+    setTimeout(function() {
+      addRow();
+      scheduleNext();
+    }, nextDelay());
+  }
+
+  if (!reduced) scheduleNext();
 </script>
 
 </body>
