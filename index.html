@@ -154,9 +154,6 @@
   }
   .nav-cta:hover { opacity: 0.85; }
 
-  .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-  .mobile-menu-btn span { display: block; width: 18px; height: 1.5px; background: var(--text); margin: 5px 0; }
-
   /* ===== HERO ===== */
   .hero {
     min-height: 100vh;
@@ -758,8 +755,8 @@
   }
 
   @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .mobile-menu-btn { display: block; }
+    .nav-links { gap: 0; }
+    .nav-links li:not(:last-child) { display: none; }
     .verticals-grid { grid-template-columns: 1fr; }
     .process-grid { grid-template-columns: 1fr; }
     .stat-row { flex-wrap: wrap; gap: 28px; }
@@ -796,9 +793,6 @@
       <li><a href="#process">Process</a></li>
       <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
     </ul>
-    <button class="mobile-menu-btn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
 
@@ -1002,7 +996,6 @@
       <p class="section-desc">Whether you're a carrier, lender, agency, or operator who wants a partner that speaks in numbers — we should talk.</p>
       <div class="cta-actions">
         <a href="mailto:hello@boringmedia.ai" class="btn-primary">Get In Touch</a>
-        <a href="#" class="btn-ghost">Book a Call</a>
       </div>
       <div class="cta-email">or email us directly at <a href="mailto:hello@boringmedia.ai">hello@boringmedia.ai</a></div>
     </div>
