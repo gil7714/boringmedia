@@ -22,7 +22,7 @@
 :root{
   color-scheme:dark;
   --bg:#000;
-  --accent:#5ec4f0; --glow-rgb:25,131,176; --green:#2ddc7a;
+  --accent:#5ec4f0; --glow-rgb:25,131,176;
   --text:#fff; --text-2:#a9bccb; --text-3:#8a9cab; --text-4:#75869a;
   --surface-rgb:7,10,14;
   --line:rgba(255,255,255,.07);
@@ -49,7 +49,6 @@ a{color:inherit}
 .wrap{position:relative;max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .ico{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .ico-sm{width:14px;height:14px;stroke-width:1.75}
-.gdot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
 
 /* buttons */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px 0 20px;border-radius:var(--r-pill);font:600 14px/1 var(--sans);text-decoration:none;white-space:nowrap;transition:transform 180ms var(--ease-out),box-shadow 180ms,background 180ms}
@@ -93,7 +92,6 @@ a{color:inherit}
 .foot-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
 .foot-brand{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--sans);letter-spacing:.08em;color:var(--text)}
 .foot-brand img{width:22px;height:22px;display:block}
-.foot-status{display:flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1 var(--sans);color:var(--text-3)}
 .foot-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .foot-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;font:400 13px/1 var(--sans);color:var(--text-3);text-decoration:none;border-radius:8px;transition:color 150ms}
 .foot-links a:hover{color:var(--text-2)}
@@ -166,7 +164,6 @@ a{color:inherit}
     <div class="foot-grid">
       <div>
         <div class="foot-brand"><img src="/logo.svg" alt="" width="22" height="22" decoding="async" loading="lazy"><span>BORING MEDIA</span></div>
-        <div class="foot-status"><span class="gdot" aria-hidden="true"></span><span>All systems operational</span></div>
       </div>
       <nav class="foot-links" aria-label="Footer">
         <a href="/#about">About</a><a href="/#verticals">Verticals</a><a href="/#process">Process</a><a href="/#contact">Contact</a>

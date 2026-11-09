@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Boring Media — We run ads the boring way.</title>
-<meta name="description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<meta name="description" content="Boring Media runs its own paid social ads and turns them into leads and inbound calls for HELOC, reverse mortgage, refi and debt settlement buyers.">
 <link rel="canonical" href="https://boringmedia.ai/">
 <meta name="theme-color" content="#07080b">
 <!-- sharing: Open Graph + Twitter card (og-image.jpg is 1200×630, made from the hero) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Boring Media">
 <meta property="og:title" content="Boring Media — We run ads the boring way.">
-<meta property="og:description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<meta property="og:description" content="Boring Media runs its own paid social ads and turns them into leads and inbound calls for HELOC, reverse mortgage, refi and debt settlement buyers.">
 <meta property="og:url" content="https://boringmedia.ai/">
 <meta property="og:image" content="https://boringmedia.ai/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
 <meta property="og:image:alt" content="The Boring Media homepage: “We run ads the boring way.” over a glowing Earth with orbit rings.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Boring Media — We run ads the boring way.">
-<meta name="twitter:description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<meta name="twitter:description" content="Boring Media runs its own paid social ads and turns them into leads and inbound calls for HELOC, reverse mortgage, refi and debt settlement buyers.">
 <meta name="twitter:image" content="https://boringmedia.ai/og-image.jpg">
 <meta name="twitter:image:alt" content="The Boring Media homepage: “We run ads the boring way.” over a glowing Earth with orbit rings.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -43,27 +43,24 @@
   /* the accent is the logo's blue (#5ec4f0): solid marks (text, dots, focus rings) use it as is. Translucent glows, washes and
      hairlines use deeper, saturated blues instead (--glow-rgb and the 0,150–174,214–249 literals): the light accent at low
      alpha turns grey and fogs the black */
-  --accent:#5ec4f0; --accent-hot:#a8e0fb; --accent-ice:#e8f6ff;
+  --accent:#5ec4f0; --accent-ice:#e8f6ff;
   --glow-rgb:25,131,176;
   --green:#2ddc7a;
   /* text tiers: cool greys; every tier clears 4.5:1 on its real background (glass over the hero glow included) */
   --text:#fff; --text-2:#a9bccb; --text-3:#8a9cab; --text-4:#75869a;
-  --surface-rgb:7,10,14;   /* the near-black behind glass, nav, menu sheet, console and email row */
-  --glass:rgba(var(--surface-rgb),.55); --glass-tint:rgba(255,255,255,.045);
+  --surface-rgb:7,10,14;   /* the near-black behind glass, nav, menu sheet and email row */
+  --glass:rgba(var(--surface-rgb),.55);
   --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.14);
-  --bar:rgba(4,7,9,.50); --bar-top:rgba(255,255,255,.16);
   --tile-accent:linear-gradient(180deg,rgba(var(--glow-rgb),.30),rgba(10,63,86,.38));
   --tile-grey:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
   --sans:'Geist',-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',Arial,sans-serif;
   --mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-  --r-pill:999px; --r-card:20px; --r-bar:24px; --r-panel:18px; --r-chip:999px;
+  --r-pill:999px; --r-card:20px;
   --sh-card:inset 0 1px 0 rgba(255,255,255,.07),0 30px 60px -30px rgba(0,0,0,.75);
   --sh-card-hover:inset 0 1px 0 rgba(255,255,255,.10),0 30px 60px -30px rgba(0,0,0,.75),0 0 0 1px rgba(var(--glow-rgb),.18),0 24px 70px -20px rgba(var(--glow-rgb),.45);
-  --sh-bar:inset 0 1px 0 rgba(255,255,255,.10),0 40px 80px -40px rgba(0,0,0,.9),0 -20px 60px -30px rgba(var(--glow-rgb),.25);
   --sh-btn:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.28),0 8px 22px -6px rgba(26,108,144,.65),0 2px 6px rgba(0,0,0,.4);
   --sh-btn-hover:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.28),0 10px 30px -6px rgba(var(--glow-rgb),.75),0 2px 6px rgba(0,0,0,.4);
   --glow-tile:inset 0 1px 0 rgba(255,255,255,.12),0 0 26px rgba(var(--glow-rgb),.35),0 6px 18px -8px rgba(0,0,0,.8);
-  --glow-num:0 0 14px rgba(var(--glow-rgb),.30);
   --ease-out:cubic-bezier(.22,1,.36,1);
   --t-mid:220ms; --t-slow:350ms;
   --gutter:max(24px,env(safe-area-inset-left,0px)); --gutter-r:max(24px,env(safe-area-inset-right,0px));
@@ -90,13 +87,11 @@ canvas{display:block}
 .skip:focus + .nav .brand{opacity:0}   /* while it is focused the skip link stands in for the brand, rather than half-covering the wordmark */
 .wrap{position:relative;max-width:1200px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
 .wrap-wide{max-width:1240px}
-.nw{white-space:nowrap}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}   /* visually hidden, still read by screen readers */
 .ico{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .ico-sm{width:14px;height:14px;stroke-width:1.75}
-.label{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
 .h2{margin:14px 0 0;font:600 clamp(28px,3vw,40px)/1.12 var(--sans);letter-spacing:-.025em;color:var(--text);text-wrap:balance}
+.h2:first-child{margin-top:0}
 .sub{margin:14px 0 0;font:400 16px/1.6 var(--sans);color:var(--text-3);max-width:560px;text-wrap:pretty}
 .sec{position:relative;padding:120px 0}
 .sec-head{margin-bottom:48px}
@@ -104,13 +99,6 @@ canvas{display:block}
 .center .sub{margin-left:auto;margin-right:auto}
 .reveal{transform:translateY(12px);transition:transform .6s var(--ease-out);transition-delay:calc(var(--i,0)*60ms)}
 .reveal.in{transform:none}
-
-/* pulsing dots */
-.pdot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
-.pdot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2s ease-out infinite}
-.gdot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
-.gdot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2.4s ease-out -.7s infinite}
-@keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(2.4);opacity:0}}
 
 /* buttons */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px 0 22px;border-radius:var(--r-pill);font:600 14px/1 var(--sans);text-decoration:none;white-space:nowrap;transition:transform 180ms var(--ease-out),box-shadow 180ms,background 180ms,border-color 180ms,color 180ms}
@@ -125,10 +113,6 @@ canvas{display:block}
 .btn-sheen{overflow:hidden}
 .btn-sheen::after{content:"";position:absolute;inset:-2px;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.14) 45%,rgba(255,255,255,.14) 55%,transparent 68%);transform:translateX(-120%);animation:sheen 9s linear 2s infinite;pointer-events:none}
 @keyframes sheen{0%{transform:translateX(-120%)}10%{transform:translateX(220%)}100%{transform:translateX(220%)}}
-
-/* chips */
-.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 7px;border-radius:var(--r-chip);font:500 10px/1 var(--mono);letter-spacing:.08em;color:var(--text-3);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);white-space:nowrap}
-.chip b{color:var(--green);font-weight:500}
 
 /* glass surface shared by every card */
 .glass{position:relative;border-radius:var(--r-card);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025) 60%,rgba(255,255,255,.015)),var(--glass);border:1px solid var(--line);border-top-color:rgba(255,255,255,.11);border-bottom-color:rgba(255,255,255,.03);box-shadow:var(--sh-card);transition:box-shadow var(--t-slow),border-color var(--t-slow),transform 500ms var(--ease-out)}
@@ -187,10 +171,9 @@ canvas{display:block}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes breathe{0%,100%{opacity:.9}50%{opacity:1}}
 @keyframes breathe2{0%,100%{opacity:.8}50%{opacity:1}}
-@keyframes pop{from{transform:scale(.8)}to{transform:none}}
 
 .hero{position:relative;overflow:hidden;background:var(--bg);min-height:clamp(720px,100svh,1011px);display:flex;flex-direction:column;
-  --R:259px;--gx:50%;--gy:74%;--card-w:clamp(224px,15.8vw,228px);--card-h:192px;--bar-w:clamp(640px,51vw,734px)}
+  --R:259px;--gx:50%;--gy:74%;--card-w:228px;--card-h:192px}
 .hero-inner{position:relative;flex:1;width:100%;max-width:1440px;margin:0 auto}
 .vig{position:absolute;inset:0;pointer-events:none;z-index:0}
 /* corner hazes carry the blue to the edges (no 1 px rule): a deeper, more saturated blue than the accent at ~.8 of the old
@@ -229,7 +212,6 @@ canvas{display:block}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:150px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(5,23,32,.55) 55%,rgba(2,12,17,.92) 85%,#000)}   /* the blue lingers to ~20 px above the hero's edge */
 
 .hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:96px 16px 0}
-.badge{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px 0 12px;border-radius:var(--r-pill);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font:500 12.5px/1 var(--sans);letter-spacing:.01em;color:var(--text-2);--dy:8px;animation:rise .4s var(--ease-out) .05s both}
 .h1{margin:18px 0 0;max-width:760px;font:600 clamp(40px,4.45vw,64px)/1.06 var(--sans);letter-spacing:-.03em;color:var(--text)}
 .h1 .l1,.h1 .l2{display:block}
 .h1 .l2{color:var(--accent)}
@@ -241,7 +223,7 @@ canvas{display:block}
 /* hero cards */
 .cards{position:absolute;inset:0;z-index:3;pointer-events:none}
 .card-wrap{position:absolute;width:var(--card-w);perspective:800px;pointer-events:auto;animation:slideX .44s var(--ease-out) both}
-/* both rows hang from the bar (bottom-anchored) with a fixed card height, so they can never collide at any viewport height */
+/* both rows hang from the hero floor (bottom-anchored, where the stats bar used to sit) with a fixed card height, so they can never collide at any viewport height */
 .card-wrap.tl{left:6.7%;bottom:calc(126px + var(--card-h) + 20px);--dx:-20px;animation-delay:.30s}
 .card-wrap.tr{right:6%;bottom:calc(126px + var(--card-h) + 14px);--dx:20px;animation-delay:.36s}
 .card-wrap.bl{left:calc(6.7% + 23px);bottom:126px;--dx:-20px;animation-delay:.42s}
@@ -261,38 +243,10 @@ canvas{display:block}
 .card-row .arrow{float:right;margin:17px 0 0 10px;shape-outside:inset(17px 0 0 0)}
 .card p{margin:0;font:400 11.5px/17px var(--sans);color:var(--text-4)}
 
-/* stats bar */
-.stats-wrap{position:absolute;left:0;right:0;bottom:24px;z-index:4;display:flex;justify-content:center;pointer-events:none;padding:0 16px}
-/* the bar is at least --bar-w wide and grows to its content (one row of chips) so the status slot can never run into the first stat;
-   only when the viewport caps it (max-width) do the chips wrap to 2 + 1 */
-.stats{pointer-events:auto;display:grid;grid-template-columns:minmax(0,1fr) repeat(4,auto);column-gap:22px;align-items:center;width:max-content;min-width:min(var(--bar-w),100%);max-width:100%;height:96px;padding:0 36px 0 27px;border-radius:var(--r-bar);
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015) 45%,rgba(255,255,255,0)),var(--bar);
-  -webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
-  border:1px solid rgba(255,255,255,.08);border-top-color:var(--bar-top);box-shadow:var(--sh-bar);--dy:16px;animation:rise .42s var(--ease-out) .38s both}   /* lands at .80 s, with the rest of the hero text */
-.status{display:flex;flex-direction:column;gap:6px;min-width:0}
-.status-row{display:flex;align-items:center;gap:8px;font:500 12.5px/1.45 var(--sans);color:var(--text);white-space:nowrap}
-.stats .chip{letter-spacing:.06em;padding:0 6px}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.stat{min-width:0}
-.stat .num{display:block;font:600 20px/1 var(--sans);letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums;text-shadow:var(--glow-num);transition:color 200ms,text-shadow 200ms;white-space:nowrap}
-.stat:hover .num{color:var(--accent-hot);text-shadow:0 0 16px rgba(var(--glow-rgb),.5)}
-.stat .lbl{display:block;margin-top:8px;font:400 11.5px/1 var(--sans);color:var(--text-3);white-space:nowrap}   /* text-3, not 4: the bar is glass over the brightest part of the glow (4.9:1 there on a phone) */
-.num.inf{animation:pop .35s var(--ease-out) .45s both}   /* ends at .80 s, with the bar; the counting numbers have no fade of their own — they ride the bar's entrance like the labels (see countTick) */
 .stage{display:none}
 /* once the entrance has played the keyframes are dropped: the resting style is the final frame,
    so nothing can replay them (full-page captures and some re-rasterisations restart animations) */
-.settled .nav,.settled .globe-wrap,.settled .badge,.settled .h1 .w,.settled .hero-sub,.settled .hero-btns,.settled .card-wrap,.settled .stats,.settled .num.inf{animation:none}
-
-/* =====================================================================
-   5. MARQUEE
-   ===================================================================== */
-.marquee{position:relative;height:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;display:flex;align-items:center;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.track{display:flex;align-items:center;width:max-content;white-space:nowrap;animation:marquee 40s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
-.track span{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);padding:0 28px}
-.track i{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
-@keyframes marquee{to{transform:translateX(-50%)}}
+.settled .nav,.settled .globe-wrap,.settled .h1 .w,.settled .hero-sub,.settled .hero-btns,.settled .card-wrap{animation:none}
 
 /* =====================================================================
    6. ABOUT
@@ -312,61 +266,15 @@ canvas{display:block}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* =====================================================================
-   7. LIVE CONSOLE
-   ===================================================================== */
-.console-sec{border-top:1px solid var(--line)}
-.console{position:relative;overflow:hidden;max-width:880px;border-radius:var(--r-panel);background:rgba(var(--surface-rgb),.85);border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
-.con-head{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 16px;border-bottom:1px solid var(--line);font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--text-3)}
-.con-head .file{display:inline-flex;align-items:center;gap:10px}
-.con-head .file i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);box-shadow:14px 0 0 rgba(255,255,255,.12),28px 0 0 rgba(255,255,255,.12);margin-right:28px}
-.live{display:inline-flex;align-items:center;gap:7px;height:22px;padding:0 9px;border-radius:var(--r-pill);background:rgba(var(--glow-rgb),.10);border:1px solid rgba(var(--glow-rgb),.25);color:var(--accent);letter-spacing:.14em;font-size:10.5px}
-.live i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.con-body{position:relative;height:261.5px;padding:12px 16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;font:400 12.5px/1.9 var(--mono)}
-.row{position:relative;z-index:1;display:flex;gap:10px;white-space:nowrap;padding:0 8px;margin:0 -8px;border-radius:6px;transition:background 150ms;min-width:0;overflow:hidden}   /* z-index: the rows paint over the scanline, so it never crosses the text */
-.row>span{flex:none}
-.row .ev{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}   /* the event is the one cell allowed to give way */
-.row:hover{background:rgba(255,255,255,.03)}
-.row.new{animation:rowIn .32s var(--ease-out) both}
-@keyframes rowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.row .t{color:var(--text-3)}
-.row .ev{color:var(--text)}
-.row .v{color:var(--text-2)}
-.row .sp{color:var(--text-3)}   /* text-3, not 4: the separators stay ≥ 4.5:1 even where the scanline passes behind them */
-.row .st{color:var(--text-2)}
-.row .v .ab{display:none;text-decoration:none}   /* abbreviated vertical (HE / DS / Ecom), phone only; the <abbr> title carries the full name */
-.con-key{display:none;flex-wrap:wrap;gap:2px 14px;margin:0;padding:0 16px 12px;font:400 10.5px/1.5 var(--mono);letter-spacing:.04em;color:var(--text-4)}   /* phone only: the key for those abbreviations, one item per entry so it wraps cleanly */
-.row .ok{color:var(--green)}
-.row .won{color:var(--accent-hot)}
-.con-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--line)}
-.con-foot .chips{gap:8px}
-.con-foot .chip{animation:chipPulse 3s ease-in-out infinite}
-.con-foot .chip:nth-child(2){animation-delay:.4s}
-.con-foot .chip:nth-child(3){animation-delay:.8s}
-.con-foot .chip:nth-child(4){animation-delay:1.2s}
-@keyframes chipPulse{0%,100%{border-color:rgba(255,255,255,.08)}50%{border-color:rgba(45,220,122,.35)}}
-.sample{font:500 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--text-3);white-space:nowrap}
-/* scanline: a ::after on the log area, not a DOM child (the log appends and drops rows by position), so the sweep covers the rows only — never the header, the status chips or the footer. A saturated-blue line with a faint 24 px trail, painted under the row text (z-index 0 vs the rows' 1) and kept at .25 alpha, so every cell stays ≥ 4.5:1 while the line passes behind it (at .62 the separators fell to 1.8:1) */
-.con-body::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent calc(100% - 24px),rgba(0,160,228,.07) calc(100% - 1px),rgba(0,166,236,.25) calc(100% - 1px));
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);animation:scan 6s linear infinite}
-.console:hover .con-body::after{animation-play-state:paused}
-@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(0)}}
-.console-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center}
-
-/* =====================================================================
    8. VERTICALS
    ===================================================================== */
-.verticals .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.verticals .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .vcard{padding:0;overflow:hidden;display:flex;flex-direction:column;--lift:0px}
 .vcard:hover{--lift:-4px}
-.vband{position:relative;height:120px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(var(--glow-rgb),.05),transparent)}
-.vband canvas{width:100%;height:100%}
-.vband .sample{position:absolute;top:10px;right:14px;font-size:10px}   /* the label sits on the visual it describes, so every card body ends with its paragraph; plain text-3 (≈ 6:1 on the band) — the old opacity .6 measured 3.1:1, text-4 only 4.5–4.8 */
-.vbody{display:flex;flex-direction:column;flex:1;padding:22px 24px 26px}
-.tag{display:inline-flex;align-self:flex-start;align-items:center;height:22px;padding:0 9px;border-radius:var(--r-chip);font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);background:var(--glass-tint);border:1px solid rgba(255,255,255,.1)}
-.tag-primary{color:var(--accent);background:rgba(var(--glow-rgb),.10);border-color:rgba(var(--glow-rgb),.25)}
-.vcard h3{margin:14px 0 0;font:600 20px/1.25 var(--sans);letter-spacing:-.015em;color:var(--text)}
+.vbody{display:flex;flex-direction:column;align-items:flex-start;flex:1;padding:26px 24px 28px}
+.vcard h3{margin:20px 0 0;font:600 20px/1.25 var(--sans);letter-spacing:-.015em;color:var(--text)}
 .vcard p{margin:10px 0 0;font:400 14px/1.6 var(--sans);color:var(--text-2);text-wrap:pretty}
+@media (max-width:1199px){.verticals .grid{grid-template-columns:1fr 1fr}}   /* 2 × 2 below 1200: four across would squeeze each card to ~230 px */
 
 /* =====================================================================
    9. PROCESS
@@ -394,7 +302,7 @@ canvas{display:block}
 .tdot{display:none}
 
 /* =====================================================================
-   10. COMPLIANCE — one wide band: radar left, copy + chips right
+   10. COMPLIANCE — one wide band: radar left, copy right
    ===================================================================== */
 .compliance{padding:120px 0 104px;border-top:1px solid var(--line);overflow:hidden}   /* 104 below: the band's own padding makes up the rest of the 240 px rhythm */
 .comp-band{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;padding:44px 52px;border-radius:28px;
@@ -409,23 +317,6 @@ canvas{display:block}
 .radar svg{position:relative;width:52px;height:52px;color:var(--accent);filter:drop-shadow(0 0 10px rgba(var(--glow-rgb),.55))}
 .comp-copy .h2{margin-top:0;max-width:540px}
 .comp-copy .sub{max-width:640px}
-.chips-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;max-width:620px}   /* wraps 2 + 2, never 3 + 1 */
-.chip-lg{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:9px 14px;border-radius:var(--r-chip);font:500 12px/1.25 var(--mono);letter-spacing:.06em;text-align:left;color:var(--text-2);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);animation:chipGlow 4s ease-in-out infinite}
-.chip-lg::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.chip-lg:nth-child(2){animation-delay:1s}
-.chip-lg:nth-child(3){animation-delay:2s}
-.chip-lg:nth-child(4){animation-delay:3s}
-@keyframes chipGlow{0%,20%,100%{border-color:rgba(255,255,255,.1);color:var(--text-2)}8%{border-color:rgba(var(--glow-rgb),.5);color:var(--text)}}
-
-/* =====================================================================
-   11. MANIFESTO
-   ===================================================================== */
-.manifesto{padding:136px 0 112px;text-align:center}   /* 104 + 136 above the quote, 112 + 128 below: both ≈ 240 px content to content, like every other section gap */
-.quote{margin:0 auto;max-width:900px;font:500 clamp(24px,2.6vw,34px)/1.35 var(--sans);letter-spacing:-.02em;color:var(--text-2);text-wrap:pretty}
-.quote .w{display:inline-block;animation:wordglow 6s ease-in-out infinite;animation-delay:calc(var(--i)*.18s)}
-.quote .win{color:var(--accent);font-weight:600;animation:winglow 6s ease-in-out infinite;animation-delay:calc(var(--i)*.18s)}
-@keyframes wordglow{0%,20%,100%{color:var(--text-2)}10%{color:var(--text)}}
-@keyframes winglow{0%,20%,100%{text-shadow:0 0 0 rgba(var(--glow-rgb),0)}10%{text-shadow:0 0 18px rgba(var(--glow-rgb),.75)}}
 
 /* =====================================================================
    12. CTA — the globe's upper rim rises from the section's bottom edge: a
@@ -462,7 +353,6 @@ canvas{display:block}
 .foot-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
 .foot-brand{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--sans);letter-spacing:.08em;color:var(--text)}
 .foot-brand img{width:22px;height:22px;display:block}
-.foot-status{display:flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1 var(--sans);color:var(--text-3)}
 .foot-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .foot-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;font:400 13px/1 var(--sans);color:var(--text-3);text-decoration:none;border-radius:8px;transition:color 150ms}
 .foot-links a:hover{color:var(--text-2)}
@@ -477,11 +367,8 @@ canvas{display:block}
 @media (min-width:1024px) and (max-width:1199px){
   .nav-links a{padding:0 11px;font-size:13.5px}
   .hero-sub{max-width:400px;font-size:14px;line-height:1.6}   /* ≥ 24 px of air between the copy and the top cards */
-  .stats{column-gap:20px}
-  .stats .chip{font-size:9.5px;letter-spacing:.03em;padding:0 6px}
-  .stats .chips{gap:4px}
 }
-/* mid-height desktop (a MacBook with browser chrome, 1536×864, 1280×800): slightly tighter cards, both rows still hang from the bar */
+/* mid-height desktop (a MacBook with browser chrome, 1536×864, 1280×800): slightly tighter cards, both rows still hang from the floor */
 @media (min-width:1024px) and (min-height:780px) and (max-height:895px){
   .hero{--card-h:182px}
   .hero-copy{padding-top:88px}
@@ -493,9 +380,8 @@ canvas{display:block}
 /* short desktop (1280×720 class): compressed vertical rhythm, hero still fits */
 @media (min-width:1024px) and (max-height:779px){
   .nav{height:64px}
-  .hero{--card-w:212px;--card-h:162px;--bar-w:clamp(600px,51vw,652px)}
+  .hero{--card-w:220px;--card-h:162px}   /* 220, not 212: every card description holds 2 lines */
   .hero-copy{padding-top:84px}
-  .badge{height:32px;font-size:12px}
   .h1{margin-top:14px;font-size:48px}
   .hero-sub{margin-top:14px;font-size:14px;line-height:22px}
   .hero-btns{margin-top:20px}
@@ -509,12 +395,6 @@ canvas{display:block}
   .card p{font-size:11px;line-height:16px}
   .card-row .arrow{margin:16px 0 0 8px;shape-outside:inset(16px 0 0 0)}
   .arrow{width:32px;height:32px}
-  .stats-wrap{bottom:16px}
-  .stats{height:78px;padding:0 20px;column-gap:22px}
-  .stats .chip{font-size:9.5px;letter-spacing:.03em;padding:0 6px}
-  .stats .chips{gap:4px}
-  .stat .num{font-size:18px}
-  .stat .lbl{font-size:11px;margin-top:6px}
 }
 /* stacked hero: tablet + phone */
 @media (max-width:1023px){
@@ -528,11 +408,7 @@ canvas{display:block}
   .hero-copy{padding:88px 32px 0}
   .h1{font-size:48px}
   .hero-sub{font-size:15px;line-height:24px}
-  .stage{display:block;height:calc(var(--R)*1.5 + 32px);pointer-events:none}
-  .stats-wrap{position:static;display:block;padding:0 32px;z-index:auto}
-  .stats{width:100%;min-width:0;max-width:756px;margin:0 auto;height:auto;grid-template-columns:repeat(4,auto);justify-content:start;column-gap:32px;row-gap:18px;padding:22px 28px}
-  .stats .chip{color:var(--text-2)}   /* stacked, the bar sits on the brightest part of the pool glow: text-3 measured 4.2–4.5:1 there at 768–820 */
-  .status{grid-column:1/-1}
+  .stage{display:block;height:calc(var(--R)*2 + 56px);pointer-events:none}   /* the whole sphere + its rim: nothing covers its lower part */
   .cards{position:static;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:32px 32px 0;pointer-events:auto}
   .card-wrap{position:static;width:auto;perspective:none;animation:rise .45s var(--ease-out) both;--dy:10px}
   .card-wrap.tl{animation-delay:.30s}
@@ -547,10 +423,9 @@ canvas{display:block}
   .hero-fade{display:none}
   .hero-end{height:40px}
   .sec{padding:96px 0}
-  .about .grid,.cta .grid,.console-grid{grid-template-columns:1fr;gap:40px}
+  .about .grid,.cta .grid{grid-template-columns:1fr;gap:40px}
   .about-art{right:-260px;top:auto;bottom:-200px;margin-top:0}
   .verticals .grid{grid-template-columns:1fr 1fr}
-  .verticals .vcard:last-child{grid-column:1/-1}
   /* process: the orbit track becomes a vertical timeline with the satellite travelling down */
   .track-wrap{display:none}
   .steps{grid-template-columns:1fr;padding-left:36px;gap:12px}
@@ -561,8 +436,6 @@ canvas{display:block}
   .tdot{display:block;position:absolute;left:7px;top:26px;width:9px;height:9px;border-radius:50%;background:var(--accent-ice);box-shadow:0 0 12px 3px rgba(0,150,214,.6);pointer-events:none}
   .comp-band{grid-template-columns:1fr;justify-items:center;text-align:center;gap:32px;padding:40px 28px;background-image:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
   .comp-copy .sub{margin-left:auto;margin-right:auto}
-  .chips-row{justify-content:center;margin-left:auto;margin-right:auto}
-  .manifesto{padding:120px 0}
   .cta{padding:110px 0 clamp(180px,24vw,240px)}
 }
 /* phone */
@@ -574,16 +447,11 @@ canvas{display:block}
   .nav-cta{height:44px;padding:0 14px 0 16px}   /* phone tap targets: 44 px (menu toggle, nav CTA, brand, footer links, email, Copy) */
   .hero{--R:55vw}
   .hero-copy{padding:88px max(16px,env(safe-area-inset-left,0px)) 0}
-  .badge{height:32px;font-size:12px}
   .h1{margin-top:14px;font-size:40px;line-height:1.05}
   .hero-sub{margin-top:14px;max-width:330px;font-size:15px;line-height:1.55}
   .hero-btns{width:100%;max-width:360px;gap:12px;margin-top:20px}
   .hero-btns .btn{flex:1;padding:0 12px}
-  .stage{height:calc(var(--R)*1.35 + 28px)}
-  .stats-wrap{padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px))}
-  .stats{grid-template-columns:1fr 1fr;column-gap:16px;row-gap:16px;padding:20px;border-radius:20px}
-  .stat .num{font-size:22px}
-  .stat .lbl{font-size:11px}
+  .stage{height:calc(var(--R)*2 + 44px)}
   .cards{grid-template-columns:1fr;gap:12px;padding:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
   .hero-end{height:28px}
   .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -593,21 +461,13 @@ canvas{display:block}
   .sub{font-size:15px}
   .about .body{font-size:15px}
   .principle{padding:18px}
-  .console-grid{gap:28px}
-  .con-body{font-size:12px;height:252px}
-  .row{gap:8px}
-  .row .v .full,.row .st,.row .sp-st{display:none}   /* phone keeps time · event · vertical (abbreviated) · result; the state column goes */
-  .row .v .ab{display:inline}
-  .con-key{display:flex}
   .comp-copy .ln{white-space:nowrap}   /* the spans keep the H2 from breaking inside a sentence (never a one-word first line) */
-  .comp-copy .h2{font-size:clamp(22px,6.5vw,28px)}   /* 25.4 px at 390, 23.4 px at 360: "Compliance isn't a feature." (337 px at 28 px) fits the 316 / 286 px box, so the phone breaks one sentence per line like the desktop — "Compliance isn't a feature. / It's the foundation." (decided 11-08) */
+  .comp-copy .h2{font-size:clamp(22px,6.5vw,28px)}   /* 25.4 px at 390, 23.4 px at 360: each .ln span holds one line and fits the 316 / 286 px box */
   .verticals .grid{grid-template-columns:1fr}
   .compliance{padding:64px 0}
   .radar{width:140px;height:140px}
   .radar::before{inset:24px}
   .radar::after{inset:48px}
-  .manifesto{padding:88px 0}
-  .quote{font-size:24px}
   .cta{padding:80px 0 clamp(150px,36vw,200px)}
   .email-row{height:52px;width:100%;justify-content:space-between;padding:0 4px 0 14px}
   .copy{height:44px}
@@ -633,7 +493,6 @@ canvas{display:block}
   .card h2{grid-column:2;grid-row:1;margin:0;font-size:15px;align-self:end}
   .card p{grid-column:2;grid-row:2;max-width:none;margin:0;font-size:13px;align-self:start}
   .card .arrow{width:32px;height:32px;grid-column:3;grid-row:1/3;align-self:center}
-  .stats .status-row{font-size:13px}
 }
 /* small phones: the wordmark stays on one line; the nav CTA drops its arrow */
 @media (max-width:400px){
@@ -643,9 +502,6 @@ canvas{display:block}
   .comp-band{padding:40px 20px}
   .card{column-gap:12px}
   .card p{font-size:12.5px}  /* the 196 px text column holds every description on two lines at 360 */
-  .chip-lg{font-size:11px}   /* the longest chip stays on one line at 360 */
-  .con-body{font-size:11.5px}
-  .row{gap:6px}              /* the longest console rows fit the 294 px body at 360 */
 }
 @media (max-width:360px){
   .h1{font-size:36px}
@@ -668,33 +524,14 @@ canvas{display:block}
 /* no hardware GPU — the GLOBE LOADER's probe found software WebGL or none (html.soft-gl): the compositor then works in software
    too, and every backdrop blur re-filters its box on the CPU each frame (under SwiftShader the bobbing hero cards held the page
    at ~33 fps instead of 60). The blurred glass takes flat, denser tints instead (the cards take the no-backdrop-filter fallback) */
-.soft-gl .btn-ghost,.soft-gl .nav.scrolled,.soft-gl .nav.open,.soft-gl .card,.soft-gl .stats{-webkit-backdrop-filter:none;backdrop-filter:none}
+.soft-gl .btn-ghost,.soft-gl .nav.scrolled,.soft-gl .nav.open,.soft-gl .card{-webkit-backdrop-filter:none;backdrop-filter:none}
 @media (min-width:1024px){.soft-gl .card{background-color:rgba(var(--surface-rgb),.82)}}   /* stacked, the cards never blur */
 .soft-gl .nav.scrolled,.soft-gl .nav.open{background:rgba(var(--surface-rgb),.94)}
-.soft-gl .stats{background-color:rgba(4,7,9,.82)}
 /* reduced motion: static arrangements that never depend on an animation */
 @media (prefers-reduced-motion:reduce){
-  /* capability strip: a static 2-column list (one row from 1280 up, one column under 480); the dots move inside the items as ::before, so a wrap can never strand one */
-  .marquee{height:auto;padding:14px 16px;-webkit-mask-image:none;mask-image:none}
-  .track{width:auto;display:grid;grid-template-columns:repeat(2,auto);justify-content:center;row-gap:10px}
-  .track i,.track .dup{display:none}
-  .track span{display:inline-flex;align-items:center;gap:16px;padding:0 16px}
-  .track span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}   /* 2-column list: every item leads with a dot (both columns alike) */
   .sweep{display:none}
-  .con-body::after{display:none}
-  .quote .w{color:var(--text-2)}
-  .quote .win{color:var(--accent)}
   .btn-sheen::after{display:none}
   .tdot{display:none}
-}
-@media (prefers-reduced-motion:reduce) and (max-width:479px){
-  .track{grid-template-columns:auto}
-  .track span::before{content:none}
-}
-@media (prefers-reduced-motion:reduce) and (min-width:1280px){
-  .track{display:flex}
-  .track span{font-size:11px;letter-spacing:.08em;gap:10px;padding:0 10px}   /* all eight fit one row from 1280: the dots separate the items */
-  .track span:first-of-type::before{content:none}
 }
 </style>
 </head>
@@ -750,12 +587,11 @@ canvas{display:block}
   <div class="hero-fade" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-copy" id="hero-copy">
-      <div class="badge"><span class="pdot" aria-hidden="true"></span><span>Performance Media Buying</span></div>
       <h1 class="h1">
         <span class="l1"><span class="w" style="--i:0">We</span> <span class="w" style="--i:1">run</span> <span class="w" style="--i:2">ads</span></span>
         <span class="l2"><span class="w" style="--i:3">the</span> <span class="w" style="--i:4">boring</span> <span class="w" style="--i:5">way.</span></span>
       </h1>
-      <p class="hero-sub">No hype. No fluff. Just engineered systems that convert traffic into revenue&nbsp;— predictably, repeatedly, at scale.</p>
+      <p class="hero-sub">We turn our own ads into leads and inbound calls for HELOC, reverse mortgage, refi and debt settlement buyers.</p>
       <div class="hero-btns" id="hero-btns">
         <a class="btn btn-primary btn-sheen" href="#contact">Work With Us <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-ghost" href="#process">How It Works</a>
@@ -764,56 +600,35 @@ canvas{display:block}
 
     <div class="stage" id="stage" aria-hidden="true"></div>
 
-    <div class="stats-wrap">
-      <div class="stats" id="stats" role="group" aria-label="Status and stats">
-        <div class="status">
-          <div class="status-row"><span class="gdot" aria-hidden="true"></span><span>Systems online</span></div>
-          <div class="chips"><span class="chip">PIXEL <b>OK</b></span><span class="chip">WEBHOOKS <b>OK</b></span><span class="chip">ROUTING <b>OK</b></span></div>
-        </div>
-        <div class="stat"><div class="num">24/7</div><div class="lbl">Campaigns live</div></div>
-        <div class="stat"><div class="num" data-count="100" data-start="90" data-dec="0" data-suffix="%">100%</div><div class="lbl">Funnel owned</div></div>
-        <div class="stat"><div class="num inf">∞</div><div class="lbl">Tests running</div></div>
-        <div class="stat"><div class="num" data-count="99.98" data-start="99.00" data-dec="2" data-suffix="%">99.98%</div><div class="lbl">Tracking uptime</div></div>
-      </div>
-    </div>
-
     <div class="cards">
-      <div class="card-wrap tl"><div class="card-float"><a class="card glass" href="#about">
-        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
-        <div class="text"><h2>Real-Time Tracking</h2>
+      <div class="card-wrap tl"><div class="card-float"><a class="card glass" href="#verticals">
+        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5v2h6v-2"/><path d="m9 13 2 2 4-4"/></svg></span>
+        <div class="text"><h2>Leads</h2>
         <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <p>Every click, call, and conversion tracked to the dollar.</p></div></div>
+        <p>People who filled out our form, sent to you in real time.</p></div></div>
       </a></div></div>
-      <div class="card-wrap tr"><div class="card-float"><a class="card glass" href="#about">
-        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
-        <div class="text"><h2>Lead Generation</h2>
+      <div class="card-wrap tr"><div class="card-float"><a class="card glass" href="#process">
+        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.9l1.5 4-2.1 1.4a11 11 0 0 0 6.2 6.2l1.4-2.1 4 1.5v2.9a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/><path d="M15 4v5h5M21 3l-6 6"/></svg></span>
+        <div class="text"><h2>Inbound Calls</h2>
         <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <p>Exclusive, verified leads delivered the moment they convert.</p></div></div>
+        <p>People who call in from our pages, routed live to you.</p></div></div>
       </a></div></div>
-      <div class="card-wrap bl"><div class="card-float"><a class="card glass" href="#about">
-        <span class="tile tile-grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
-        <div class="text"><h2>Creative Testing</h2>
+      <div class="card-wrap bl"><div class="card-float"><a class="card glass" href="#process">
+        <span class="tile tile-grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+        <div class="text"><h2>Tracking</h2>
         <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <p>Variants launched daily. Losers killed fast. Data&nbsp;decides.</p></div></div>
+        <p>Every click and call tracked from the ad to delivery.</p></div></div>
       </a></div></div>
-      <div class="card-wrap br"><div class="card-float"><a class="card glass" href="#about">
+      <div class="card-wrap br"><div class="card-float"><a class="card glass" href="#compliance">
         <span class="tile tile-grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
-        <div class="text"><h2>TCPA Compliance</h2>
+        <div class="text"><h2>Consent</h2>
         <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <p>An independent certificate of consent on every record.</p></div></div>
+        <p>An independent consent certificate on every form lead.</p></div></div>
       </a></div></div>
     </div>
     <div class="hero-end" aria-hidden="true"></div>
   </div>
 </section>
-
-<!-- ================= CAPABILITY MARQUEE ================= -->
-<div class="marquee" role="group" aria-label="Capabilities">
-  <div class="track">
-    <i aria-hidden="true"></i><span>Real-Time Tracking</span><i aria-hidden="true"></i><span>Lead Generation</span><i aria-hidden="true"></i><span>Creative Testing</span><i aria-hidden="true"></i><span>TCPA Compliance</span><i aria-hidden="true"></i><span>Paid Social</span><i aria-hidden="true"></i><span>Conversion APIs</span><i aria-hidden="true"></i><span>Funnel Automation</span><i aria-hidden="true"></i><span>Signal Optimization</span>
-    <i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Real-Time Tracking</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Lead Generation</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Creative Testing</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">TCPA Compliance</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Paid Social</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Conversion APIs</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Funnel Automation</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Signal Optimization</span>
-  </div>
-</div>
 
 <!-- ================= ABOUT ================= -->
 <section class="sec about" id="about" aria-labelledby="about-h">
@@ -821,46 +636,23 @@ canvas{display:block}
   <div class="wrap">
     <div class="grid">
       <div class="reveal">
-        <span class="label">What we do</span>
-        <h2 class="h2" id="about-h">The boring stuff<br>that prints money.</h2>
-        <p class="body">We buy media. We build funnels. We track every click, every call, every conversion, every dollar&nbsp;— then we do it again, better, faster, cheaper.</p>
-        <p class="body">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
+        <h2 class="h2" id="about-h">We own the whole funnel.</h2>
+        <p class="body">We buy the traffic on paid social, send it to landing pages and quizzes we build ourselves, and deliver what comes out to the buyer as a lead or a live call.</p>
+        <p class="body">Every step is ours, so we know where each lead came from and what it was asked before it reached you.</p>
       </div>
       <div class="principles">
         <div class="principle glass tilt reveal" style="--i:0">
-          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
-          <div><h3>Systems Over Stunts</h3><p>Every campaign is a system&nbsp;— tracked, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p></div>
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+          <div><h3>Our Own Traffic</h3><p>We run the ads and build the pages, so every lead comes from a funnel we control.</p></div>
         </div>
         <div class="principle glass tilt reveal" style="--i:1">
-          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
-          <div><h3>Data Is the Creative</h3><p>The numbers tell us what works. Winning ads aren't the prettiest&nbsp;— they're the ones with the best unit economics.</p></div>
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h6l6-6h6M9 12l6 6h6"/></svg></span>
+          <div><h3>Leads or Live Calls</h3><p>Take form fills posted to your system, inbound calls to your phones, or both.</p></div>
         </div>
         <div class="principle glass tilt reveal" style="--i:2">
-          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>
-          <div><h3>Scale What Works</h3><p>Find a winner, remove the ceiling, pour fuel on it. That's the whole strategy. It's boring. It works.</p></div>
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="m9 14 2 2 4-4"/></svg></span>
+          <div><h3>Consent Certificates</h3><p>Every form lead carries an independent certificate of consent.</p></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= LIVE CONSOLE ================= -->
-<section class="sec console-sec" id="tracking" aria-labelledby="tracking-h">
-  <div class="wrap">
-    <div class="console-grid">
-      <div class="reveal">
-        <span class="label">Tracking</span>
-        <h2 class="h2" id="tracking-h">Every&nbsp;click. Every&nbsp;call. Every&nbsp;dollar.</h2>
-        <p class="sub">Each lead is tracked from first impression to delivery, in real&nbsp;time.</p>
-      </div>
-      <div class="console reveal" id="console" style="--i:1">
-        <div class="con-head"><span class="file"><i aria-hidden="true"></i>conversions.log</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
-        <div class="con-body" id="con-body" aria-live="off"></div>
-        <div class="con-foot">
-          <div class="chips"><span class="chip">PIXEL <b>OK</b></span><span class="chip">WEBHOOKS <b>OK</b></span><span class="chip">ROUTING <b>OK</b></span><span class="chip">UPTIME <b>99.98%</b></span></div>
-          <span class="sample">Sample data</span>
-        </div>
-        <p class="con-key"><span>HE Home Equity</span><span>DS Debt Settlement</span><span>Ecom Ecommerce</span></p>
       </div>
     </div>
   </div>
@@ -870,22 +662,21 @@ canvas{display:block}
 <section class="sec verticals" id="verticals" aria-labelledby="verticals-h">
   <div class="wrap wrap-wide">
     <div class="sec-head center reveal">
-      <span class="label">Verticals</span>
       <h2 class="h2" id="verticals-h">Where we operate.</h2>
-      <p class="sub">High-intent, high-value verticals where performance media buying matters&nbsp;most.</p>
+      <p class="sub">Leads and inbound calls in four consumer finance verticals.</p>
     </div>
     <div class="grid">
       <article class="vcard glass tilt reveal" style="--i:0">
-        <div class="vband"><canvas class="mini" data-mini="orbit" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
-        <div class="vbody"><span class="tag tag-primary">Primary</span><h3>Home Equity &amp; Refinance</h3><p>Exclusive, verified home equity and <span class="nw">cash-out</span> refinance leads&nbsp;— delivered in real time to lenders and loan officers ready to close, not chase.</p></div>
+        <div class="vbody"><span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg></span><h3>HELOC</h3><p>Homeowners who want a line of credit against their home's equity. For lenders and loan officers.</p></div>
       </article>
       <article class="vcard glass tilt reveal" style="--i:1">
-        <div class="vband"><canvas class="mini" data-mini="usmap" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
-        <div class="vbody"><span class="tag">Growing</span><h3>Debt Settlement</h3><p>Qualified debt relief leads from consumers actively looking for a way out&nbsp;— verified, consent-backed, and delivered to settlement firms ready to enroll.</p></div>
+        <div class="vbody"><span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12A7.5 7.5 0 1 0 7 6.4"/><path d="M4 3.5V7.5h4"/><path d="M9.5 15.5v-3l2.5-2 2.5 2v3z"/></svg></span><h3>Reverse Mortgage</h3><p>Older homeowners asking about a reverse mortgage. For reverse mortgage lenders and brokers.</p></div>
       </article>
       <article class="vcard glass tilt reveal" style="--i:2">
-        <div class="vband"><canvas class="mini" data-mini="bars" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
-        <div class="vbody"><span class="tag">Growing</span><h3>Ecommerce</h3><p>Direct response media buying for products that sell on cold traffic. Creative testing, conversion tracking, and scaling&nbsp;— the same system, pointed at a storefront.</p></div>
+        <div class="vbody"><span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></span><h3>Refi</h3><p>Homeowners looking to refinance, including cash-out. For lenders and loan officers.</p></div>
+      </article>
+      <article class="vcard glass tilt reveal" style="--i:3">
+        <div class="vbody"><span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M21 11v6h-6"/></svg></span><h3>Debt Settlement</h3><p>Consumers with unsecured debt looking for a way out. For debt settlement firms.</p></div>
       </article>
     </div>
   </div>
@@ -895,9 +686,8 @@ canvas{display:block}
 <section class="sec process" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="label">Process</span>
-      <h2 class="h2" id="process-h">How boring works.</h2>
-      <p class="sub">Four steps. Repeat forever. That's the secret&nbsp;— there is no secret.</p>
+      <h2 class="h2" id="process-h">How it works.</h2>
+      <p class="sub">The four steps behind our leads and calls.</p>
     </div>
     <div class="track-wrap" aria-hidden="true">
       <svg id="track" viewBox="0 0 1200 222" preserveAspectRatio="xMidYMid meet">
@@ -915,10 +705,10 @@ canvas{display:block}
     </div>
     <div class="steps" id="steps">
       <span class="tdot" id="tdot" aria-hidden="true"></span>
-      <article class="step glass reveal active" style="--i:0"><span class="n">01</span><h3>Build</h3><p>Set up the infrastructure&nbsp;— tracking, offer routing, landing pages, compliance. Nothing flashy. Everything&nbsp;measurable.</p></article>
-      <article class="step glass reveal" style="--i:1"><span class="n">02</span><h3>Test</h3><p>Launch variants. Compare everything. Kill losers fast. The data decides, not opinions.</p></article>
-      <article class="step glass reveal" style="--i:2"><span class="n">03</span><h3>Optimize</h3><p>Squeeze every conversion point. Lower costs. Improve quality. Tiny gains compound into outsized margins.</p></article>
-      <article class="step glass reveal" style="--i:3"><span class="n">04</span><h3>Scale</h3><p>Winners get budget. Proven systems get expanded. Then we go back to step two and do it all again.</p></article>
+      <article class="step glass reveal active" style="--i:0"><span class="n">01</span><h3>Ads</h3><p>We run paid social ads from our own ad accounts, written for people who need the product.</p></article>
+      <article class="step glass reveal" style="--i:1"><span class="n">02</span><h3>Funnel</h3><p>They land on our pages and quizzes, which ask the basic screening questions first.</p></article>
+      <article class="step glass reveal" style="--i:2"><span class="n">03</span><h3>Consent</h3><p>Each form lead gets an independent consent certificate, and every click and call is tracked.</p></article>
+      <article class="step glass reveal" style="--i:3"><span class="n">04</span><h3>Delivery</h3><p>Leads post to your system in real time. Calls ring through live to your team.</p></article>
     </div>
   </div>
 </section>
@@ -933,23 +723,10 @@ canvas{display:block}
         <svg class="ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
       </div>
       <div class="comp-copy">
-        <h2 class="h2" id="compliance-h"><span class="ln">Compliance isn't</span> <span class="ln">a feature.</span> <span class="ln">It's the&nbsp;foundation.</span></h2>
-        <p class="sub">Every lead carries an independent certificate of consent. TCPA-compliant capture, verified phone numbers, and a full audit trail on every record&nbsp;— so our buyers scale with confidence, not&nbsp;exposure.</p>
-        <div class="chips-row">
-          <span class="chip-lg">Independent consent certificate</span>
-          <span class="chip-lg">TCPA-compliant capture</span>
-          <span class="chip-lg">Verified phone numbers</span>
-          <span class="chip-lg">Full audit trail</span>
-        </div>
+        <h2 class="h2" id="compliance-h"><span class="ln">A consent certificate</span> <span class="ln">on every form lead.</span></h2>
+        <p class="sub">Every lead carries an independent certificate of consent. TCPA-compliant capture and a full audit trail on every record&nbsp;— so our buyers scale with confidence, not&nbsp;exposure.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ================= MANIFESTO ================= -->
-<section class="sec manifesto" aria-label="Manifesto">
-  <div class="wrap">
-    <p class="quote reveal" id="quote">We don't need to stand out. We just need to <span class="win">win</span>. The design doesn't ask for attention. The results do the work.</p>
   </div>
 </section>
 
@@ -961,9 +738,8 @@ canvas{display:block}
   <div class="wrap">
     <div class="grid">
       <div class="reveal">
-        <span class="label">Let's talk</span>
-        <h2 class="h2" id="contact-h">Ready for results that are predictably boring?</h2>
-        <p class="sub">Whether you're a carrier, lender, agency, or operator who wants a partner that speaks in numbers&nbsp;— we should talk.</p>
+        <h2 class="h2" id="contact-h">Tell us what you buy.</h2>
+        <p class="sub">Email us the vertical, the states and the volume you want, and we'll tell you what we can send.</p>
       </div>
       <div class="cta-actions reveal" style="--i:1">
         <div class="email-row">
@@ -984,7 +760,6 @@ canvas{display:block}
     <div class="foot-grid">
       <div>
         <div class="foot-brand"><img src="logo.svg" alt="" width="22" height="22" decoding="async" loading="lazy"><span>BORING MEDIA</span></div>
-        <div class="foot-status"><span class="gdot" aria-hidden="true"></span><span>All systems operational</span></div>
       </div>
       <nav class="foot-links" aria-label="Footer">
         <a href="#about">About</a><a href="#verticals">Verticals</a><a href="#process">Process</a><a href="#contact">Contact</a>
@@ -1003,22 +778,21 @@ canvas{display:block}
 /* =====================================================================
    SHARED — flags, helpers, the page's single rAF loop
    The loop stops itself when nothing on the page needs a frame (the WebGL
-   globe, console, process, minis all off screen or off, and the count-up
-   done) and is woken by the IntersectionObservers below.
+   globe and the process track both off screen or off) and is woken by the
+   IntersectionObservers below.
    ===================================================================== */
 const RMq = matchMedia('(prefers-reduced-motion: reduce)');
 let RM = RMq.matches;
 const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
-const DEG = Math.PI / 180, TAU = Math.PI * 2;
+const DEG = Math.PI / 180;
 const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
 const frac = v => v - Math.floor(v);
-function mulberry32(a){ return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
 const tasks = [];
-const live = { hero: false, con: false, proc: false, minis: 0, count: !RM };
-const anyLive = () => live.hero || live.con || live.proc || live.minis > 0 || live.count;
+const live = { hero: false, proc: false };
+const anyLive = () => live.hero || live.proc;
 let running = false, rafId = 0, tStart = 0, pausedAt = 0;
 function frame(now){
   if (!running) return;
@@ -1043,32 +817,17 @@ function watch(el, fn){
 }
 
 /* =====================================================================
-   US METROS — the nine lead-routing metros (Natural Earth populated
-   places, public domain) as [name, lat, lon]: the Debt Settlement card's
-   mini map pulses on them. The WebGL globe carries its own arc endpoints.
-   ===================================================================== */
-const US_METROS = [
-  ["New York", 40.752, -73.982],
-  ["Los Angeles", 33.992, -118.182],
-  ["Chicago", 41.832, -87.752],
-  ["Miami", 25.79, -80.226],
-  ["Atlanta", 33.832, -84.402],
-  ["Houston", 29.822, -95.342],
-  ["Washington, D.C.", 38.901, -77.011],
-  ["San Francisco", 37.769, -122.417],
-  ["Denver", 39.741, -104.986]
-];
-
-/* =====================================================================
    HERO GLOBE — the poster first, the WebGL globe over it once it has drawn.
    The layout finds the sphere's radius and centre from the DOM: anchored to
-   the stats bar on desktop (R ≈ 259 at 1440×900, ~196 at 1280×720, 300 at
-   1920), to the stage block when stacked. --gx/--gy/--R box the poster and
+   the hero floor on desktop (120 px above the hero's bottom edge, 94 on short
+   viewports: where the stats bar's top used to be, so the globe and the cards
+   keep their places; R ≈ 259 at 1440×900, ~230 at 1280×720, 300 at 1920), to
+   the stage block when stacked. --gx/--gy/--R box the poster and
    the CSS glows; the WebGL layer gets the globe box plus room for the rings.
    One rAF loop: the page's tick drives the WebGL globe (loop: 'external').
    ===================================================================== */
 const Hero = (function(){
-  const hero = $('#top'), wrap = $('#globe-wrap'), bar = $('#stats'), btns = $('#hero-btns'), stage = $('#stage'), glBox = $('#globe-gl');
+  const hero = $('#top'), wrap = $('#globe-wrap'), btns = $('#hero-btns'), stage = $('#stage'), glBox = $('#globe-gl');
   let geo = null, gl = null, glOn = false, inView = true, tLast = -1, weakGPU = false;
   function offTop(el){ let y = 0; while (el && el !== hero){ y += el.offsetTop; el = el.offsetParent; } return y; }   // offsets ignore the entrance transforms
   function layout(){
@@ -1076,9 +835,9 @@ const Hero = (function(){
     let R, cy;
     if (stacked){ R = phone ? Math.round(w * .55) : 210; cy = offTop(stage) + (phone ? 28 : 32) + R; }
     else {
-      const bt = offTop(bar), bb = offTop(btns) + btns.offsetHeight, avail = bt - bb - 21;   // sphere top 21 px under the buttons
-      const short = h < 780, k = short ? 1.12 : 1.3;                                           // short viewports let the bar hide more of the disc (~45 %) so the sphere keeps ~36 % of the width
-      R = Math.round(Math.max(170, Math.min(300, w * .18, avail / k)));                        // otherwise ~65 % of the disc above the bar
+      const short = h < 780, bt = h - (short ? 94 : 120);                                      // the floor: the old stats bar's top edge (CSS bottom 24 + 96 tall; 16 + 78 short)
+      const bb = offTop(btns) + btns.offsetHeight, avail = bt - bb - 21, k = short ? 1.12 : 1.3;  // sphere top 21 px under the buttons
+      R = Math.round(Math.max(170, Math.min(300, w * .18, avail / k)));                        // short viewports sink more of the disc (~45 %) below the floor so the sphere keeps ~36 % of the width; otherwise ~65 % above it
       const v = clamp(avail / (2 * R), short ? .54 : .62, .78);
       cy = Math.round(bt - (2 * v - 1) * R);
     }
@@ -1201,75 +960,6 @@ function bootGlobe(){
 const whenIdle = fn => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 300));
 
 /* =====================================================================
-   HERO STATS — count-up inside the bar's own entrance (0.38 s → 0.80 s), ease-out cubic, so
-   every number is final by the time the hero text is at full opacity (brief: 0.8 s). The
-   numbers carry no fade or blur of their own: they appear with the bar, like the labels.
-   Only the digits that stay plausible move: 100 from 90, 99.98 from 99.00 (data-start);
-   24/7 is static, since any other value reads as nonsense. Tabular figures, and every stat
-   column is sized by its label (wider than the number), so the bar never reflows mid-count.
-   ===================================================================== */
-const nums = $$('.num[data-count]').map(el => ({ el, end: parseFloat(el.dataset.count), start: parseFloat(el.dataset.start || el.dataset.count), dec: parseInt(el.dataset.dec || '0', 10), suf: el.dataset.suffix || '' }));
-let countDone = RM;
-if (!RM) nums.forEach(n => { n.el.textContent = n.start.toFixed(n.dec) + n.suf; });
-function countFinal(){ countDone = true; live.count = false; nums.forEach(n => { n.el.textContent = n.end.toFixed(n.dec) + n.suf; }); }
-function countTick(t){
-  if (countDone || t < .38) return;
-  let p = (t - .38) / .42; if (p >= 1){ countFinal(); return; }
-  const e = 1 - Math.pow(1 - p, 3);
-  for (let i = 0; i < nums.length; i++){ const n = nums[i]; n.el.textContent = (n.start + (n.end - n.start) * e).toFixed(n.dec) + n.suf; }
-}
-
-/* =====================================================================
-   LIVE CONSOLE — sample rows, timestamps from the viewer's clock
-   ===================================================================== */
-const conBody = $('#con-body'), conEl = $('#console');
-const EVENTS = [
-  ['Lead verified', 'Home Equity', 'TX', 'delivered', 'ok'],
-  ['Inbound call', 'Debt Settlement', 'FL', 'connected', 'ok'],
-  ['Consent cert issued', 'Home Equity', 'CO'],
-  ['Variant B won', 'Ecommerce', 'CTR +18%', null, 'won'],
-  ['Lead verified', 'Debt Settlement', 'GA', 'delivered', 'ok'],
-  ['Inbound call', 'Home Equity', 'AZ', 'connected', 'ok'],
-  ['Pixel matched', 'Ecommerce', 'CA', 'attributed', 'ok'],
-  ['Lead verified', 'Home Equity', 'NC', 'delivered', 'ok'],
-  ['Consent cert issued', 'Debt Settlement', 'MI'],
-  ['Webhook sent', 'Debt Settlement', 'OH', 'delivered', 'ok'],
-  ['Call qualified', 'Home Equity', 'WA', 'transferred', 'ok'],
-  ['Lead verified', 'Home Equity', 'CA', 'delivered', 'ok']
-];
-const pad = n => (n < 10 ? '0' : '') + n;
-const stamp = d => pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
-const ABBR = { 'Home Equity': 'HE', 'Debt Settlement': 'DS', 'Ecommerce': 'Ecom' };   // phone shows the short form as an <abbr> with the full name as its title (CSS swaps .full / .ab); the key sits in the footer
-let evCursor = 0;
-function makeRow(d, isNew){
-  const ev = EVENTS[evCursor]; evCursor = (evCursor + 1) % EVENTS.length;
-  const row = document.createElement('div'); row.className = isNew ? 'row new' : 'row';
-  const won = ev[4] === 'won';
-  const parts = [['t', stamp(d)], ['ev', ev[0]], ['sp', '·'], ['v', ev[1]], [won ? 'sp' : 'sp sp-st', '·'], [won ? 'won' : 'st', ev[2]]];
-  if (ev[3]) parts.push(['sp', '·'], ['ok', ev[3]]);
-  for (let i = 0; i < parts.length; i++){
-    const s = document.createElement('span'); s.className = parts[i][0];
-    if (parts[i][0] === 'v'){
-      const f = document.createElement('span'); f.className = 'full'; f.textContent = parts[i][1];
-      const a = document.createElement('abbr'); a.className = 'ab'; a.title = parts[i][1]; a.textContent = ABBR[parts[i][1]] || parts[i][1];
-      s.appendChild(f); s.appendChild(a);
-    } else s.textContent = parts[i][1];
-    row.appendChild(s);
-  }
-  return row;
-}
-{ const now = Date.now(); for (let i = 8; i >= 0; i--) conBody.appendChild(makeRow(new Date(now - i * 2000 - 1500), false)); }
-let nextRow = 2.0;
-watch(conEl, v => { live.con = v; });
-function consoleTick(t){
-  if (t < nextRow) return;
-  nextRow = t + 1.6 + Math.random() * .8;
-  if (!live.con) return;
-  conBody.appendChild(makeRow(new Date(), true));
-  while (conBody.children.length > 10) conBody.removeChild(conBody.firstChild);
-}
-
-/* =====================================================================
    PROCESS — satellite on an elliptical track (desktop) / timeline (stacked)
    ===================================================================== */
 const satCore = $('#sat-core'), satHaloEl = $('#sat-halo'), nodes = $$('#nodes .node'), nodeRings = $$('#nodes .node-ring'), drops = $$('#nodes .drop');
@@ -1310,117 +1000,9 @@ function processTick(t){
     const p = frac(t / 12), seg = Math.min(2, Math.floor(p * 3)), f = p * 3 - seg;
     const y = Math.round(stepTops[seg] + (stepTops[seg + 1] - stepTops[seg]) * f);
     if (y !== lastSatY){ lastSatY = y; tdot.style.transform = 'translateY(' + y + 'px)'; }
-    setActive(Math.min(3, Math.floor(p * 3 + 1e-6)));
+    setActive(Math.min(3, Math.round(p * 3)));   // the step nearest the dot: 04 lights for the last sixth of the cycle (floor never reached it)
   }
 }
-
-/* =====================================================================
-   VERTICALS — three ambient mini canvases (orbit, US dot-map, bar sweep)
-   ===================================================================== */
-const miniRnd = mulberry32(99);
-const BARH = new Float32Array(28); for (let i = 0; i < 28; i++) BARH[i] = .2 + miniRnd() * .75;
-/* the Debt Settlement card's US dot map: the contiguous US on a 0.5° grid, precomputed offline (_sources/bake/make_us_dots.py)
-   from _sources/maps/land-50m-3600x1800.png (Natural Earth, public domain) — the land cells inside the US outline or close
-   enough to it to be cut partway. A base64 bitmask, row-major (row 0 = 50° N, column 0 = 125° W, cells sampled at their
-   centres), most significant bit first. The dots are drawn inside a clip of US_OUTLINE, which gives the coast and the border
-   a smooth, anti-aliased edge (whole-cell dots alone step in blocks). */
-const US_OUTLINE = [[49,-124.7],[48.4,-124.7],[46.2,-124],[42,-124.4],[40.4,-124.4],[38,-123],[36.5,-121.9],[34.4,-120.5],[33.7,-118.3],[32.5,-117.1],[32.7,-114.7],[31.3,-111],[31.3,-108.2],[31.8,-106.5],[29.8,-104.4],[29.3,-103.3],[28.9,-102.5],[29.8,-101.4],[27.6,-99.5],[26,-97.2],[27.8,-97.4],[29.3,-94.8],[29.1,-90.1],[30.2,-88.5],[30.4,-86.6],[29.9,-84.3],[28.9,-82.7],[27,-82.5],[25.1,-81],[25.2,-80.3],[27.8,-80.4],[30.7,-81.4],[32.1,-80.8],[33.9,-77.9],[35.3,-75.5],[37,-76],[38.9,-75],[40.5,-73.9],[41.3,-71.9],[41.7,-70],[43.1,-70.6],[44.8,-66.9],[47.3,-68.3],[45.3,-71.5],[45,-74.7],[43.7,-79.2],[42.3,-82.9],[43.6,-82.3],[46.5,-84.5],[48,-88],[49,-95.2]];   // [lat, lon]
-const US_DOTS = { rows: 53, cols: 119, lat1: 50, lon0: -125, step: .5,
-  b64: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADf/////////wAAAAAAAAHP//////////4AAAAAAAE////////////AAAAAAAP////////////gAAAABgP////////////4AAAAHgf////////////4AAAA/g/////////////4AAAD/B/////////////4AAB//D/////////////4ADv/+H/////////////wA///8P/////////////wf//+Af/////////////3///gB/////////////////+AD/////////////////8AH/////////////////4AP/////////////////4AP////////////////8QA/////////////////wAB////////////////8AAB////////////////4AAD///////////////7gAAD///////////////+AAAD///////////////sAAAD///////////////wAAAH//////////////+AAAAH//////////////+AAAAP//////////////+AAAAP//////////////8AAAAP//////////////gAAAAP//////////////AAAAAH/////////////4AAAAAD////////////+AAAAAAB////////////8AAAAAAD////////////gAAAAAAD///////////+AAAAAAAAH//////////4AAAAAAAAB//////////wAAAAAAAAAfj////////AAAAAAAAAAAD////+uP+AAAAAAAAAAAD/////AM+AAAAAAAAAAAB///AdAA8AAAAAAAAAAAA//8AAAA8AAAAAAAAAAAAD/gAAAD4AAAAAAAAAAAAD8AAAAHwAAAAAAAAAAAAD4AAAAHwAAAAAAAAAAAADwAAAAHgAAAAAAAAAAAABwAAAAPAAAAAAAAAAAAABgAAAAOAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' };
-const minis = $$('.mini').map(c => ({ c, kind: c.dataset.mini, g: c.getContext('2d'), w: 0, h: 0, d: 1, on: true, off: null, grad: null, metros: null, pulseT: new Float32Array(3), pulseI: new Int8Array(3), nextPulse: 0, pc: 0 }));
-function sizeMini(mn){
-  const r = mn.c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2), w = Math.round(r.width), h = Math.round(r.height);
-  if (!w || !h || (w === mn.w && h === mn.h && d === mn.d)) return;
-  mn.w = w; mn.h = h; mn.d = d; mn.c.width = w * d; mn.c.height = h * d; mn.g.setTransform(d, 0, 0, d, 0, 0); mn.off = null; mn.grad = null;
-}
-function miniOff(mn){
-  const off = document.createElement('canvas'); off.width = mn.c.width; off.height = mn.c.height;
-  const g = off.getContext('2d'); g.scale(mn.d, mn.d); return { off, g };
-}
-/* mini orbit: a small dark lit sphere with two rings that pass behind it, one satellite each */
-const ORB = [{ a: 1.6, b: .36, rot: .22, w: .55, ph: 0 }, { a: 2.0, b: .26, rot: -.32, w: -.42, ph: 2 }];
-function buildOrbitOff(mn){
-  const { off, g } = miniOff(mn), w = mn.w, h = mn.h, cx = w * .5, cy = h * .62, r = 32;
-  const hz = g.createRadialGradient(cx, cy, r * .9, cx, cy, r * 1.9); hz.addColorStop(0, 'rgba(25,131,176,.26)'); hz.addColorStop(1, 'rgba(25,131,176,0)');
-  g.fillStyle = hz; g.fillRect(0, 0, w, h);
-  const body = mn.g.createRadialGradient(cx - 9, cy - 9, 2, cx, cy, r);
-  body.addColorStop(0, '#041922'); body.addColorStop(.7, '#02090c'); body.addColorStop(1, '#082633');
-  mn.grad = body; mn.off = off;
-}
-function drawOrbit(mn, t){
-  if (!mn.off) buildOrbitOff(mn);
-  const g = mn.g, w = mn.w, h = mn.h, cx = w * .5, cy = h * .62, r = 32;
-  g.clearRect(0, 0, w, h); g.drawImage(mn.off, 0, 0, w, h);
-  g.lineWidth = 1;
-  for (let pass = 0; pass < 2; pass++){                                   // pass 0: ring halves behind the sphere; pass 1: in front
-    if (pass === 1){
-      g.fillStyle = mn.grad; g.beginPath(); g.arc(cx, cy, r, 0, TAU); g.fill();
-      g.strokeStyle = 'rgba(43,192,255,.5)'; g.lineWidth = 1.2; g.beginPath(); g.arc(cx, cy, r - .5, Math.PI * 1.02, Math.PI * 1.72); g.stroke();
-      g.globalCompositeOperation = 'lighter'; g.fillStyle = 'rgba(0,171,245,.8)';
-      for (let i = 0; i < 14; i++){ const an = i * .62 + t * .25, rr = r * (.15 + (i % 5) * .17), x = Math.cos(an) * rr, y = Math.sin(an) * rr * .62; if (Math.cos(an + 1.2) < -.1) continue; g.fillRect(cx + x - .75, cy + y - .75, 1.5, 1.5); }
-      g.lineWidth = 1;
-    }
-    for (let k = 0; k < 2; k++){
-      const o = ORB[k], a = r * o.a, b = a * o.b;
-      g.save(); g.translate(cx, cy); g.rotate(o.rot);
-      g.strokeStyle = pass ? 'rgba(0,162,231,.6)' : 'rgba(0,157,224,.22)';
-      g.beginPath(); g.ellipse(0, 0, a, b, 0, pass ? 0 : Math.PI, pass ? Math.PI : TAU); g.stroke();   // y > 0 (lower half) is the near half
-      const ph = o.w * t + o.ph, sxx = Math.cos(ph) * a, syy = Math.sin(ph) * b, front = Math.sin(ph) >= 0;
-      if (front === !!pass){
-        g.fillStyle = pass ? 'rgba(0,174,249,.5)' : 'rgba(0,174,249,.25)'; g.beginPath(); g.arc(sxx, syy, pass ? 6 : 4, 0, TAU); g.fill();
-        g.fillStyle = pass ? '#f3fbff' : '#e6f8ff'; g.beginPath(); g.arc(sxx, syy, pass ? 2.2 : 1.5, 0, TAU); g.fill();
-      }
-      g.restore();
-    }
-  }
-  g.globalCompositeOperation = 'source-over';
-}
-function buildUSOff(mn){
-  const { off, g } = miniOff(mn), w = mn.w, h = mn.h;
-  const lon0 = -125, lon1 = -66, lat0 = 24, lat1 = 50, sc = Math.min((w - 40) / (lon1 - lon0), (h - 16) / ((lat1 - lat0) * 1.3));
-  const mw = (lon1 - lon0) * sc, mh = (lat1 - lat0) * 1.3 * sc, ox = (w - mw) / 2, oy = (h - mh) / 2;
-  const proj = (lat, lon) => [ox + (lon - lon0) * sc, oy + (lat1 - lat) * 1.3 * sc];
-  const bits = atob(US_DOTS.b64), half = US_DOTS.step / 2;
-  g.beginPath();
-  for (let i = 0; i < US_OUTLINE.length; i++){ const p = proj(US_OUTLINE[i][0], US_OUTLINE[i][1]); if (i) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); }
-  g.closePath(); g.clip();                                                // the outline trims the boundary dots: a smooth coast and border
-  g.fillStyle = 'rgba(0,167,238,.55)';
-  for (let r = 0, i = 0; r < US_DOTS.rows; r++) for (let c = 0; c < US_DOTS.cols; c++, i++){
-    if (!((bits.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1)) continue;
-    const p = proj(US_DOTS.lat1 - r * US_DOTS.step + half, US_DOTS.lon0 + c * US_DOTS.step + half); g.fillRect(p[0] - .7, p[1] - .7, 1.4, 1.4);
-  }
-  mn.off = off; mn.metros = US_METROS.map(c => proj(c[1], c[2]));
-  mn.pulseI.fill(-1);
-}
-function drawUS(mn, t){
-  if (!mn.off) buildUSOff(mn);
-  const g = mn.g, w = mn.w, h = mn.h;
-  g.clearRect(0, 0, w, h); g.drawImage(mn.off, 0, 0, w, h);
-  g.globalCompositeOperation = 'lighter';
-  if (t >= mn.nextPulse){ mn.nextPulse = t + 1.1 + Math.random() * .6; const slot = mn.pc % 3; mn.pc++; mn.pulseI[slot] = Math.floor(Math.random() * mn.metros.length); mn.pulseT[slot] = t; }
-  for (let s = 0; s < 3; s++){
-    const mi = mn.pulseI[s]; if (mi < 0) continue; const age = t - mn.pulseT[s]; if (age > 1.3) continue;
-    const p = age / 1.3, m = mn.metros[mi];
-    g.globalAlpha = 1 - p; g.strokeStyle = '#b7e9ff'; g.lineWidth = 1; g.beginPath(); g.arc(m[0], m[1], 2 + 14 * p, 0, TAU); g.stroke();
-  }
-  g.globalAlpha = 1; g.fillStyle = '#f3fbff';
-  for (let i = 0; i < mn.metros.length; i++){ const m = mn.metros[i]; g.fillRect(m[0] - 1.2, m[1] - 1.2, 2.4, 2.4); }
-  g.globalCompositeOperation = 'source-over';
-}
-function drawBars(mn, t){
-  const g = mn.g, w = mn.w, h = mn.h, n = 28, gap = 4, bw = (w - 40 - gap * (n - 1)) / n, sweep = frac(t / 4) * (w + 80) - 40;
-  g.clearRect(0, 0, w, h);
-  g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(16, h - 12, w - 32, 1);
-  for (let i = 0; i < n; i++){
-    const x = 20 + i * (bw + gap), bh = (h - 32) * BARH[i], y = h - 13 - bh, k = Math.max(0, 1 - Math.abs(x + bw / 2 - sweep) / 60);
-    g.globalAlpha = .22 + .16 * BARH[i]; g.fillStyle = '#5ec4f0'; g.fillRect(x, y, bw, bh);          // the accent, dimmed by height
-    if (k > 0){ g.globalAlpha = .55 * k; g.fillStyle = '#c3edff'; g.fillRect(x, y, bw, bh); g.globalAlpha = .95 * k; g.fillStyle = '#f3fbff'; g.fillRect(x, y, bw, 1.5); }
-  }
-  g.globalAlpha = .35; g.fillStyle = '#a3e3ff'; g.fillRect(sweep, 19, 1, h - 32); g.globalAlpha = 1;   // the sweep cursor stays inside the bar area
-}
-const MINI_DRAW = { orbit: drawOrbit, usmap: drawUS, bars: drawBars };
-minis.forEach(mn => watch(mn.c, v => { mn.on = v; live.minis = minis.reduce((s, x) => s + (x.on ? 1 : 0), 0); }));
-function minisTick(t){ for (let i = 0; i < minis.length; i++){ const mn = minis[i]; if (!mn.on || !mn.w) continue; MINI_DRAW[mn.kind](mn, t); } }
 
 /* =====================================================================
    NAV — glass on scroll, scroll-spy with a gliding indicator, phone sheet
@@ -1467,26 +1049,6 @@ addEventListener('keydown', e => {
 });
 document.addEventListener('pointerdown', e => { if (menuOpen() && !nav.contains(e.target)) setMenu(false, false); });
 matchMedia('(min-width: 768px)').addEventListener('change', e => { if (e.matches) setMenu(false, false); });
-
-/* =====================================================================
-   MANIFESTO — wrap each word in .w (with its --i) so the brightness sweep
-   runs word by word; "win" keeps its own span, glued to its full stop
-   ===================================================================== */
-{
-  const q = $('#quote'), frag = document.createDocumentFragment(), nodes = Array.prototype.slice.call(q.childNodes);
-  let wi = 0;
-  const word = content => { const s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', wi++); if (typeof content === 'string') s.textContent = content; else { content.style.setProperty('--i', wi); s.appendChild(content); } return s; };
-  for (let n = 0; n < nodes.length; n++){
-    const node = nodes[n];
-    if (node.nodeType !== 3){
-      const s = word(node), nx = nodes[n + 1], m = nx && nx.nodeType === 3 ? nx.textContent.match(/^[^\s\w]+/) : null;
-      if (m){ s.appendChild(document.createTextNode(m[0])); nx.textContent = nx.textContent.slice(m[0].length); }
-      frag.appendChild(s); continue;
-    }
-    node.textContent.split(/(\s+)/).forEach(tok => { if (tok) frag.appendChild(/^\s+$/.test(tok) ? document.createTextNode(' ') : word(tok)); });
-  }
-  q.textContent = ''; q.appendChild(frag);
-}
 
 /* =====================================================================
    SCROLL REVEALS — translate only; in view on load means in place on load
@@ -1539,22 +1101,19 @@ copyBtn.addEventListener('click', () => {
    BOOT — layout, resize, reduced motion, start the loop
    ===================================================================== */
 Hero.layout();
-minis.forEach(sizeMini);
 let rsTimer = 0;
-function relayout(){ Hero.layout(); minis.forEach(sizeMini); stepTops = null; lastSatY = -1; placeInd(); if (RM) staticFrame(); }
+function relayout(){ Hero.layout(); stepTops = null; lastSatY = -1; placeInd(); if (RM) staticFrame(); }
 function scheduleRelayout(){ clearTimeout(rsTimer); rsTimer = setTimeout(relayout, 120); }
-if ('ResizeObserver' in window){ const ro = new ResizeObserver(scheduleRelayout); ro.observe($('#top')); ro.observe($('#hero-copy')); minis.forEach(mn => ro.observe(mn.c)); }
+if ('ResizeObserver' in window){ const ro = new ResizeObserver(scheduleRelayout); ro.observe($('#top')); ro.observe($('#hero-copy')); }
 addEventListener('resize', scheduleRelayout);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleRelayout);
 function staticFrame(){
-  minis.forEach(mn => { if (mn.w) MINI_DRAW[mn.kind](mn, 0); });
-  nums.forEach(n => { n.el.textContent = n.end.toFixed(n.dec) + n.suf; });
   setActive(0);                                                           // satellite parked on node 01
   const x = nodes[0].getAttribute('cx'), y = nodes[0].getAttribute('cy');
   satCore.setAttribute('cx', x); satCore.setAttribute('cy', y); satHaloEl.setAttribute('cx', x); satHaloEl.setAttribute('cy', y);
   tdot.style.transform = 'translateY(' + steps[0].offsetTop + 'px)';
 }
-tasks.push(Hero.tick, countTick, consoleTick, processTick, minisTick);
+tasks.push(Hero.tick, processTick);
 if (RM) staticFrame(); else start();
 setTimeout(() => document.documentElement.classList.add('settled'), 1400);   // entrance done by 0.92 s; drop its keyframes
 /* the WebGL globe: after load, once the poster has been painted (its largest-contentful-paint entry; decoded + two frames
@@ -1574,8 +1133,8 @@ if (document.readyState === 'complete') afterPoster(bootGlobe); else addEventLis
 /* reduced motion switched on: everything static and the poster back (the WebGL globe is torn down); switched off: back to life */
 RMq.addEventListener('change', e => {
   RM = e.matches;
-  if (RM){ stop(); countFinal(); staticFrame(); Hero.unmount('reduced motion'); }
-  else { countFinal(); start(); whenIdle(bootGlobe); }
+  if (RM){ stop(); staticFrame(); Hero.unmount('reduced motion'); }
+  else { start(); whenIdle(bootGlobe); }
 });
 })();
 </script>
