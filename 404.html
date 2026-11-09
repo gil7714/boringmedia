@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boring Media — This page doesn't exist.</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<!-- GitHub Pages serves this file for a missing path at any depth, so every asset and link below is root-absolute (/…) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap"></noscript>
+<style>
+/* =====================================================================
+   404 — the homepage's tokens, nav, buttons and footer (same values as
+   index.html), a static globe poster, one line and one button. No
+   three.js, no script.
+   ===================================================================== */
+:root{
+  color-scheme:dark;
+  --bg:#000;
+  --accent:#5ec4f0; --glow-rgb:25,131,176; --green:#2ddc7a;
+  --text:#fff; --text-2:#a9bccb; --text-3:#8a9cab; --text-4:#75869a;
+  --surface-rgb:7,10,14;
+  --line:rgba(255,255,255,.07);
+  --sans:'Geist',-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',Arial,sans-serif;
+  --mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --r-pill:999px;
+  --sh-btn:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.28),0 8px 22px -6px rgba(26,108,144,.65),0 2px 6px rgba(0,0,0,.4);
+  --sh-btn-hover:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.28),0 10px 30px -6px rgba(var(--glow-rgb),.75),0 2px 6px rgba(0,0,0,.4);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* base */
+*,*::before,*::after{box-sizing:border-box}
+html{background:#000}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+a{color:inherit}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#main:focus{outline:none}
+.skip{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:12px;z-index:100;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:var(--r-pill);background:var(--accent);color:#04111b;font:600 14px/1 var(--sans);text-decoration:none;transform:translateY(-200%);transition:transform 200ms var(--ease-out)}
+.skip:focus{transform:none}
+.skip:focus + .nav .brand{opacity:0}   /* while it is focused the skip link stands in for the brand, rather than half-covering the wordmark */
+.wrap{position:relative;max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.ico{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ico-sm{width:14px;height:14px;stroke-width:1.75}
+.gdot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px 0 20px;border-radius:var(--r-pill);font:600 14px/1 var(--sans);text-decoration:none;white-space:nowrap;transition:transform 180ms var(--ease-out),box-shadow 180ms,background 180ms}
+.btn svg{transition:transform 180ms var(--ease-out)}
+.btn-primary{color:#071018;background:linear-gradient(180deg,#8adcfb,#5ec4f0 55%,#3fb2e6);border:1px solid rgba(255,255,255,.30);box-shadow:var(--sh-btn)}
+.btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-1px);background:linear-gradient(180deg,#9ae3fd,#6fcdf4 55%,#4bb9ea);box-shadow:var(--sh-btn-hover)}
+.btn-primary:hover .back{transform:translateX(-3px)}
+.btn-sm{height:36px;padding:0 16px 0 18px;font-size:13.5px}
+
+/* nav (the homepage's, without the scroll-spy and the phone menu: the links sit in the pill from 768 px up) */
+.nav{position:absolute;top:0;left:0;right:0;z-index:50;height:72px}
+.nav-inner{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:100%;max-width:1440px;margin:0 auto;padding:0 max(44px,env(safe-area-inset-right,0px)) 0 max(44px,env(safe-area-inset-left,0px))}
+.brand{display:inline-flex;align-items:center;gap:14px;min-height:44px;color:var(--text);text-decoration:none;font:700 15px/1 var(--sans);letter-spacing:.08em;border-radius:8px;transition:opacity 150ms}
+.brand img{width:28px;height:28px;display:block}
+.brand span{white-space:nowrap}
+.nav-links{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;height:40px;padding:0 6px;border-radius:var(--r-pill);background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)}
+.nav-links a{display:inline-flex;align-items:center;height:40px;margin:-6px 0;padding:0 14px;border-radius:var(--r-pill);font:500 14px/1 var(--sans);color:var(--text-3);text-decoration:none;transition:color 150ms}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;justify-self:end}
+
+/* not found: the line and the button over a static globe that rises from the bottom edge */
+.nf{position:relative;overflow:hidden;min-height:max(640px,100svh);display:flex;flex-direction:column;align-items:center;padding:clamp(150px,24vh,230px) 16px 0;text-align:center;
+  --R:clamp(150px,min(26vw,32vh),300px)}
+.vig{position:absolute;inset:0;pointer-events:none}
+.vig-l{background:radial-gradient(48% 42% at 0% 0%,rgba(var(--glow-rgb),.21),transparent 70%)}
+.vig-r{background:radial-gradient(42% 38% at 100% 4%,rgba(var(--glow-rgb),.17),transparent 70%)}
+/* the poster's globe radius is .27 of its width (box 3.7 R): its bottom 1.5 R under the edge puts the centre .35 R above it */
+.nf-globe{position:absolute;left:50%;bottom:calc(var(--R) * -1.5);width:calc(var(--R) / .27);height:calc(var(--R) / .27);transform:translateX(-50%);pointer-events:none}
+/* behind the poster: the hero's pool under the sphere and its soft haze ring around it (same values as index.html), so the
+   poster's faint outer halo sits on the same smooth glow as on the homepage instead of on bare black */
+.nf-globe::before{content:"";position:absolute;left:50%;top:50%;width:calc(var(--R) * 5.4);height:calc(var(--R) * 4.4);transform:translate(-50%,-50%);
+  background:radial-gradient(calc(var(--R) * 2.7) calc(var(--R) * .9) at 50% 50%,rgba(24,120,170,.42),rgba(24,120,170,.18) 45%,rgba(24,120,170,.06) 75%,rgba(24,120,170,0) 100%),
+    radial-gradient(circle calc(var(--R) * 2.2) at 50% 50%,rgba(40,150,200,.16) 43.2%,rgba(40,150,200,.055) 55.7%,rgba(40,150,200,.028) 68.9%,rgba(40,150,200,.008) 85.8%,rgba(40,150,200,0) 100%)}
+.nf-globe img{position:relative;display:block;width:100%;height:100%}
+.nf-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.nf h1{margin:0;font:600 clamp(34px,4.2vw,56px)/1.08 var(--sans);letter-spacing:-.03em;color:var(--text);text-wrap:balance}
+.nf .btn{margin-top:28px}
+
+/* footer (the homepage's) */
+.footer{position:relative;background:#000;border-top:1px solid var(--line);padding:48px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
+.foot-brand{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--sans);letter-spacing:.08em;color:var(--text)}
+.foot-brand img{width:22px;height:22px;display:block}
+.foot-status{display:flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1 var(--sans);color:var(--text-3)}
+.foot-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.foot-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;font:400 13px/1 var(--sans);color:var(--text-3);text-decoration:none;border-radius:8px;transition:color 150ms}
+.foot-links a:hover{color:var(--text-2)}
+.foot-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.foot-right a{display:inline-flex;align-items:center;min-height:40px;font:500 13px/1 var(--mono);color:var(--text-2);text-decoration:none}
+.foot-right a:hover{color:var(--text)}
+.copyright{font:400 12.5px/1 var(--sans);color:var(--text-4)}
+
+/* responsive */
+@media (max-width:1023px){
+  .nav{height:64px}
+  .nav-inner{padding:0 max(32px,env(safe-area-inset-right,0px)) 0 max(32px,env(safe-area-inset-left,0px))}
+  .nav-links a{padding:0 12px;font-size:13px}
+  .nav-right .btn{height:40px;font-size:13px}
+}
+@media (max-width:767px){
+  .nav-inner{padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+  .brand{font-size:14px;gap:10px}
+  .nav-links{display:none}
+  .nav-right .btn{height:44px;padding:0 14px 0 16px}
+  .nf{--R:clamp(150px,52vw,240px);min-height:max(640px,84svh);padding-top:clamp(150px,28vh,230px)}   /* a shorter block on tall phones lifts the globe to ~100 px under the button (the full-height one left a ~230 px void); short phones keep the 640 px floor */
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .foot-grid{grid-template-columns:1fr;gap:20px;text-align:left}
+  .foot-links{justify-content:flex-start;margin-left:-10px}
+  .foot-links a,.foot-right a{min-height:44px}
+  .foot-right{align-items:flex-start}
+}
+@media (max-width:400px){
+  .brand{font-size:13px}
+  .nav-right .btn{padding:0 12px}
+  .nav-right .btn svg{display:none}
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Boring Media — home"><img src="/logo.svg" alt="" width="28" height="28" decoding="async"><span>BORING MEDIA</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/#about">About</a>
+      <a href="/#verticals">Verticals</a>
+      <a href="/#process">Process</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="/#contact">Work With Us <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="nf" aria-labelledby="nf-h">
+    <div class="vig vig-l" aria-hidden="true"></div>
+    <div class="vig vig-r" aria-hidden="true"></div>
+    <div class="nf-globe" aria-hidden="true">
+      <picture><source media="(max-width: 1023px)" srcset="/globe-assets/poster-hero-1000.webp" width="1000" height="1000"><img src="/globe-assets/poster-hero-1600.webp" srcset="/globe-assets/poster-hero-800.webp 800w, /globe-assets/poster-hero-1600.webp 1600w" sizes="min(80vw, 1111px)" width="1600" height="1600" alt="" decoding="async"></picture>
+    </div>
+    <div class="nf-copy">
+      <h1 id="nf-h">This page doesn't exist.</h1>
+      <a class="btn btn-primary" href="/"><svg class="ico ico-sm back" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to home</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="/logo.svg" alt="" width="22" height="22" decoding="async" loading="lazy"><span>BORING MEDIA</span></div>
+        <div class="foot-status"><span class="gdot" aria-hidden="true"></span><span>All systems operational</span></div>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/#about">About</a><a href="/#verticals">Verticals</a><a href="/#process">Process</a><a href="/#contact">Contact</a>
+      </nav>
+      <div class="foot-right">
+        <a href="mailto:hello@boringmedia.ai">hello@boringmedia.ai</a>
+        <span class="copyright">© 2026 Boring Media</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

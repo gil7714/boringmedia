@@ -1,1134 +1,1583 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boring Media — We Buy Media. It Converts.</title>
-<meta name="description" content="Performance media buying and lead generation. Home equity, debt settlement, auto insurance, ecommerce. Systems that convert traffic into revenue.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boring Media — We run ads the boring way.</title>
+<meta name="description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<link rel="canonical" href="https://boringmedia.ai/">
+<meta name="theme-color" content="#07080b">
+<!-- sharing: Open Graph + Twitter card (og-image.jpg is 1200×630, made from the hero) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Boring Media">
+<meta property="og:title" content="Boring Media — We run ads the boring way.">
+<meta property="og:description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<meta property="og:url" content="https://boringmedia.ai/">
+<meta property="og:image" content="https://boringmedia.ai/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Boring Media homepage: “We run ads the boring way.” over a glowing Earth with orbit rings.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boring Media — We run ads the boring way.">
+<meta name="twitter:description" content="Performance media buying and lead generation. Home equity, debt settlement, ecommerce. Systems that convert traffic into revenue.">
+<meta name="twitter:image" content="https://boringmedia.ai/og-image.jpg">
+<meta name="twitter:image:alt" content="The Boring Media homepage: “We run ads the boring way.” over a glowing Earth with orbit rings.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Organization", "name": "Boring Media", "url": "https://boringmedia.ai/", "logo": "https://boringmedia.ai/logo.svg", "email": "hello@boringmedia.ai"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Geist / Geist Mono: the stylesheet is preloaded and applied when it lands, so it never blocks the first paint (the text
+     shows in the fallback stack for a moment, then swaps); without JavaScript the <noscript> link loads it normally -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&display=swap"></noscript>
 <style>
-  :root {
-    --bg: #07080b;
-    --bg-raise: #0c0e13;
-    --panel: #0e1117;
-    --panel-2: #12151d;
-    --border: rgba(255,255,255,0.07);
-    --border-strong: rgba(255,255,255,0.13);
-    --text: #eceef3;
-    --text-2: #99a0b0;
-    --text-3: #5c6372;
-    --blue: #6f9dff;
-    --blue-dim: rgba(111,157,255,0.12);
-    --green: #3ddc84;
-    --green-dim: rgba(61,220,132,0.10);
-    --amber: #ffc76f;
-    --sans: 'Geist', -apple-system, 'Helvetica Neue', sans-serif;
-    --mono: 'Geist Mono', 'SF Mono', monospace;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  ::selection { background: var(--blue); color: var(--bg); }
-
-  /* ===== BACKGROUND GRID ===== */
-  .bg-grid {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 100%);
-  }
-
-  .glow {
-    position: fixed;
-    top: -280px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 560px;
-    background: radial-gradient(ellipse at center, rgba(111,157,255,0.10) 0%, transparent 65%);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .container {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 64px);
-    position: relative;
-    z-index: 2;
-  }
-
-  /* ===== NAV ===== */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
-    background: rgba(7,8,11,0.72);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 64px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 62px;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .logo svg, .logo img { flex-shrink: 0; display: block; }
-  .footer-logo img { flex-shrink: 0; display: block; }
-
-  .logo-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 13px;
-    background: var(--blue);
-    margin-left: 2px;
-    animation: blink 1.2s steps(2, start) infinite;
-  }
-
-  @keyframes blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--text-2);
-    text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 450;
-    transition: color 0.25s;
-  }
-  .nav-links a:hover { color: var(--text); }
-
-  .nav-cta {
-    background: var(--text) !important;
-    color: var(--bg) !important;
-    padding: 8px 18px !important;
-    border-radius: 6px;
-    font-weight: 600 !important;
-    font-size: 13px !important;
-    transition: opacity 0.25s !important;
-  }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 130px 0 90px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: clamp(40px, 5vw, 72px);
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
-    padding: 6px 14px;
-    margin-bottom: 30px;
-    background: rgba(255,255,255,0.02);
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.15s;
-  }
-
-  .pulse-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 0 rgba(61,220,132,0.5);
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-
-  .hero h1 {
-    font-size: clamp(42px, 6.2vw, 78px);
-    font-weight: 800;
-    line-height: 1.0;
-    letter-spacing: -0.035em;
-    margin-bottom: 26px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.3s;
-  }
-
-  .hero h1 .dim { color: var(--text-3); }
-  .hero h1 .accent { color: var(--blue); }
-
-  .hero-sub {
-    font-size: clamp(15px, 1.6vw, 17.5px);
-    color: var(--text-2);
-    max-width: 460px;
-    line-height: 1.7;
-    font-weight: 400;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.45s;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.6s;
-  }
-
-  .btn-primary {
-    background: var(--text);
-    color: var(--bg);
-    padding: 13px 28px;
-    border: none;
-    border-radius: 7px;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-  }
-  .btn-primary:hover { opacity: 0.87; transform: translateY(-1px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    padding: 13px 28px;
-    border: 1px solid var(--border-strong);
-    border-radius: 7px;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-  }
-  .btn-ghost:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.03); }
-
-  /* ===== TERMINAL / LIVE FEED ===== */
-  .terminal {
-    background: linear-gradient(180deg, var(--panel-2) 0%, var(--panel) 100%);
-    border: 1px solid var(--border-strong);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.55s;
-  }
-
-  .terminal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,0.015);
-  }
-
-  .term-dots { display: flex; gap: 6px; }
-  .term-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.1); }
-
-  .term-title {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.05em;
-  }
-
-  .term-live {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--green);
-    letter-spacing: 0.12em;
-    background: var(--green-dim);
-    border: 1px solid rgba(61,220,132,0.25);
-    border-radius: 4px;
-    padding: 3px 8px;
-  }
-
-  .terminal-body {
-    padding: 14px 6px 14px 14px;
-    height: 318px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .terminal-body::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 70px;
-    background: linear-gradient(transparent, var(--panel));
-    pointer-events: none;
-  }
-
-  .feed-row {
-    display: grid;
-    grid-template-columns: 62px 1fr 44px 70px;
-    gap: 10px;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 12px;
-    padding: 8px 8px;
-    border-radius: 6px;
-    animation: rowIn 0.4s ease;
-  }
-
-  .feed-row:nth-child(odd) { background: rgba(255,255,255,0.015); }
-
-  .feed-time { color: var(--text-3); font-size: 11px; }
-  .feed-event { color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .feed-event b { color: var(--text); font-weight: 500; }
-  .feed-geo { color: var(--blue); font-size: 11px; text-align: center; background: var(--blue-dim); border-radius: 4px; padding: 2px 0; }
-  .feed-payout { color: var(--green); text-align: right; font-weight: 500; }
-
-  .terminal-foot {
-    display: flex;
-    justify-content: space-between;
-    padding: 11px 16px;
-    border-top: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--text-3);
-    letter-spacing: 0.06em;
-  }
-  .terminal-foot b { color: var(--text-2); font-weight: 500; }
-
-  /* ===== STACK TICKER ===== */
-  .ticker-wrap {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 0;
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
-    background: var(--bg-raise);
-  }
-
-  .ticker { display: flex; animation: scroll 40s linear infinite; width: max-content; }
-
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 30px;
-    white-space: nowrap;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--text-3);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .ticker-item .dot { width: 3px; height: 3px; background: var(--blue); border-radius: 50%; }
-
-  /* ===== SECTIONS ===== */
-  section { padding: 120px 0; position: relative; z-index: 2; }
-
-  .section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 20px;
-  }
-  .section-label::before {
-    content: '';
-    width: 20px; height: 1px;
-    background: var(--blue);
-    opacity: 0.5;
-  }
-
-  .section-title {
-    font-size: clamp(30px, 4.2vw, 50px);
-    font-weight: 750;
-    letter-spacing: -0.03em;
-    line-height: 1.08;
-    margin-bottom: 16px;
-  }
-
-  .section-desc {
-    font-size: 16px;
-    color: var(--text-2);
-    line-height: 1.7;
-    max-width: 540px;
-    font-weight: 400;
-  }
-
-  /* ===== ABOUT ===== */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
-    align-items: start;
-    margin-top: 56px;
-  }
-
-  .about-left .section-desc { margin-bottom: 22px; }
-
-  .stat-row {
-    display: flex;
-    gap: 44px;
-    margin-top: 44px;
-    padding-top: 36px;
-    border-top: 1px solid var(--border);
-  }
-
-  .stat-num {
-    font-family: var(--mono);
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-  .stat-num em { font-style: normal; color: var(--blue); }
-
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .principles {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .principle {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 26px 28px;
-    transition: border-color 0.3s, background 0.3s;
-  }
-  .principle:hover { border-color: var(--border-strong); background: var(--panel-2); }
-
-  .principle-idx {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--blue);
-    letter-spacing: 0.12em;
-    margin-bottom: 12px;
-  }
-
-  .principle h4 { font-size: 15.5px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .principle p { font-size: 14px; color: var(--text-2); line-height: 1.65; }
-
-  /* ===== VERTICALS ===== */
-  .verticals-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 56px;
-  }
-
-  .v-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 34px 32px;
-    transition: border-color 0.3s, background 0.3s, transform 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .v-card:hover {
-    border-color: rgba(111,157,255,0.35);
-    background: var(--panel-2);
-    transform: translateY(-2px);
-  }
-
-  .v-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 22px;
-  }
-
-  .v-card-icon {
-    width: 42px; height: 42px;
-    border-radius: 9px;
-    background: var(--blue-dim);
-    border: 1px solid rgba(111,157,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--blue);
-  }
-
-  .v-tag {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    color: var(--text-3);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 4px 9px;
-  }
-  .v-tag.hot { color: var(--green); border-color: rgba(61,220,132,0.3); background: var(--green-dim); }
-
-  .v-card h3 { font-size: 19px; font-weight: 650; margin-bottom: 10px; letter-spacing: -0.02em; }
-  .v-card p { font-size: 14px; color: var(--text-2); line-height: 1.68; }
-
-  /* ===== PROCESS ===== */
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: 56px;
-  }
-
-  .p-step {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 30px 26px;
-    transition: border-color 0.3s;
-    position: relative;
-  }
-  .p-step:hover { border-color: var(--border-strong); }
-
-  .p-step-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--blue);
-    letter-spacing: 0.1em;
-    margin-bottom: 44px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .p-step-num::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .p-step h4 { font-size: 16.5px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
-  .p-step p { font-size: 13.5px; color: var(--text-2); line-height: 1.66; }
-
-  /* ===== COMPLIANCE STRIP ===== */
-  .compliance {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-raise);
-    padding: 56px 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .compliance-inner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 40px;
-    align-items: center;
-  }
-
-  .compliance-icon {
-    width: 54px; height: 54px;
-    border-radius: 12px;
-    background: var(--green-dim);
-    border: 1px solid rgba(61,220,132,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--green);
-  }
-
-  .compliance h3 { font-size: 19px; font-weight: 650; margin-bottom: 8px; letter-spacing: -0.015em; }
-  .compliance p { font-size: 14.5px; color: var(--text-2); line-height: 1.65; max-width: 720px; }
-
-  /* ===== MANIFESTO ===== */
-  .manifesto {
-    padding: 110px 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .manifesto blockquote {
-    font-size: clamp(22px, 3vw, 32px);
-    font-weight: 350;
-    line-height: 1.5;
-    letter-spacing: -0.02em;
-    color: var(--text-2);
-    max-width: 700px;
-    padding-left: 28px;
-    border-left: 2px solid var(--blue);
-  }
-  .manifesto blockquote em { font-style: normal; color: var(--text); font-weight: 550; }
-
-  /* ===== CTA ===== */
-  .cta-section {
-    padding: 140px 0;
-    text-align: center;
-    position: relative;
-  }
-
-  .cta-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 720px; height: 420px;
-    background: radial-gradient(ellipse at center, rgba(111,157,255,0.08) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
-  .cta-section .section-title { max-width: 620px; margin: 0 auto 16px; }
-  .cta-section .section-desc { max-width: 440px; margin: 0 auto 44px; }
-  .cta-section .section-label { justify-content: center; }
-  .cta-section .section-label::before { display: none; }
-
-  .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-
-  .cta-email {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-3);
-    margin-top: 26px;
-  }
-  .cta-email a {
-    color: var(--text-2);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border-strong);
-    padding-bottom: 2px;
-    transition: color 0.25s, border-color 0.25s;
-  }
-  .cta-email a:hover { color: var(--text); border-color: var(--text-2); }
-
-  /* ===== FOOTER ===== */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 36px 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .footer-left { display: flex; align-items: center; gap: 14px; }
-
-  .footer-logo {
-    font-weight: 700;
-    font-size: 12.5px;
-    letter-spacing: 0.07em;
-    color: var(--text-2);
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .footer-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .footer-right { display: flex; align-items: center; gap: 28px; }
-
-  .footer-links { display: flex; gap: 22px; list-style: none; }
-  .footer-links a { font-size: 12.5px; color: var(--text-3); text-decoration: none; transition: color 0.25s; }
-  .footer-links a:hover { color: var(--text-2); }
-
-  .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
-
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes rowIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.45); }
-    70% { box-shadow: 0 0 0 7px rgba(61,220,132,0); }
-    100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); }
-  }
-
-  @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    .hero-badge, .hero h1, .hero-sub, .hero-actions, .terminal { opacity: 1; }
-    .reveal { opacity: 1; transform: none; }
-    html { scroll-behavior: auto; }
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .about-grid { grid-template-columns: 1fr; gap: 48px; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  @media (max-width: 768px) {
-    .nav-links { gap: 0; }
-    .nav-links li:not(:last-child) { display: none; }
-    .verticals-grid { grid-template-columns: 1fr; }
-    .process-grid { grid-template-columns: 1fr; }
-    .stat-row { flex-wrap: wrap; gap: 28px; }
-    section { padding: 80px 0; }
-    .manifesto { padding: 70px 0; }
-    .cta-section { padding: 100px 0; }
-    .compliance-inner { grid-template-columns: 1fr; gap: 22px; }
-    .feed-row { grid-template-columns: 54px 1fr 60px; }
-    .feed-geo { display: none; }
-    .hero { padding: 110px 0 70px; }
-  }
+/* =====================================================================
+   1. TOKENS
+   ===================================================================== */
+:root{
+  color-scheme:dark;
+  --bg:#000;
+  /* the accent is the logo's blue (#5ec4f0): solid marks (text, dots, focus rings) use it as is. Translucent glows, washes and
+     hairlines use deeper, saturated blues instead (--glow-rgb and the 0,150–174,214–249 literals): the light accent at low
+     alpha turns grey and fogs the black */
+  --accent:#5ec4f0; --accent-hot:#a8e0fb; --accent-ice:#e8f6ff;
+  --glow-rgb:25,131,176;
+  --green:#2ddc7a;
+  /* text tiers: cool greys; every tier clears 4.5:1 on its real background (glass over the hero glow included) */
+  --text:#fff; --text-2:#a9bccb; --text-3:#8a9cab; --text-4:#75869a;
+  --surface-rgb:7,10,14;   /* the near-black behind glass, nav, menu sheet, console and email row */
+  --glass:rgba(var(--surface-rgb),.55); --glass-tint:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.14);
+  --bar:rgba(4,7,9,.50); --bar-top:rgba(255,255,255,.16);
+  --tile-accent:linear-gradient(180deg,rgba(var(--glow-rgb),.30),rgba(10,63,86,.38));
+  --tile-grey:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
+  --sans:'Geist',-apple-system,BlinkMacSystemFont,'Inter','Helvetica Neue',Arial,sans-serif;
+  --mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --r-pill:999px; --r-card:20px; --r-bar:24px; --r-panel:18px; --r-chip:999px;
+  --sh-card:inset 0 1px 0 rgba(255,255,255,.07),0 30px 60px -30px rgba(0,0,0,.75);
+  --sh-card-hover:inset 0 1px 0 rgba(255,255,255,.10),0 30px 60px -30px rgba(0,0,0,.75),0 0 0 1px rgba(var(--glow-rgb),.18),0 24px 70px -20px rgba(var(--glow-rgb),.45);
+  --sh-bar:inset 0 1px 0 rgba(255,255,255,.10),0 40px 80px -40px rgba(0,0,0,.9),0 -20px 60px -30px rgba(var(--glow-rgb),.25);
+  --sh-btn:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.28),0 8px 22px -6px rgba(26,108,144,.65),0 2px 6px rgba(0,0,0,.4);
+  --sh-btn-hover:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.28),0 10px 30px -6px rgba(var(--glow-rgb),.75),0 2px 6px rgba(0,0,0,.4);
+  --glow-tile:inset 0 1px 0 rgba(255,255,255,.12),0 0 26px rgba(var(--glow-rgb),.35),0 6px 18px -8px rgba(0,0,0,.8);
+  --glow-num:0 0 14px rgba(var(--glow-rgb),.30);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --t-mid:220ms; --t-slow:350ms;
+  --gutter:max(24px,env(safe-area-inset-left,0px)); --gutter-r:max(24px,env(safe-area-inset-right,0px));
+}
+/* the one !important block: reduced motion kills every animation and transition */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* =====================================================================
+   2. BASE
+   ===================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;background:#000}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+canvas{display:block}
+/* focus: keyboard focus gets a 2 px accent ring (outlines follow the border radius); mouse focus stays clean */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#main:focus,main section:focus{outline:none}   /* the skip link's target, and a section the phone menu jumped to: focus lands there without ringing the whole block */
+/* skip link: the first stop for keyboard users, parked above the viewport until focused */
+.skip{position:fixed;left:max(16px,env(safe-area-inset-left,0px));top:12px;z-index:100;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:var(--r-pill);background:var(--accent);color:#04111b;font:600 14px/1 var(--sans);text-decoration:none;transform:translateY(-200%);transition:transform 200ms var(--ease-out)}
+.skip:focus{transform:none}
+.skip:focus + .nav .brand{opacity:0}   /* while it is focused the skip link stands in for the brand, rather than half-covering the wordmark */
+.wrap{position:relative;max-width:1200px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.wrap-wide{max-width:1240px}
+.nw{white-space:nowrap}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}   /* visually hidden, still read by screen readers */
+.ico{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ico-sm{width:14px;height:14px;stroke-width:1.75}
+.label{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.h2{margin:14px 0 0;font:600 clamp(28px,3vw,40px)/1.12 var(--sans);letter-spacing:-.025em;color:var(--text);text-wrap:balance}
+.sub{margin:14px 0 0;font:400 16px/1.6 var(--sans);color:var(--text-3);max-width:560px;text-wrap:pretty}
+.sec{position:relative;padding:120px 0}
+.sec-head{margin-bottom:48px}
+.center{text-align:center}
+.center .sub{margin-left:auto;margin-right:auto}
+.reveal{transform:translateY(12px);transition:transform .6s var(--ease-out);transition-delay:calc(var(--i,0)*60ms)}
+.reveal.in{transform:none}
+
+/* pulsing dots */
+.pdot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.pdot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2s ease-out infinite}
+.gdot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+.gdot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2.4s ease-out -.7s infinite}
+@keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(2.4);opacity:0}}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px 0 22px;border-radius:var(--r-pill);font:600 14px/1 var(--sans);text-decoration:none;white-space:nowrap;transition:transform 180ms var(--ease-out),box-shadow 180ms,background 180ms,border-color 180ms,color 180ms}
+.btn svg{transition:transform 180ms var(--ease-out)}
+.btn-primary{color:#071018;background:linear-gradient(180deg,#8adcfb,#5ec4f0 55%,#3fb2e6);border:1px solid rgba(255,255,255,.30);box-shadow:var(--sh-btn)}   /* the logo-blue fill takes dark ink: white on #5ec4f0 is ≈ 2:1, this ink on the darkest stop (#3fb2e6) is ≈ 8:1 */
+.btn-primary:hover{transform:translateY(-1px);background:linear-gradient(180deg,#9ae3fd,#6fcdf4 55%,#4bb9ea);box-shadow:var(--sh-btn-hover)}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-primary:active{transform:translateY(0) scale(.98);box-shadow:inset 0 2px 4px rgba(0,0,0,.35),0 4px 12px -6px rgba(26,108,144,.6)}
+.btn-ghost{color:#dfe7ed;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.btn-ghost:hover{transform:translateY(-1px);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22);color:#fff}
+.btn-sm{height:36px;padding:0 16px 0 18px;font-size:13.5px}
+.btn-sheen{overflow:hidden}
+.btn-sheen::after{content:"";position:absolute;inset:-2px;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.14) 45%,rgba(255,255,255,.14) 55%,transparent 68%);transform:translateX(-120%);animation:sheen 9s linear 2s infinite;pointer-events:none}
+@keyframes sheen{0%{transform:translateX(-120%)}10%{transform:translateX(220%)}100%{transform:translateX(220%)}}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 7px;border-radius:var(--r-chip);font:500 10px/1 var(--mono);letter-spacing:.08em;color:var(--text-3);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);white-space:nowrap}
+.chip b{color:var(--green);font-weight:500}
+
+/* glass surface shared by every card */
+.glass{position:relative;border-radius:var(--r-card);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025) 60%,rgba(255,255,255,.015)),var(--glass);border:1px solid var(--line);border-top-color:rgba(255,255,255,.11);border-bottom-color:rgba(255,255,255,.03);box-shadow:var(--sh-card);transition:box-shadow var(--t-slow),border-color var(--t-slow),transform 500ms var(--ease-out)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity var(--t-slow);background:radial-gradient(220px 160px at var(--mx,50%) var(--my,50%),rgba(0,150,214,.16),transparent 70%)}
+.glass:hover{border-color:rgba(var(--glow-rgb),.28);box-shadow:var(--sh-card-hover)}
+.glass:hover::before{opacity:1}
+.glass:focus-visible{box-shadow:var(--sh-card-hover)}   /* keyboard focus lights the card like a hover, under the accent ring */
+.tilt{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--lift,0px))}
+.tilt.tilting{transition:box-shadow var(--t-slow),border-color var(--t-slow),transform 120ms linear}
+.tile{width:48px;height:48px;border-radius:25%;display:grid;place-items:center;flex:none;color:#e7f8ff;background:var(--tile-accent);border:1px solid rgba(0,157,224,.22);box-shadow:var(--glow-tile);transition:box-shadow var(--t-slow)}
+.tile svg{width:20px;height:20px;filter:drop-shadow(0 0 6px rgba(0,153,218,.85))}
+.tile-grey{background:var(--tile-grey);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 6px 18px -8px rgba(0,0,0,.8);color:#b9eaff}
+.glass:hover .tile{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 36px rgba(var(--glow-rgb),.5),0 6px 18px -8px rgba(0,0,0,.8)}
+.tile-sm{width:44px;height:44px}
+.arrow{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#c7c7c7;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:background var(--t-mid),border-color var(--t-mid),color var(--t-mid),transform var(--t-mid)}
+.glass:hover .arrow{background:rgba(var(--glow-rgb),.18);border-color:rgba(var(--glow-rgb),.45);color:#fff;transform:translateX(2px)}
+@supports not (backdrop-filter:blur(1px)){.glass{background-color:rgba(var(--surface-rgb),.82)}}
+
+/* =====================================================================
+   3. NAV
+   ===================================================================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;height:72px;animation:navIn .4s var(--ease-out) both;transition:background 250ms,border-color 250ms;border-bottom:1px solid transparent}
+.nav.scrolled,.nav.open{background:rgba(var(--surface-rgb),.72);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border-bottom-color:var(--line)}
+@keyframes navIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.nav-inner{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:100%;max-width:1440px;margin:0 auto;padding:0 max(44px,env(safe-area-inset-right,0px)) 0 max(44px,env(safe-area-inset-left,0px))}
+.brand{display:inline-flex;align-items:center;gap:14px;min-height:40px;color:var(--text);text-decoration:none;font:700 15px/1 var(--sans);letter-spacing:.08em;border-radius:8px;transition:opacity 150ms}
+.brand img{width:28px;height:28px;display:block}
+.brand span{white-space:nowrap}
+.nav-links{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;height:40px;padding:0 6px;border-radius:var(--r-pill);background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)}
+.nav-links a{position:relative;z-index:1;display:inline-flex;align-items:center;height:40px;margin:-6px 0;padding:0 14px;border-radius:var(--r-pill);font:500 14px/1 var(--sans);color:var(--text-3);text-decoration:none;transition:color 150ms}   /* 40 px hit area on a 28 px visual row */
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.ind{position:absolute;top:5px;left:0;width:0;height:28px;border-radius:var(--r-pill);background:rgba(var(--glow-rgb),.10);box-shadow:inset 0 0 0 1px rgba(var(--glow-rgb),.18);opacity:0;transition:left 320ms var(--ease-out),width 320ms var(--ease-out),opacity 200ms;pointer-events:none}
+.ind.on{opacity:1}
+.nav-right{display:flex;align-items:center;gap:10px;justify-self:end}
+.nav-cta:hover{box-shadow:var(--sh-btn-hover),0 0 0 4px rgba(var(--glow-rgb),.15)}
+.btn-primary:focus-visible,.nav-cta:focus-visible{box-shadow:var(--sh-btn-hover)}   /* keyboard focus lifts the button like a hover, under the accent ring */
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);place-items:center}
+.menu-btn svg{width:20px;height:20px}
+.menu-btn .x{display:none}
+.nav.open .menu-btn .x{display:block}
+.nav.open .menu-btn .h{display:none}
+.sheet{display:none;position:absolute;top:100%;left:0;right:0;padding:8px 16px 16px;background:rgb(var(--surface-rgb));border-bottom:1px solid var(--line)}
+.nav.open .sheet{display:block;animation:rise .25s var(--ease-out) both;--dy:-6px}
+.sheet a{display:flex;align-items:center;height:48px;padding:0 12px;border-radius:12px;font:500 17px/1 var(--sans);color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.sheet a:last-child{border-bottom:0}
+.sheet a.active{color:var(--accent)}
+
+/* =====================================================================
+   4. HERO
+   ===================================================================== */
+@keyframes rise{from{opacity:0;transform:translateY(var(--dy,10px))}to{opacity:1;transform:none}}
+@keyframes riseBlur{from{opacity:0;transform:translateY(14px);filter:blur(6px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes slideX{from{opacity:0;transform:translate(var(--dx),6px)}to{opacity:1;transform:none}}
+@keyframes bloom{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes breathe{0%,100%{opacity:.9}50%{opacity:1}}
+@keyframes breathe2{0%,100%{opacity:.8}50%{opacity:1}}
+@keyframes pop{from{transform:scale(.8)}to{transform:none}}
+
+.hero{position:relative;overflow:hidden;background:var(--bg);min-height:clamp(720px,100svh,1011px);display:flex;flex-direction:column;
+  --R:259px;--gx:50%;--gy:74%;--card-w:clamp(224px,15.8vw,228px);--card-h:192px;--bar-w:clamp(640px,51vw,734px)}
+.hero-inner{position:relative;flex:1;width:100%;max-width:1440px;margin:0 auto}
+.vig{position:absolute;inset:0;pointer-events:none;z-index:0}
+/* corner hazes carry the blue to the edges (no 1 px rule): a deeper, more saturated blue than the accent at ~.8 of the old
+   alphas — the logo's own blue at these alphas reads as teal fog on black */
+.vig-l{background:radial-gradient(48% 42% at 0% 0%,rgba(28,112,196,.17),transparent 70%)}
+.vig-r{background:radial-gradient(42% 38% at 100% 4%,rgba(28,112,196,.14),transparent 70%)}
+.vig-b{background:radial-gradient(38% 46% at 0% 100%,rgba(28,112,196,.10),transparent 70%),radial-gradient(38% 46% at 100% 100%,rgba(28,112,196,.10),transparent 70%)}
+/* globe layers. The poster (a static render of the WebGL globe at its first frame, globe-assets/poster-hero-*.webp) is up from
+   the first paint and is all a reduced-motion, Save-Data or no-WebGL visitor ever gets. When the WebGL globe has drawn its
+   first frame, .webgl goes on the wrap and the two crossfade over .6 s: the canvas fades in while the poster fades out in step,
+   so over the translucent halo and rings the two never stack up into a brighter flash (the poster's curve lags the canvas's
+   ease a little — opacity (1 − a) / (1 − .4 a) — which is what two "over" layers need to sum to 1 where the halo is ~40 %
+   opaque, its brightest part), and .poster-disc — the same image masked to the sphere — stays opaque under the canvas until
+   it is fully in (so the disc never dims mid-fade). On a failure or a lost context .webgl comes off and the poster is back at
+   once (the canvas is already blank or gone by then). The poster is boxed from the hero layout's --gx/--gy/--R (its globe
+   radius is .27 of its width — CONTRACT.md), the WebGL box by the layout script; haze, pool and tight glow follow the same values. */
+.globe-wrap{position:absolute;inset:0;z-index:0;pointer-events:none;transform-origin:var(--gx) var(--gy);animation:bloom .9s var(--ease-out) both}
+.poster{position:absolute;left:var(--gx);top:var(--gy);width:calc(var(--R) / .27);height:auto;max-width:none;transform:translate(-50%,-50%)}
+.poster-disc{-webkit-mask-image:radial-gradient(circle closest-side,#000 53.4%,transparent 54%);mask-image:radial-gradient(circle closest-side,#000 53.4%,transparent 54%)}   /* the sphere: radius .27 of the width = 54 % of the half-width */
+.gl{position:absolute;left:0;top:0;opacity:0}
+.gl canvas{position:absolute;left:0;top:0}
+.globe-wrap.webgl .gl{opacity:1;transition:opacity .6s ease}
+.globe-wrap.webgl .poster{opacity:0;transition:opacity .6s cubic-bezier(.27,.05,.38,.97)}
+.globe-wrap.webgl .poster-disc{transition:opacity 0s linear .6s}
+.haze,.pool,.tglow{position:absolute;pointer-events:none}
+.haze{left:calc(var(--gx) - var(--R)*2.2);top:calc(var(--gy) - var(--R)*2.2);width:calc(var(--R)*4.4);height:calc(var(--R)*4.4);border-radius:50%;animation:breathe 38s ease-in-out infinite}
+.pool{left:calc(var(--gx) - var(--R)*2.7);top:calc(var(--gy) - var(--R)*.25);width:calc(var(--R)*5.4);height:calc(var(--R)*1.8);border-radius:50%}
+.tglow{left:calc(var(--gx) - var(--R)*1.28);top:calc(var(--gy) - var(--R)*1.28);width:calc(var(--R)*2.56);height:calc(var(--R)*2.56);border-radius:50%;
+  -webkit-mask-image:conic-gradient(from 130deg,rgba(0,0,0,.45),#000 50%,rgba(0,0,0,.45));mask-image:conic-gradient(from 130deg,rgba(0,0,0,.45),#000 50%,rgba(0,0,0,.45));animation:breathe2 26s ease-in-out infinite}
+/* glow colours: blue-teal, luminance-matched to the dark page. The globe render carries its own rim and halo, so the haze
+   ring and the tight glow stay faint; the pool under the sphere is wide and strong enough to wash the whole lower third and
+   show through the glass bar */
+.hero .haze{background:radial-gradient(circle closest-side,rgba(40,150,200,.16) 43.2%,rgba(40,150,200,.055) 55.7%,rgba(40,150,200,.028) 68.9%,rgba(40,150,200,.008) 85.8%,rgba(40,150,200,0) 100%)}
+.hero .pool{background:radial-gradient(ellipse closest-side,rgba(24,120,170,.56),rgba(24,120,170,.27) 45%,rgba(24,120,170,.10) 75%,rgba(24,120,170,0) 100%)}
+.hero .tglow{background:radial-gradient(circle closest-side,rgba(50,160,210,.12) 76.5%,rgba(50,160,210,.055) 84.7%,rgba(50,160,210,0) 100%)}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:150px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(5,23,32,.55) 55%,rgba(2,12,17,.92) 85%,#000)}   /* the blue lingers to ~20 px above the hero's edge */
+
+.hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:96px 16px 0}
+.badge{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px 0 12px;border-radius:var(--r-pill);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font:500 12.5px/1 var(--sans);letter-spacing:.01em;color:var(--text-2);--dy:8px;animation:rise .4s var(--ease-out) .05s both}
+.h1{margin:18px 0 0;max-width:760px;font:600 clamp(40px,4.45vw,64px)/1.06 var(--sans);letter-spacing:-.03em;color:var(--text)}
+.h1 .l1,.h1 .l2{display:block}
+.h1 .l2{color:var(--accent)}
+.h1 .w{display:inline-block;--dy:14px;animation:rise .45s var(--ease-out) both;animation-delay:calc(.08s + var(--i)*.045s)}
+.h1 .l2 .w{animation-name:riseBlur}
+.hero-sub{margin:20px 0 0;max-width:30rem;font:400 15px/1.65 var(--sans);color:var(--text-3);animation:rise .45s var(--ease-out) .22s both}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:24px;animation:rise .4s var(--ease-out) .30s both}
+
+/* hero cards */
+.cards{position:absolute;inset:0;z-index:3;pointer-events:none}
+.card-wrap{position:absolute;width:var(--card-w);perspective:800px;pointer-events:auto;animation:slideX .44s var(--ease-out) both}
+/* both rows hang from the bar (bottom-anchored) with a fixed card height, so they can never collide at any viewport height */
+.card-wrap.tl{left:6.7%;bottom:calc(126px + var(--card-h) + 20px);--dx:-20px;animation-delay:.30s}
+.card-wrap.tr{right:6%;bottom:calc(126px + var(--card-h) + 14px);--dx:20px;animation-delay:.36s}
+.card-wrap.bl{left:calc(6.7% + 23px);bottom:126px;--dx:-20px;animation-delay:.42s}
+.card-wrap.br{right:calc(6% + 18px);bottom:126px;--dx:20px;animation-delay:.48s}
+.card-float{animation:bob var(--bobT,7s) ease-in-out var(--bobD,0s) infinite}
+.tl .card-float{--bobT:6.5s;--bobD:-1.6s}
+.tr .card-float{--bobT:7.5s;--bobD:-3.2s}
+.bl .card-float{--bobT:8.5s;--bobD:-4.8s}
+.br .card-float{--bobT:9.5s;--bobD:-6.4s}
+.card{display:block;height:var(--card-h);padding:24px 20px 22px;color:inherit;text-decoration:none;-webkit-backdrop-filter:blur(14px) saturate(1.25);backdrop-filter:blur(14px) saturate(1.25);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card.tilting{transition:box-shadow var(--t-slow),border-color var(--t-slow),transform 120ms linear}
+.card .tile{width:44px;height:44px;border-radius:10px}   /* the inspo's tile: a 44 px rounded square, radius ~10 */
+.card h2{margin:22px 0 0;font:600 15px/1.25 var(--sans);letter-spacing:-.01em;color:var(--text)}
+/* two-line description with the arrow bottom-right like the inspo: the arrow floats beside the second line only
+   (its exclusion area starts one line down), so line 1 runs the full 188 px column and every description holds 2 lines */
+.card-row{margin-top:6px}
+.card-row .arrow{float:right;margin:17px 0 0 10px;shape-outside:inset(17px 0 0 0)}
+.card p{margin:0;font:400 11.5px/17px var(--sans);color:var(--text-4)}
+
+/* stats bar */
+.stats-wrap{position:absolute;left:0;right:0;bottom:24px;z-index:4;display:flex;justify-content:center;pointer-events:none;padding:0 16px}
+/* the bar is at least --bar-w wide and grows to its content (one row of chips) so the status slot can never run into the first stat;
+   only when the viewport caps it (max-width) do the chips wrap to 2 + 1 */
+.stats{pointer-events:auto;display:grid;grid-template-columns:minmax(0,1fr) repeat(4,auto);column-gap:22px;align-items:center;width:max-content;min-width:min(var(--bar-w),100%);max-width:100%;height:96px;padding:0 36px 0 27px;border-radius:var(--r-bar);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015) 45%,rgba(255,255,255,0)),var(--bar);
+  -webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.08);border-top-color:var(--bar-top);box-shadow:var(--sh-bar);--dy:16px;animation:rise .42s var(--ease-out) .38s both}   /* lands at .80 s, with the rest of the hero text */
+.status{display:flex;flex-direction:column;gap:6px;min-width:0}
+.status-row{display:flex;align-items:center;gap:8px;font:500 12.5px/1.45 var(--sans);color:var(--text);white-space:nowrap}
+.stats .chip{letter-spacing:.06em;padding:0 6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.stat{min-width:0}
+.stat .num{display:block;font:600 20px/1 var(--sans);letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums;text-shadow:var(--glow-num);transition:color 200ms,text-shadow 200ms;white-space:nowrap}
+.stat:hover .num{color:var(--accent-hot);text-shadow:0 0 16px rgba(var(--glow-rgb),.5)}
+.stat .lbl{display:block;margin-top:8px;font:400 11.5px/1 var(--sans);color:var(--text-3);white-space:nowrap}   /* text-3, not 4: the bar is glass over the brightest part of the glow (4.9:1 there on a phone) */
+.num.inf{animation:pop .35s var(--ease-out) .45s both}   /* ends at .80 s, with the bar; the counting numbers have no fade of their own — they ride the bar's entrance like the labels (see countTick) */
+.stage{display:none}
+/* once the entrance has played the keyframes are dropped: the resting style is the final frame,
+   so nothing can replay them (full-page captures and some re-rasterisations restart animations) */
+.settled .nav,.settled .globe-wrap,.settled .badge,.settled .h1 .w,.settled .hero-sub,.settled .hero-btns,.settled .card-wrap,.settled .stats,.settled .num.inf{animation:none}
+
+/* =====================================================================
+   5. MARQUEE
+   ===================================================================== */
+.marquee{position:relative;height:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;display:flex;align-items:center;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;align-items:center;width:max-content;white-space:nowrap;animation:marquee 40s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);padding:0 28px}
+.track i{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* =====================================================================
+   6. ABOUT
+   ===================================================================== */
+.about{overflow:hidden}
+.about .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about .body{margin:18px 0 0;max-width:520px;font:400 16px/1.7 var(--sans);color:var(--text-2);text-wrap:pretty}
+.about .body:first-of-type{margin-top:28px}
+.principles{display:grid;gap:14px}
+.principle{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;transition:box-shadow var(--t-slow),border-color var(--t-slow),transform 500ms var(--ease-out)}
+.principle h3{margin:2px 0 0;font:600 17px/1.3 var(--sans);letter-spacing:-.01em;color:var(--text)}
+.principle p{margin:6px 0 0;font:400 14px/1.6 var(--sans);color:var(--text-2);text-wrap:pretty}
+.about-art{position:absolute;right:-140px;top:50%;width:720px;height:720px;margin-top:-360px;pointer-events:none;opacity:.08}
+.about-art g{transform-origin:50% 50%;animation:spin 120s linear infinite}
+.about-art ellipse,.about-art circle{fill:none;stroke:#fff;stroke-width:1}
+.about-art circle{fill:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* =====================================================================
+   7. LIVE CONSOLE
+   ===================================================================== */
+.console-sec{border-top:1px solid var(--line)}
+.console{position:relative;overflow:hidden;max-width:880px;border-radius:var(--r-panel);background:rgba(var(--surface-rgb),.85);border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
+.con-head{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 16px;border-bottom:1px solid var(--line);font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--text-3)}
+.con-head .file{display:inline-flex;align-items:center;gap:10px}
+.con-head .file i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);box-shadow:14px 0 0 rgba(255,255,255,.12),28px 0 0 rgba(255,255,255,.12);margin-right:28px}
+.live{display:inline-flex;align-items:center;gap:7px;height:22px;padding:0 9px;border-radius:var(--r-pill);background:rgba(var(--glow-rgb),.10);border:1px solid rgba(var(--glow-rgb),.25);color:var(--accent);letter-spacing:.14em;font-size:10.5px}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.con-body{position:relative;height:261.5px;padding:12px 16px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;font:400 12.5px/1.9 var(--mono)}
+.row{position:relative;z-index:1;display:flex;gap:10px;white-space:nowrap;padding:0 8px;margin:0 -8px;border-radius:6px;transition:background 150ms;min-width:0;overflow:hidden}   /* z-index: the rows paint over the scanline, so it never crosses the text */
+.row>span{flex:none}
+.row .ev{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}   /* the event is the one cell allowed to give way */
+.row:hover{background:rgba(255,255,255,.03)}
+.row.new{animation:rowIn .32s var(--ease-out) both}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.row .t{color:var(--text-3)}
+.row .ev{color:var(--text)}
+.row .v{color:var(--text-2)}
+.row .sp{color:var(--text-3)}   /* text-3, not 4: the separators stay ≥ 4.5:1 even where the scanline passes behind them */
+.row .st{color:var(--text-2)}
+.row .v .ab{display:none;text-decoration:none}   /* abbreviated vertical (HE / DS / Ecom), phone only; the <abbr> title carries the full name */
+.con-key{display:none;flex-wrap:wrap;gap:2px 14px;margin:0;padding:0 16px 12px;font:400 10.5px/1.5 var(--mono);letter-spacing:.04em;color:var(--text-4)}   /* phone only: the key for those abbreviations, one item per entry so it wraps cleanly */
+.row .ok{color:var(--green)}
+.row .won{color:var(--accent-hot)}
+.con-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--line)}
+.con-foot .chips{gap:8px}
+.con-foot .chip{animation:chipPulse 3s ease-in-out infinite}
+.con-foot .chip:nth-child(2){animation-delay:.4s}
+.con-foot .chip:nth-child(3){animation-delay:.8s}
+.con-foot .chip:nth-child(4){animation-delay:1.2s}
+@keyframes chipPulse{0%,100%{border-color:rgba(255,255,255,.08)}50%{border-color:rgba(45,220,122,.35)}}
+.sample{font:500 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--text-3);white-space:nowrap}
+/* scanline: a ::after on the log area, not a DOM child (the log appends and drops rows by position), so the sweep covers the rows only — never the header, the status chips or the footer. A saturated-blue line with a faint 24 px trail, painted under the row text (z-index 0 vs the rows' 1) and kept at .25 alpha, so every cell stays ≥ 4.5:1 while the line passes behind it (at .62 the separators fell to 1.8:1) */
+.con-body::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent calc(100% - 24px),rgba(0,160,228,.07) calc(100% - 1px),rgba(0,166,236,.25) calc(100% - 1px));
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);animation:scan 6s linear infinite}
+.console:hover .con-body::after{animation-play-state:paused}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.console-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center}
+
+/* =====================================================================
+   8. VERTICALS
+   ===================================================================== */
+.verticals .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vcard{padding:0;overflow:hidden;display:flex;flex-direction:column;--lift:0px}
+.vcard:hover{--lift:-4px}
+.vband{position:relative;height:120px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(var(--glow-rgb),.05),transparent)}
+.vband canvas{width:100%;height:100%}
+.vband .sample{position:absolute;top:10px;right:14px;font-size:10px}   /* the label sits on the visual it describes, so every card body ends with its paragraph; plain text-3 (≈ 6:1 on the band) — the old opacity .6 measured 3.1:1, text-4 only 4.5–4.8 */
+.vbody{display:flex;flex-direction:column;flex:1;padding:22px 24px 26px}
+.tag{display:inline-flex;align-self:flex-start;align-items:center;height:22px;padding:0 9px;border-radius:var(--r-chip);font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);background:var(--glass-tint);border:1px solid rgba(255,255,255,.1)}
+.tag-primary{color:var(--accent);background:rgba(var(--glow-rgb),.10);border-color:rgba(var(--glow-rgb),.25)}
+.vcard h3{margin:14px 0 0;font:600 20px/1.25 var(--sans);letter-spacing:-.015em;color:var(--text)}
+.vcard p{margin:10px 0 0;font:400 14px/1.6 var(--sans);color:var(--text-2);text-wrap:pretty}
+
+/* =====================================================================
+   9. PROCESS
+   ===================================================================== */
+.track-wrap{position:relative;margin:0 0 6px}
+.track-wrap svg{display:block;width:100%;height:auto;overflow:visible}
+.orb-back{fill:none;stroke:rgba(255,255,255,.09);stroke-width:1}
+.orb-front{fill:none;stroke:rgba(0,157,224,.42);stroke-width:1.25}
+.drop{stroke:rgba(255,255,255,.09);stroke-width:1;stroke-dasharray:2 6}
+.node{fill:#05181f;stroke:rgba(0,157,224,.55);stroke-width:1.25;transition:fill .3s,stroke .3s}
+.node-ring{fill:none;stroke:rgba(var(--glow-rgb),.5);stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center}
+.node.active{fill:var(--accent);stroke:#e6f8ff}
+.node-ring.active{animation:nodePing .5s ease-out both}
+@keyframes nodePing{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(1.9)}}
+.sat-core{fill:var(--accent-ice)}
+.sat-halo{fill:rgba(0,174,249,.45)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.step{padding:22px 22px 24px;transition:box-shadow var(--t-slow),border-color .4s,transform 500ms var(--ease-out)}
+.step .n{font:500 12px/1 var(--mono);letter-spacing:.14em;color:var(--accent)}
+.step h3{margin:14px 0 0;font:600 17px/1.3 var(--sans);letter-spacing:-.01em;color:var(--text-3);transition:color .4s}
+.step p{margin:8px 0 0;font:400 14px/1.6 var(--sans);color:var(--text-4);transition:color .4s;text-wrap:pretty}
+.step.active{border-color:rgba(var(--glow-rgb),.35);box-shadow:var(--sh-card),0 0 0 1px rgba(var(--glow-rgb),.12),0 20px 60px -30px rgba(var(--glow-rgb),.5)}
+.step.active h3{color:var(--text)}
+.step.active p{color:var(--text-2)}
+.tdot{display:none}
+
+/* =====================================================================
+   10. COMPLIANCE — one wide band: radar left, copy + chips right
+   ===================================================================== */
+.compliance{padding:120px 0 104px;border-top:1px solid var(--line);overflow:hidden}   /* 104 below: the band's own padding makes up the rest of the 240 px rhythm */
+.comp-band{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;padding:44px 52px;border-radius:28px;
+  background:radial-gradient(60% 120% at 0% 50%,rgba(var(--glow-rgb),.09),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),rgba(var(--surface-rgb),.6);
+  border:1px solid var(--line);border-top-color:rgba(255,255,255,.11);box-shadow:var(--sh-card)}
+.radar{position:relative;width:168px;height:168px;border-radius:50%;border:1px solid rgba(255,255,255,.09);display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle,rgba(var(--glow-rgb),.12),rgba(var(--glow-rgb),.04) 60%,transparent 72%)}
+.radar::before,.radar::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.07)}
+.radar::before{inset:28px}
+.radar::after{inset:56px}
+.radar .cross{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(50% - .5px),rgba(255,255,255,.06) calc(50% - .5px),rgba(255,255,255,.06) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(180deg,transparent calc(50% - .5px),rgba(255,255,255,.06) calc(50% - .5px),rgba(255,255,255,.06) calc(50% + .5px),transparent calc(50% + .5px))}
+.sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(var(--glow-rgb),.38),rgba(var(--glow-rgb),.12) 40deg,transparent 60deg);animation:spin 4s linear infinite}
+.radar svg{position:relative;width:52px;height:52px;color:var(--accent);filter:drop-shadow(0 0 10px rgba(var(--glow-rgb),.55))}
+.comp-copy .h2{margin-top:0;max-width:540px}
+.comp-copy .sub{max-width:640px}
+.chips-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;max-width:620px}   /* wraps 2 + 2, never 3 + 1 */
+.chip-lg{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:9px 14px;border-radius:var(--r-chip);font:500 12px/1.25 var(--mono);letter-spacing:.06em;text-align:left;color:var(--text-2);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);animation:chipGlow 4s ease-in-out infinite}
+.chip-lg::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.chip-lg:nth-child(2){animation-delay:1s}
+.chip-lg:nth-child(3){animation-delay:2s}
+.chip-lg:nth-child(4){animation-delay:3s}
+@keyframes chipGlow{0%,20%,100%{border-color:rgba(255,255,255,.1);color:var(--text-2)}8%{border-color:rgba(var(--glow-rgb),.5);color:var(--text)}}
+
+/* =====================================================================
+   11. MANIFESTO
+   ===================================================================== */
+.manifesto{padding:136px 0 112px;text-align:center}   /* 104 + 136 above the quote, 112 + 128 below: both ≈ 240 px content to content, like every other section gap */
+.quote{margin:0 auto;max-width:900px;font:500 clamp(24px,2.6vw,34px)/1.35 var(--sans);letter-spacing:-.02em;color:var(--text-2);text-wrap:pretty}
+.quote .w{display:inline-block;animation:wordglow 6s ease-in-out infinite;animation-delay:calc(var(--i)*.18s)}
+.quote .win{color:var(--accent);font-weight:600;animation:winglow 6s ease-in-out infinite;animation-delay:calc(var(--i)*.18s)}
+@keyframes wordglow{0%,20%,100%{color:var(--text-2)}10%{color:var(--text)}}
+@keyframes winglow{0%,20%,100%{text-shadow:0 0 0 rgba(var(--glow-rgb),0)}10%{text-shadow:0 0 18px rgba(var(--glow-rgb),.75)}}
+
+/* =====================================================================
+   12. CTA — the globe's upper rim rises from the section's bottom edge: a
+   wide static render of the globe's cap (globe-assets/poster-cta.webp; its
+   framing and numbers are in CONTRACT.md) over a CSS glow, its base tint
+   ===================================================================== */
+.cta{position:relative;overflow:hidden;padding:128px 0 clamp(200px,20vw,300px);--R:clamp(300px,42vw,620px)}   /* --R: the horizon sphere's radius */
+.cta::before{content:"";position:absolute;left:0;right:0;bottom:0;height:70%;pointer-events:none;background:radial-gradient(60% 100% at 50% 100%,rgba(32,124,214,.26),rgba(12,62,120,.12) 45%,transparent 70%)}   /* the base tint under the horizon: the vignettes' deeper blue */
+.horizon-wrap{position:absolute;inset:0;pointer-events:none}
+/* the cap: 2.4 R wide × .52 R tall, the sphere's centre .6 R under the section's bottom edge, so it rises .4 R into the bottom padding */
+.horizon{position:absolute;left:50%;bottom:0;width:calc(var(--R) * 2.4);max-width:none;height:auto;aspect-ratio:2880 / 624;transform:translateX(-50%);-webkit-user-select:none;user-select:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 16%);mask-image:linear-gradient(180deg,transparent,#000 16%)}   /* the halo reaches the image's top rows: fade them in so its edge never shows (the limb sits 23 % down) */
+/* a slow breath on its own glow layer over the limb (opacity only, so it costs nothing; off under reduced motion) */
+.horizon-wrap::after{content:"";position:absolute;left:50%;bottom:0;width:calc(var(--R) * 2.6);height:calc(var(--R) * .8);transform:translateX(-50%);
+  background:radial-gradient(50% 100% at 50% 100%,rgba(40,140,230,.16),rgba(40,140,230,.05) 60%,transparent 80%);opacity:.5;animation:limbGlow 9s ease-in-out infinite}
+@keyframes limbGlow{0%,100%{opacity:.5}50%{opacity:1}}
+.cta .wrap{z-index:1}
+.cta .grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.cta-actions{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.email-row{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 6px 0 18px;border-radius:var(--r-pill);background:rgba(var(--surface-rgb),.6);border:1px solid rgba(255,255,255,.1);max-width:100%}
+.email{font:500 18px/1 var(--mono);color:var(--text);letter-spacing:-.01em;-webkit-user-select:all;user-select:all;white-space:nowrap}
+.copy{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:var(--r-pill);font:600 13px/1 var(--sans);color:#dfe7ed;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);transition:border-color .3s,background .3s,transform 120ms,color .3s}   /* 40 px tap target on touch */
+@media (hover:hover) and (pointer:fine){.copy{height:36px}}
+.copy:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+.copy:active{transform:scale(.97)}
+.copy.done{border-color:rgba(45,220,122,.6);color:#fff}
+.copy .ck{display:none;width:12px;height:12px;stroke:var(--green);stroke-width:2}
+.copy.done .ck{display:block}
+
+/* =====================================================================
+   13. FOOTER
+   ===================================================================== */
+.footer{position:relative;background:#000;border-top:1px solid var(--line);padding:48px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
+.foot-brand{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--sans);letter-spacing:.08em;color:var(--text)}
+.foot-brand img{width:22px;height:22px;display:block}
+.foot-status{display:flex;align-items:center;gap:8px;margin-top:14px;font:400 13px/1 var(--sans);color:var(--text-3)}
+.foot-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.foot-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;font:400 13px/1 var(--sans);color:var(--text-3);text-decoration:none;border-radius:8px;transition:color 150ms}
+.foot-links a:hover{color:var(--text-2)}
+.foot-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.foot-right a{display:inline-flex;align-items:center;min-height:40px;font:500 13px/1 var(--mono);color:var(--text-2);text-decoration:none}
+.foot-right a:hover{color:var(--text)}
+.copyright{font:400 12.5px/1 var(--sans);color:var(--text-4)}
+
+/* =====================================================================
+   14. RESPONSIVE
+   ===================================================================== */
+@media (min-width:1024px) and (max-width:1199px){
+  .nav-links a{padding:0 11px;font-size:13.5px}
+  .hero-sub{max-width:400px;font-size:14px;line-height:1.6}   /* ≥ 24 px of air between the copy and the top cards */
+  .stats{column-gap:20px}
+  .stats .chip{font-size:9.5px;letter-spacing:.03em;padding:0 6px}
+  .stats .chips{gap:4px}
+}
+/* mid-height desktop (a MacBook with browser chrome, 1536×864, 1280×800): slightly tighter cards, both rows still hang from the bar */
+@media (min-width:1024px) and (min-height:780px) and (max-height:895px){
+  .hero{--card-h:182px}
+  .hero-copy{padding-top:88px}
+  .card{padding:20px}
+  .card h2{margin-top:18px}
+  .card-wrap.tl{bottom:calc(126px + var(--card-h) + 16px)}
+  .card-wrap.tr{bottom:calc(126px + var(--card-h) + 10px)}
+}
+/* short desktop (1280×720 class): compressed vertical rhythm, hero still fits */
+@media (min-width:1024px) and (max-height:779px){
+  .nav{height:64px}
+  .hero{--card-w:212px;--card-h:162px;--bar-w:clamp(600px,51vw,652px)}
+  .hero-copy{padding-top:84px}
+  .badge{height:32px;font-size:12px}
+  .h1{margin-top:14px;font-size:48px}
+  .hero-sub{margin-top:14px;font-size:14px;line-height:22px}
+  .hero-btns{margin-top:20px}
+  .hero-btns .btn{height:40px}
+  .card-wrap.tl,.card-wrap.tr{bottom:calc(102px + var(--card-h) + 36px)}
+  .card-wrap.bl{left:calc(6.7% + 18px);bottom:102px}
+  .card-wrap.br{right:calc(6% + 16px);bottom:102px}
+  .card{padding:18px}
+  .card .tile{width:40px;height:40px}
+  .card h2{margin-top:14px;font-size:14px}
+  .card p{font-size:11px;line-height:16px}
+  .card-row .arrow{margin:16px 0 0 8px;shape-outside:inset(16px 0 0 0)}
+  .arrow{width:32px;height:32px}
+  .stats-wrap{bottom:16px}
+  .stats{height:78px;padding:0 20px;column-gap:22px}
+  .stats .chip{font-size:9.5px;letter-spacing:.03em;padding:0 6px}
+  .stats .chips{gap:4px}
+  .stat .num{font-size:18px}
+  .stat .lbl{font-size:11px;margin-top:6px}
+}
+/* stacked hero: tablet + phone */
+@media (max-width:1023px){
+  html{scroll-padding-top:80px}
+  .nav{height:64px}
+  .nav-inner{padding:0 max(32px,env(safe-area-inset-right,0px)) 0 max(32px,env(safe-area-inset-left,0px))}
+  .nav-links a{padding:0 12px;font-size:13px}
+  .nav-cta{height:40px;font-size:13px}
+  .hero{min-height:0;--R:210px}
+  .hero-inner{display:flex;flex-direction:column}
+  .hero-copy{padding:88px 32px 0}
+  .h1{font-size:48px}
+  .hero-sub{font-size:15px;line-height:24px}
+  .stage{display:block;height:calc(var(--R)*1.5 + 32px);pointer-events:none}
+  .stats-wrap{position:static;display:block;padding:0 32px;z-index:auto}
+  .stats{width:100%;min-width:0;max-width:756px;margin:0 auto;height:auto;grid-template-columns:repeat(4,auto);justify-content:start;column-gap:32px;row-gap:18px;padding:22px 28px}
+  .stats .chip{color:var(--text-2)}   /* stacked, the bar sits on the brightest part of the pool glow: text-3 measured 4.2–4.5:1 there at 768–820 */
+  .status{grid-column:1/-1}
+  .cards{position:static;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:32px 32px 0;pointer-events:auto}
+  .card-wrap{position:static;width:auto;perspective:none;animation:rise .45s var(--ease-out) both;--dy:10px}
+  .card-wrap.tl{animation-delay:.30s}
+  .card-wrap.tr{animation-delay:.36s}
+  .card-wrap.bl{animation-delay:.42s}
+  .card-wrap.br{animation-delay:.48s}
+  .card-float{animation:none}
+  .card{height:auto;min-height:170px;-webkit-backdrop-filter:none;backdrop-filter:none;transform:none}
+  .card-row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}   /* auto-height cards: the arrow is a flex item beside the text again */
+  .card-row .arrow{float:none;order:1;margin:0;shape-outside:none}
+  .card p{font-size:13px;line-height:1.45;text-wrap:pretty}
+  .hero-fade{display:none}
+  .hero-end{height:40px}
+  .sec{padding:96px 0}
+  .about .grid,.cta .grid,.console-grid{grid-template-columns:1fr;gap:40px}
+  .about-art{right:-260px;top:auto;bottom:-200px;margin-top:0}
+  .verticals .grid{grid-template-columns:1fr 1fr}
+  .verticals .vcard:last-child{grid-column:1/-1}
+  /* process: the orbit track becomes a vertical timeline with the satellite travelling down */
+  .track-wrap{display:none}
+  .steps{grid-template-columns:1fr;padding-left:36px;gap:12px}
+  .steps::before{content:"";position:absolute;left:11px;top:16px;bottom:16px;width:1px;background:var(--line-2)}
+  .step{position:relative}
+  .step::after{content:"";position:absolute;left:-30px;top:26px;width:11px;height:11px;border-radius:50%;background:#05181f;border:1px solid rgba(0,157,224,.55);transition:background .3s}
+  .step.active::after{background:var(--accent);border-color:#e6f8ff;box-shadow:0 0 12px rgba(var(--glow-rgb),.7)}
+  .tdot{display:block;position:absolute;left:7px;top:26px;width:9px;height:9px;border-radius:50%;background:var(--accent-ice);box-shadow:0 0 12px 3px rgba(0,150,214,.6);pointer-events:none}
+  .comp-band{grid-template-columns:1fr;justify-items:center;text-align:center;gap:32px;padding:40px 28px;background-image:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
+  .comp-copy .sub{margin-left:auto;margin-right:auto}
+  .chips-row{justify-content:center;margin-left:auto;margin-right:auto}
+  .manifesto{padding:120px 0}
+  .cta{padding:110px 0 clamp(180px,24vw,240px)}
+}
+/* phone */
+@media (max-width:767px){
+  .nav-inner{padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+  .brand{font-size:14px;gap:10px;min-height:44px}
+  .nav-links{display:none}
+  .menu-btn{display:grid}
+  .nav-cta{height:44px;padding:0 14px 0 16px}   /* phone tap targets: 44 px (menu toggle, nav CTA, brand, footer links, email, Copy) */
+  .hero{--R:55vw}
+  .hero-copy{padding:88px max(16px,env(safe-area-inset-left,0px)) 0}
+  .badge{height:32px;font-size:12px}
+  .h1{margin-top:14px;font-size:40px;line-height:1.05}
+  .hero-sub{margin-top:14px;max-width:330px;font-size:15px;line-height:1.55}
+  .hero-btns{width:100%;max-width:360px;gap:12px;margin-top:20px}
+  .hero-btns .btn{flex:1;padding:0 12px}
+  .stage{height:calc(var(--R)*1.35 + 28px)}
+  .stats-wrap{padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px))}
+  .stats{grid-template-columns:1fr 1fr;column-gap:16px;row-gap:16px;padding:20px;border-radius:20px}
+  .stat .num{font-size:22px}
+  .stat .lbl{font-size:11px}
+  .cards{grid-template-columns:1fr;gap:12px;padding:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+  .hero-end{height:28px}
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .sec{padding:72px 0}
+  .sec-head{margin-bottom:32px}
+  .h2{font-size:28px}
+  .sub{font-size:15px}
+  .about .body{font-size:15px}
+  .principle{padding:18px}
+  .console-grid{gap:28px}
+  .con-body{font-size:12px;height:252px}
+  .row{gap:8px}
+  .row .v .full,.row .st,.row .sp-st{display:none}   /* phone keeps time · event · vertical (abbreviated) · result; the state column goes */
+  .row .v .ab{display:inline}
+  .con-key{display:flex}
+  .comp-copy .ln{white-space:nowrap}   /* the spans keep the H2 from breaking inside a sentence (never a one-word first line) */
+  .comp-copy .h2{font-size:clamp(22px,6.5vw,28px)}   /* 25.4 px at 390, 23.4 px at 360: "Compliance isn't a feature." (337 px at 28 px) fits the 316 / 286 px box, so the phone breaks one sentence per line like the desktop — "Compliance isn't a feature. / It's the foundation." (decided 11-08) */
+  .verticals .grid{grid-template-columns:1fr}
+  .compliance{padding:64px 0}
+  .radar{width:140px;height:140px}
+  .radar::before{inset:24px}
+  .radar::after{inset:48px}
+  .manifesto{padding:88px 0}
+  .quote{font-size:24px}
+  .cta{padding:80px 0 clamp(150px,36vw,200px)}
+  .email-row{height:52px;width:100%;justify-content:space-between;padding:0 4px 0 14px}
+  .copy{height:44px}
+  .email{font-size:15px}
+  .foot-grid{grid-template-columns:1fr;gap:20px;text-align:left}
+  .foot-links{justify-content:flex-start;margin-left:-10px}
+  .foot-links a,.foot-right a{min-height:44px}
+  .foot-right{align-items:flex-start}
+}
+/* 480–767: two-column vertical cards; <480: single-column horizontal cards */
+@media (min-width:480px) and (max-width:767px){
+  .cards{grid-template-columns:1fr 1fr;grid-auto-rows:1fr}   /* equal rows: all four cards take the tallest description's height, so a 3-line card in row one never leaves row two shorter */
+  .card-float,.card{height:100%}   /* the card fills its grid cell, so a 3-line description never leaves its row-mate shorter */
+  .card{min-height:150px;padding:18px 18px 20px}
+  .card .tile{width:44px;height:44px}
+  .card h2{margin-top:16px}
+  .card p{max-width:none}
+}
+@media (max-width:479px){
+  .card{display:grid;grid-template-columns:44px 1fr 32px;grid-template-rows:auto auto;align-items:center;column-gap:14px;row-gap:3px;min-height:92px;padding:16px}
+  .card .tile{width:44px;height:44px;grid-column:1;grid-row:1/3;align-self:center}
+  .card .text,.card-row{display:contents}
+  .card h2{grid-column:2;grid-row:1;margin:0;font-size:15px;align-self:end}
+  .card p{grid-column:2;grid-row:2;max-width:none;margin:0;font-size:13px;align-self:start}
+  .card .arrow{width:32px;height:32px;grid-column:3;grid-row:1/3;align-self:center}
+  .stats .status-row{font-size:13px}
+}
+/* small phones: the wordmark stays on one line; the nav CTA drops its arrow */
+@media (max-width:400px){
+  .brand{font-size:13px}
+  .nav-cta{padding:0 12px}
+  .nav-cta svg{display:none}
+  .comp-band{padding:40px 20px}
+  .card{column-gap:12px}
+  .card p{font-size:12.5px}  /* the 196 px text column holds every description on two lines at 360 */
+  .chip-lg{font-size:11px}   /* the longest chip stays on one line at 360 */
+  .con-body{font-size:11.5px}
+  .row{gap:6px}              /* the longest console rows fit the 294 px body at 360 */
+}
+@media (max-width:360px){
+  .h1{font-size:36px}
+  .hero-btns .btn{font-size:13px;padding:0 10px}
+}
+/* tall desktop viewports (iPad Pro portrait at 1024 wide): a lower hero cap and a higher top row keep the cards near the copy */
+@media (min-width:1024px) and (min-height:1100px){
+  .hero{min-height:960px}
+  .card-wrap.tl{bottom:calc(126px + var(--card-h) + 40px)}
+  .card-wrap.tr{bottom:calc(126px + var(--card-h) + 34px)}
+}
+/* touch screens of any width (tablets, touch laptops): the nav, the buttons and the footer links get the phone layout's 44 px
+   targets (the pointer-first sizes are 36–40 px) */
+@media (pointer:coarse){
+  .brand{min-height:44px}
+  .nav-links a{height:44px;margin:-8px 0}
+  .nav-cta,.copy{height:44px}
+  .foot-links a,.foot-right a{min-height:44px}
+}
+/* no hardware GPU — the GLOBE LOADER's probe found software WebGL or none (html.soft-gl): the compositor then works in software
+   too, and every backdrop blur re-filters its box on the CPU each frame (under SwiftShader the bobbing hero cards held the page
+   at ~33 fps instead of 60). The blurred glass takes flat, denser tints instead (the cards take the no-backdrop-filter fallback) */
+.soft-gl .btn-ghost,.soft-gl .nav.scrolled,.soft-gl .nav.open,.soft-gl .card,.soft-gl .stats{-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (min-width:1024px){.soft-gl .card{background-color:rgba(var(--surface-rgb),.82)}}   /* stacked, the cards never blur */
+.soft-gl .nav.scrolled,.soft-gl .nav.open{background:rgba(var(--surface-rgb),.94)}
+.soft-gl .stats{background-color:rgba(4,7,9,.82)}
+/* reduced motion: static arrangements that never depend on an animation */
+@media (prefers-reduced-motion:reduce){
+  /* capability strip: a static 2-column list (one row from 1280 up, one column under 480); the dots move inside the items as ::before, so a wrap can never strand one */
+  .marquee{height:auto;padding:14px 16px;-webkit-mask-image:none;mask-image:none}
+  .track{width:auto;display:grid;grid-template-columns:repeat(2,auto);justify-content:center;row-gap:10px}
+  .track i,.track .dup{display:none}
+  .track span{display:inline-flex;align-items:center;gap:16px;padding:0 16px}
+  .track span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}   /* 2-column list: every item leads with a dot (both columns alike) */
+  .sweep{display:none}
+  .con-body::after{display:none}
+  .quote .w{color:var(--text-2)}
+  .quote .win{color:var(--accent)}
+  .btn-sheen::after{display:none}
+  .tdot{display:none}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:479px){
+  .track{grid-template-columns:auto}
+  .track span::before{content:none}
+}
+@media (prefers-reduced-motion:reduce) and (min-width:1280px){
+  .track{display:flex}
+  .track span{font-size:11px;letter-spacing:.08em;gap:10px;padding:0 10px}   /* all eight fit one row from 1280: the dots separate the items */
+  .track span:first-of-type::before{content:none}
+}
 </style>
 </head>
+
 <body>
-
-<div class="bg-grid"></div>
-<div class="glow"></div>
-
-<!-- NAV -->
-<nav>
+<a class="skip" href="#main">Skip to content</a>
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="logo.svg" width="28" height="28" alt="" aria-hidden="true">
-      Boring Media<span class="logo-cursor" aria-hidden="true"></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#verticals">Verticals</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
-    </ul>
+    <a class="brand" href="#top" aria-label="Boring Media — home"><img src="logo.svg" alt="" width="28" height="28" decoding="async"><span>BORING MEDIA</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <span class="ind" id="ind" aria-hidden="true"></span>
+      <a href="#top" data-spy="top">Home</a>
+      <a href="#about" data-spy="about">About</a>
+      <a href="#verticals" data-spy="verticals">Verticals</a>
+      <a href="#process" data-spy="process">Process</a>
+      <a href="#contact" data-spy="contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm nav-cta" href="#contact">Work With Us <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Menu">
+        <svg class="ico h" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ico x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
   </div>
-</nav>
+  <nav class="sheet" id="sheet" aria-label="Primary (menu)">
+    <a href="#top" data-spy="top">Home</a>
+    <a href="#about" data-spy="about">About</a>
+    <a href="#verticals" data-spy="verticals">Verticals</a>
+    <a href="#process" data-spy="process">Process</a>
+    <a href="#contact" data-spy="contact">Contact</a>
+  </nav>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
+<main id="main" tabindex="-1">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" aria-label="Intro">
+  <div class="vig vig-l" aria-hidden="true"></div>
+  <div class="vig vig-r" aria-hidden="true"></div>
+  <div class="vig vig-b" aria-hidden="true"></div>
+  <div class="globe-wrap" id="globe-wrap" aria-hidden="true">
+    <div class="haze"></div>
+    <div class="pool"></div>
+    <div class="tglow"></div>
+    <!-- phones and tablets (≤ 1023 px) always get the 1000 file: their live globe draws at most 1.25 device px per CSS px, and
+         1000 px over the poster box is the same 1.25 — so no screen fetches more poster than its globe shows (97 KB, not 174).
+         Desktops pick 800 / 1600 by the poster's real box (R / .27). The second copy is the same file, masked to the sphere (.poster-disc). -->
+    <picture><source media="(max-width: 1023px)" srcset="globe-assets/poster-hero-1000.webp" width="1000" height="1000"><img class="poster" id="globe-poster" src="globe-assets/poster-hero-1600.webp" srcset="globe-assets/poster-hero-800.webp 800w, globe-assets/poster-hero-1600.webp 1600w" sizes="min(67vw, 1111px)" width="1600" height="1600" alt="" decoding="async" fetchpriority="high"></picture>
+    <picture><source media="(max-width: 1023px)" srcset="globe-assets/poster-hero-1000.webp" width="1000" height="1000"><img class="poster poster-disc" src="globe-assets/poster-hero-1600.webp" srcset="globe-assets/poster-hero-800.webp 800w, globe-assets/poster-hero-1600.webp 1600w" sizes="min(67vw, 1111px)" width="1600" height="1600" alt="" decoding="async"></picture>
+    <div class="gl" id="globe-gl"></div>
+  </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-copy" id="hero-copy">
+      <div class="badge"><span class="pdot" aria-hidden="true"></span><span>Performance Media Buying</span></div>
+      <h1 class="h1">
+        <span class="l1"><span class="w" style="--i:0">We</span> <span class="w" style="--i:1">run</span> <span class="w" style="--i:2">ads</span></span>
+        <span class="l2"><span class="w" style="--i:3">the</span> <span class="w" style="--i:4">boring</span> <span class="w" style="--i:5">way.</span></span>
+      </h1>
+      <p class="hero-sub">No hype. No fluff. Just engineered systems that convert traffic into revenue&nbsp;— predictably, repeatedly, at scale.</p>
+      <div class="hero-btns" id="hero-btns">
+        <a class="btn btn-primary btn-sheen" href="#contact">Work With Us <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#process">How It Works</a>
+      </div>
+    </div>
+
+    <div class="stage" id="stage" aria-hidden="true"></div>
+
+    <div class="stats-wrap">
+      <div class="stats" id="stats" role="group" aria-label="Status and stats">
+        <div class="status">
+          <div class="status-row"><span class="gdot" aria-hidden="true"></span><span>Systems online</span></div>
+          <div class="chips"><span class="chip">PIXEL <b>OK</b></span><span class="chip">WEBHOOKS <b>OK</b></span><span class="chip">ROUTING <b>OK</b></span></div>
+        </div>
+        <div class="stat"><div class="num">24/7</div><div class="lbl">Campaigns live</div></div>
+        <div class="stat"><div class="num" data-count="100" data-start="90" data-dec="0" data-suffix="%">100%</div><div class="lbl">Funnel owned</div></div>
+        <div class="stat"><div class="num inf">∞</div><div class="lbl">Tests running</div></div>
+        <div class="stat"><div class="num" data-count="99.98" data-start="99.00" data-dec="2" data-suffix="%">99.98%</div><div class="lbl">Tracking uptime</div></div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card-wrap tl"><div class="card-float"><a class="card glass" href="#about">
+        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+        <div class="text"><h2>Real-Time Tracking</h2>
+        <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <p>Every click, call, and conversion tracked to the dollar.</p></div></div>
+      </a></div></div>
+      <div class="card-wrap tr"><div class="card-float"><a class="card glass" href="#about">
+        <span class="tile"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+        <div class="text"><h2>Lead Generation</h2>
+        <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <p>Exclusive, verified leads delivered the moment they convert.</p></div></div>
+      </a></div></div>
+      <div class="card-wrap bl"><div class="card-float"><a class="card glass" href="#about">
+        <span class="tile tile-grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+        <div class="text"><h2>Creative Testing</h2>
+        <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <p>Variants launched daily. Losers killed fast. Data&nbsp;decides.</p></div></div>
+      </a></div></div>
+      <div class="card-wrap br"><div class="card-float"><a class="card glass" href="#about">
+        <span class="tile tile-grey"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div class="text"><h2>TCPA Compliance</h2>
+        <div class="card-row"><span class="arrow" aria-hidden="true"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <p>An independent certificate of consent on every record.</p></div></div>
+      </a></div></div>
+    </div>
+    <div class="hero-end" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= CAPABILITY MARQUEE ================= -->
+<div class="marquee" role="group" aria-label="Capabilities">
+  <div class="track">
+    <i aria-hidden="true"></i><span>Real-Time Tracking</span><i aria-hidden="true"></i><span>Lead Generation</span><i aria-hidden="true"></i><span>Creative Testing</span><i aria-hidden="true"></i><span>TCPA Compliance</span><i aria-hidden="true"></i><span>Paid Social</span><i aria-hidden="true"></i><span>Conversion APIs</span><i aria-hidden="true"></i><span>Funnel Automation</span><i aria-hidden="true"></i><span>Signal Optimization</span>
+    <i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Real-Time Tracking</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Lead Generation</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Creative Testing</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">TCPA Compliance</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Paid Social</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Conversion APIs</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Funnel Automation</span><i class="dup" aria-hidden="true"></i><span class="dup" aria-hidden="true">Signal Optimization</span>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section class="sec about" id="about" aria-labelledby="about-h">
+  <svg class="about-art" viewBox="0 0 720 720" aria-hidden="true"><g><ellipse cx="360" cy="360" rx="340" ry="120" transform="rotate(-18 360 360)"/><ellipse cx="360" cy="360" rx="250" ry="235" transform="rotate(32 360 360)"/><circle cx="700" cy="360" r="4" transform="rotate(-18 360 360)"/><circle cx="360" cy="125" r="3" transform="rotate(32 360 360)"/></g></svg>
+  <div class="wrap">
+    <div class="grid">
+      <div class="reveal">
+        <span class="label">What we do</span>
+        <h2 class="h2" id="about-h">The boring stuff<br>that prints money.</h2>
+        <p class="body">We buy media. We build funnels. We track every click, every call, every conversion, every dollar&nbsp;— then we do it again, better, faster, cheaper.</p>
+        <p class="body">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
+      </div>
+      <div class="principles">
+        <div class="principle glass tilt reveal" style="--i:0">
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/></svg></span>
+          <div><h3>Systems Over Stunts</h3><p>Every campaign is a system&nbsp;— tracked, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p></div>
+        </div>
+        <div class="principle glass tilt reveal" style="--i:1">
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
+          <div><h3>Data Is the Creative</h3><p>The numbers tell us what works. Winning ads aren't the prettiest&nbsp;— they're the ones with the best unit economics.</p></div>
+        </div>
+        <div class="principle glass tilt reveal" style="--i:2">
+          <span class="tile tile-sm"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>
+          <div><h3>Scale What Works</h3><p>Find a winner, remove the ceiling, pour fuel on it. That's the whole strategy. It's boring. It works.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE CONSOLE ================= -->
+<section class="sec console-sec" id="tracking" aria-labelledby="tracking-h">
+  <div class="wrap">
+    <div class="console-grid">
+      <div class="reveal">
+        <span class="label">Tracking</span>
+        <h2 class="h2" id="tracking-h">Every&nbsp;click. Every&nbsp;call. Every&nbsp;dollar.</h2>
+        <p class="sub">Each lead is tracked from first impression to delivery, in real&nbsp;time.</p>
+      </div>
+      <div class="console reveal" id="console" style="--i:1">
+        <div class="con-head"><span class="file"><i aria-hidden="true"></i>conversions.log</span><span class="live"><i aria-hidden="true"></i>LIVE</span></div>
+        <div class="con-body" id="con-body" aria-live="off"></div>
+        <div class="con-foot">
+          <div class="chips"><span class="chip">PIXEL <b>OK</b></span><span class="chip">WEBHOOKS <b>OK</b></span><span class="chip">ROUTING <b>OK</b></span><span class="chip">UPTIME <b>99.98%</b></span></div>
+          <span class="sample">Sample data</span>
+        </div>
+        <p class="con-key"><span>HE Home Equity</span><span>DS Debt Settlement</span><span>Ecom Ecommerce</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VERTICALS ================= -->
+<section class="sec verticals" id="verticals" aria-labelledby="verticals-h">
+  <div class="wrap wrap-wide">
+    <div class="sec-head center reveal">
+      <span class="label">Verticals</span>
+      <h2 class="h2" id="verticals-h">Where we operate.</h2>
+      <p class="sub">High-intent, high-value verticals where performance media buying matters&nbsp;most.</p>
+    </div>
+    <div class="grid">
+      <article class="vcard glass tilt reveal" style="--i:0">
+        <div class="vband"><canvas class="mini" data-mini="orbit" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
+        <div class="vbody"><span class="tag tag-primary">Primary</span><h3>Home Equity &amp; Refinance</h3><p>Exclusive, verified home equity and <span class="nw">cash-out</span> refinance leads&nbsp;— delivered in real time to lenders and loan officers ready to close, not chase.</p></div>
+      </article>
+      <article class="vcard glass tilt reveal" style="--i:1">
+        <div class="vband"><canvas class="mini" data-mini="usmap" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
+        <div class="vbody"><span class="tag">Growing</span><h3>Debt Settlement</h3><p>Qualified debt relief leads from consumers actively looking for a way out&nbsp;— verified, consent-backed, and delivered to settlement firms ready to enroll.</p></div>
+      </article>
+      <article class="vcard glass tilt reveal" style="--i:2">
+        <div class="vband"><canvas class="mini" data-mini="bars" aria-hidden="true"></canvas><span class="sample">Sample data</span></div>
+        <div class="vbody"><span class="tag">Growing</span><h3>Ecommerce</h3><p>Direct response media buying for products that sell on cold traffic. Creative testing, conversion tracking, and scaling&nbsp;— the same system, pointed at a storefront.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="sec process" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">Process</span>
+      <h2 class="h2" id="process-h">How boring works.</h2>
+      <p class="sub">Four steps. Repeat forever. That's the secret&nbsp;— there is no secret.</p>
+    </div>
+    <div class="track-wrap" aria-hidden="true">
+      <svg id="track" viewBox="0 0 1200 222" preserveAspectRatio="xMidYMid meet">
+        <path class="orb-back" d="M40 100 A560 86 0 0 1 1160 100"/>
+        <path class="orb-front" d="M40 100 A560 86 0 0 0 1160 100"/>
+        <g id="nodes">
+          <line class="drop"/><circle class="node-ring" r="12"/><circle class="node" r="6"/>
+          <line class="drop"/><circle class="node-ring" r="12"/><circle class="node" r="6"/>
+          <line class="drop"/><circle class="node-ring" r="12"/><circle class="node" r="6"/>
+          <line class="drop"/><circle class="node-ring" r="12"/><circle class="node" r="6"/>
+        </g>
+        <circle class="sat-halo" id="sat-halo" r="11" cx="40" cy="100"/>
+        <circle class="sat-core" id="sat-core" r="4" cx="40" cy="100"/>
+      </svg>
+    </div>
+    <div class="steps" id="steps">
+      <span class="tdot" id="tdot" aria-hidden="true"></span>
+      <article class="step glass reveal active" style="--i:0"><span class="n">01</span><h3>Build</h3><p>Set up the infrastructure&nbsp;— tracking, offer routing, landing pages, compliance. Nothing flashy. Everything&nbsp;measurable.</p></article>
+      <article class="step glass reveal" style="--i:1"><span class="n">02</span><h3>Test</h3><p>Launch variants. Compare everything. Kill losers fast. The data decides, not opinions.</p></article>
+      <article class="step glass reveal" style="--i:2"><span class="n">03</span><h3>Optimize</h3><p>Squeeze every conversion point. Lower costs. Improve quality. Tiny gains compound into outsized margins.</p></article>
+      <article class="step glass reveal" style="--i:3"><span class="n">04</span><h3>Scale</h3><p>Winners get budget. Proven systems get expanded. Then we go back to step two and do it all again.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPLIANCE ================= -->
+<section class="sec compliance" id="compliance" aria-labelledby="compliance-h">
+  <div class="wrap">
+    <div class="comp-band reveal">
+      <div class="radar" aria-hidden="true">
+        <span class="cross"></span>
+        <span class="sweep"></span>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="comp-copy">
+        <h2 class="h2" id="compliance-h"><span class="ln">Compliance isn't</span> <span class="ln">a feature.</span> <span class="ln">It's the&nbsp;foundation.</span></h2>
+        <p class="sub">Every lead carries an independent certificate of consent. TCPA-compliant capture, verified phone numbers, and a full audit trail on every record&nbsp;— so our buyers scale with confidence, not&nbsp;exposure.</p>
+        <div class="chips-row">
+          <span class="chip-lg">Independent consent certificate</span>
+          <span class="chip-lg">TCPA-compliant capture</span>
+          <span class="chip-lg">Verified phone numbers</span>
+          <span class="chip-lg">Full audit trail</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MANIFESTO ================= -->
+<section class="sec manifesto" aria-label="Manifesto">
+  <div class="wrap">
+    <p class="quote reveal" id="quote">We don't need to stand out. We just need to <span class="win">win</span>. The design doesn't ask for attention. The results do the work.</p>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="sec cta" id="contact" aria-labelledby="contact-h">
+  <div class="horizon-wrap" aria-hidden="true">
+    <img class="horizon" src="globe-assets/poster-cta.webp" width="2880" height="624" alt="" decoding="async" loading="lazy">
+  </div>
+  <div class="wrap">
+    <div class="grid">
+      <div class="reveal">
+        <span class="label">Let's talk</span>
+        <h2 class="h2" id="contact-h">Ready for results that are predictably boring?</h2>
+        <p class="sub">Whether you're a carrier, lender, agency, or operator who wants a partner that speaks in numbers&nbsp;— we should talk.</p>
+      </div>
+      <div class="cta-actions reveal" style="--i:1">
+        <div class="email-row">
+          <span class="email" id="email">hello@boringmedia.ai</span>
+          <button class="copy" id="copy" type="button" aria-label="Copy email address"><svg class="ico ck" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span id="copy-label">Copy</span></button>
+          <span class="vh" id="copy-status" role="status"></span>
+        </div>
+        <a class="btn btn-primary" href="mailto:hello@boringmedia.ai">Work With Us <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
       <div>
-        <div class="hero-badge"><span class="pulse-dot"></span>Systems Online — Performance Media Buying</div>
-        <h1>We run ads<br><span class="dim">the boring way</span><span class="accent">.</span></h1>
-        <p class="hero-sub">No hype. No fluff. Just engineered systems that convert traffic into revenue — predictably, repeatedly, at scale.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary">Work With Us</a>
-          <a href="#about" class="btn-ghost">How It Works</a>
-        </div>
+        <div class="foot-brand"><img src="logo.svg" alt="" width="22" height="22" decoding="async" loading="lazy"><span>BORING MEDIA</span></div>
+        <div class="foot-status"><span class="gdot" aria-hidden="true"></span><span>All systems operational</span></div>
       </div>
-      <div class="terminal" aria-hidden="true">
-        <div class="terminal-head">
-          <div class="term-dots"><span></span><span></span><span></span></div>
-          <div class="term-title">conversions.log</div>
-          <div class="term-live"><span class="pulse-dot"></span>LIVE</div>
-        </div>
-        <div class="terminal-body" id="feed"></div>
-        <div class="terminal-foot">
-          <span>PIXEL <b>OK</b> · WEBHOOKS <b>OK</b> · ROUTING <b>OK</b></span>
-          <span>UPTIME <b>99.98%</b></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STACK TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker" id="ticker">
-    <div class="ticker-item"><span class="dot"></span>Real-Time Tracking</div>
-    <div class="ticker-item"><span class="dot"></span>Lead Generation</div>
-    <div class="ticker-item"><span class="dot"></span>Creative Testing</div>
-    <div class="ticker-item"><span class="dot"></span>TCPA Compliance</div>
-    <div class="ticker-item"><span class="dot"></span>Paid Social</div>
-    <div class="ticker-item"><span class="dot"></span>Conversion APIs</div>
-    <div class="ticker-item"><span class="dot"></span>Funnel Automation</div>
-    <div class="ticker-item"><span class="dot"></span>Signal Optimization</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <div class="section-label">What We Do</div>
-        <h2 class="section-title">The boring stuff<br>that prints money.</h2>
-        <p class="section-desc">We buy media. We build funnels. We track every click, every call, every conversion, every dollar — then we do it again, better, faster, cheaper.</p>
-        <p class="section-desc">Most agencies sell creativity. We sell certainty. Our systems are built for predictable returns, not awards.</p>
-        <div class="stat-row">
-          <div class="stat">
-            <div class="stat-num">24<em>/</em>7</div>
-            <div class="stat-label">Campaigns Live</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">100<em>%</em></div>
-            <div class="stat-label">Funnel Owned</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num"><em>∞</em></div>
-            <div class="stat-label">Tests Running</div>
-          </div>
-        </div>
-      </div>
-      <div class="principles reveal">
-        <div class="principle">
-          <div class="principle-idx">PRINCIPLE_01</div>
-          <h4>Systems Over Stunts</h4>
-          <p>Every campaign is a system — tracked, measured, and iterated. We don't guess. We don't hope. We engineer outcomes.</p>
-        </div>
-        <div class="principle">
-          <div class="principle-idx">PRINCIPLE_02</div>
-          <h4>Data Is the Creative</h4>
-          <p>The numbers tell us what works. We listen. Winning ads aren't the prettiest — they're the ones with the best unit economics.</p>
-        </div>
-        <div class="principle">
-          <div class="principle-idx">PRINCIPLE_03</div>
-          <h4>Scale What Works</h4>
-          <p>Find a winner, remove the ceiling, pour fuel on it. That's the whole strategy. It's boring. It works.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VERTICALS -->
-<section id="verticals">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Verticals</div>
-      <h2 class="section-title">Where we operate.</h2>
-      <p class="section-desc">High-intent, high-value verticals where performance media buying matters most.</p>
-    </div>
-    <div class="verticals-grid reveal">
-      <div class="v-card">
-        <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M9 14h6"/><path d="M12 11v6"/></svg></div>
-          <span class="v-tag hot">Primary</span>
-        </div>
-        <h3>Home Equity &amp; Refinance</h3>
-        <p>Exclusive, verified home equity and cash-out refinance leads — delivered in real time to lenders and loan officers ready to close, not chase.</p>
-      </div>
-      <div class="v-card">
-        <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></div>
-          <span class="v-tag">Growing</span>
-        </div>
-        <h3>Debt Settlement</h3>
-        <p>Qualified debt relief leads from consumers actively looking for a way out — verified, consent-backed, and delivered to settlement firms ready to enroll.</p>
-      </div>
-      <div class="v-card">
-        <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h8l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M5 17v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1m10 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/></svg></div>
-          <span class="v-tag">Established</span>
-        </div>
-        <h3>Auto Insurance</h3>
-        <p>High-intent auto insurance leads and inbound calls, routed to carriers and agencies ready to bind policies — not just browse.</p>
-      </div>
-      <div class="v-card">
-        <div class="v-card-top">
-          <div class="v-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/></svg></div>
-          <span class="v-tag">Growing</span>
-        </div>
-        <h3>Ecommerce</h3>
-        <p>Direct response media buying for products that sell on cold traffic. Creative testing, conversion tracking, and scaling — the same system, pointed at a storefront.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Process</div>
-      <h2 class="section-title">How boring works.</h2>
-      <p class="section-desc">Four steps. Repeat forever. That's the secret — there is no secret.</p>
-    </div>
-    <div class="process-grid reveal">
-      <div class="p-step">
-        <div class="p-step-num">STEP_01</div>
-        <h4>Build</h4>
-        <p>Set up the infrastructure — tracking, offer routing, landing pages, compliance. Nothing flashy. Everything measurable.</p>
-      </div>
-      <div class="p-step">
-        <div class="p-step-num">STEP_02</div>
-        <h4>Test</h4>
-        <p>Launch variants. Compare everything. Kill losers fast. The data decides, not opinions.</p>
-      </div>
-      <div class="p-step">
-        <div class="p-step-num">STEP_03</div>
-        <h4>Optimize</h4>
-        <p>Squeeze every conversion point. Lower costs. Improve quality. Tiny gains compound into outsized margins.</p>
-      </div>
-      <div class="p-step">
-        <div class="p-step-num">STEP_04</div>
-        <h4>Scale</h4>
-        <p>Winners get budget. Proven systems get expanded. Then we go back to step two and do it all again.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPLIANCE -->
-<div class="compliance">
-  <div class="container">
-    <div class="compliance-inner reveal">
-      <div class="compliance-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-      <div>
-        <h3>Compliance isn't a feature. It's the foundation.</h3>
-        <p>Every lead carries an independent certificate of consent. TCPA-compliant capture, verified phone numbers, and a full audit trail on every record — so our buyers scale with confidence, not exposure.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MANIFESTO -->
-<div class="manifesto">
-  <div class="container">
-    <div class="reveal">
-      <blockquote>
-        We don't need to stand out. We just need to <em>win</em>. The design doesn't ask for attention. The results do the work.
-      </blockquote>
-    </div>
-  </div>
-</div>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-glow"></div>
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Let's Talk</div>
-      <h2 class="section-title">Ready for results that are<br>predictably boring?</h2>
-      <p class="section-desc">Whether you're a carrier, lender, agency, or operator who wants a partner that speaks in numbers — we should talk.</p>
-      <div class="cta-actions">
-        <a href="mailto:hello@boringmedia.ai" class="btn-primary">Get In Touch</a>
-      </div>
-      <div class="cta-email">or email us directly at <a href="mailto:hello@boringmedia.ai">hello@boringmedia.ai</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <a href="#" class="footer-logo" style="display:flex;align-items:center;gap:9px;">
-          <img src="logo.svg" width="22" height="22" alt="" aria-hidden="true">
-          Boring Media
-        </a>
-        <span class="footer-status"><span class="pulse-dot"></span>All Systems Operational</span>
-      </div>
-      <div class="footer-right">
-        <ul class="footer-links">
-          <li><a href="mailto:hello@boringmedia.ai">Contact</a></li>
-          <li><a href="#">boringmedia.ai</a></li>
-        </ul>
-        <span class="footer-copy">© 2026</span>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#about">About</a><a href="#verticals">Verticals</a><a href="#process">Process</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="foot-right">
+        <a href="mailto:hello@boringmedia.ai">hello@boringmedia.ai</a>
+        <span class="copyright">© 2026 Boring Media</span>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  // ---- Scroll reveals ----
-  var reveals = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  reveals.forEach(function(el) { observer.observe(el); });
+(function(){
+'use strict';
+/* =====================================================================
+   SHARED — flags, helpers, the page's single rAF loop
+   The loop stops itself when nothing on the page needs a frame (the WebGL
+   globe, console, process, minis all off screen or off, and the count-up
+   done) and is woken by the IntersectionObservers below.
+   ===================================================================== */
+const RMq = matchMedia('(prefers-reduced-motion: reduce)');
+let RM = RMq.matches;
+const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+const DEG = Math.PI / 180, TAU = Math.PI * 2;
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const frac = v => v - Math.floor(v);
+function mulberry32(a){ return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
-  // ---- Smooth anchor scrolling ----
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-    });
-  });
+const tasks = [];
+const live = { hero: false, con: false, proc: false, minis: 0, count: !RM };
+const anyLive = () => live.hero || live.con || live.proc || live.minis > 0 || live.count;
+let running = false, rafId = 0, tStart = 0, pausedAt = 0;
+function frame(now){
+  if (!running) return;
+  const t = (now - tStart) / 1000;
+  for (let i = 0; i < tasks.length; i++) tasks[i](t);
+  if (anyLive()) rafId = requestAnimationFrame(frame); else stop();
+}
+function start(){
+  if (running || RM || document.hidden) return;
+  running = true;
+  const now = performance.now();
+  if (pausedAt) tStart += now - pausedAt; else tStart = now;
+  pausedAt = 0;
+  rafId = requestAnimationFrame(frame);
+}
+function stop(){ if (!running) return; running = false; cancelAnimationFrame(rafId); pausedAt = performance.now(); }
+document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+/* visibility helper: calls fn(isIntersecting) and wakes the loop when something scrolls into view */
+function watch(el, fn){
+  if (!('IntersectionObserver' in window)){ fn(true); return; }
+  new IntersectionObserver(es => { const e = es[es.length - 1]; fn(e.isIntersecting); if (e.isIntersecting) start(); }, { threshold: 0 }).observe(el);   // newest entry wins: batched entries arrive oldest first
+}
 
-  // ---- Duplicate ticker items for a seamless loop ----
-  var ticker = document.getElementById('ticker');
-  ticker.innerHTML += ticker.innerHTML;
+/* =====================================================================
+   US METROS — the nine lead-routing metros (Natural Earth populated
+   places, public domain) as [name, lat, lon]: the Debt Settlement card's
+   mini map pulses on them. The WebGL globe carries its own arc endpoints.
+   ===================================================================== */
+const US_METROS = [
+  ["New York", 40.752, -73.982],
+  ["Los Angeles", 33.992, -118.182],
+  ["Chicago", 41.832, -87.752],
+  ["Miami", 25.79, -80.226],
+  ["Atlanta", 33.832, -84.402],
+  ["Houston", 29.822, -95.342],
+  ["Washington, D.C.", 38.901, -77.011],
+  ["San Francisco", 37.769, -122.417],
+  ["Denver", 39.741, -104.986]
+];
 
-  // ---- Live conversion feed (simulated) ----
-  var feed = document.getElementById('feed');
-
-  // "weight" controls how often each event shows up.
-  // Real logs are mostly plumbing (pixels, verifications, filters) with
-  // the occasional sale — so sales get lower weights.
-  var events = [
-    { label: '<b>PIXEL_FIRED</b> · purchase',        min: 0,  max: 0,   weight: 5 },
-    { label: '<b>FORM_VERIFIED</b> · consent_ok',    min: 0,  max: 0,   weight: 4 },
-    { label: '<b>OTP_VERIFIED</b> · sms',            min: 0,  max: 0,   weight: 3 },
-    { label: '<b>BOT_FILTERED</b> · dropped',        min: 0,  max: 0,   weight: 2 },
-    { label: '<b>DUPLICATE</b> · rejected',          min: 0,  max: 0,   weight: 1 },
-    { label: '<b>CALL_CONNECTED</b> · auto_ins',     min: 18, max: 55,  weight: 2 },
-    { label: '<b>LEAD_SOLD</b> · home_equity',       min: 35, max: 95,  weight: 2 },
-    { label: '<b>LEAD_SOLD</b> · cashout_refi',      min: 40, max: 110, weight: 1 },
-    { label: '<b>LEAD_SOLD</b> · debt_settlement',   min: 20, max: 65,  weight: 1 },
-    { label: '<b>LEAD_SOLD</b> · auto_ins',          min: 10, max: 32,  weight: 2 },
-    { label: '<b>PURCHASE</b> · ecom_dtc',           min: 29, max: 120, weight: 1 }
-  ];
-  var geos = ['FL', 'FL', 'FL', 'TX', 'GA', 'NC', 'AZ', 'OH', 'TN', 'CA', 'SC', 'NV'];
-
-  var totalWeight = events.reduce(function(sum, e) { return sum + e.weight; }, 0);
-
-  function pickEvent() {
-    var r = Math.random() * totalWeight;
-    for (var i = 0; i < events.length; i++) {
-      r -= events[i].weight;
-      if (r < 0) return events[i];
+/* =====================================================================
+   HERO GLOBE — the poster first, the WebGL globe over it once it has drawn.
+   The layout finds the sphere's radius and centre from the DOM: anchored to
+   the stats bar on desktop (R ≈ 259 at 1440×900, ~196 at 1280×720, 300 at
+   1920), to the stage block when stacked. --gx/--gy/--R box the poster and
+   the CSS glows; the WebGL layer gets the globe box plus room for the rings.
+   One rAF loop: the page's tick drives the WebGL globe (loop: 'external').
+   ===================================================================== */
+const Hero = (function(){
+  const hero = $('#top'), wrap = $('#globe-wrap'), bar = $('#stats'), btns = $('#hero-btns'), stage = $('#stage'), glBox = $('#globe-gl');
+  let geo = null, gl = null, glOn = false, inView = true, tLast = -1, weakGPU = false;
+  function offTop(el){ let y = 0; while (el && el !== hero){ y += el.offsetTop; el = el.offsetParent; } return y; }   // offsets ignore the entrance transforms
+  function layout(){
+    const w = hero.clientWidth, h = hero.clientHeight, stacked = w < 1024, phone = w < 768, cx = w / 2;
+    let R, cy;
+    if (stacked){ R = phone ? Math.round(w * .55) : 210; cy = offTop(stage) + (phone ? 28 : 32) + R; }
+    else {
+      const bt = offTop(bar), bb = offTop(btns) + btns.offsetHeight, avail = bt - bb - 21;   // sphere top 21 px under the buttons
+      const short = h < 780, k = short ? 1.12 : 1.3;                                           // short viewports let the bar hide more of the disc (~45 %) so the sphere keeps ~36 % of the width
+      R = Math.round(Math.max(170, Math.min(300, w * .18, avail / k)));                        // otherwise ~65 % of the disc above the bar
+      const v = clamp(avail / (2 * R), short ? .54 : .62, .78);
+      cy = Math.round(bt - (2 * v - 1) * R);
     }
-    return events[0];
+    hero.style.setProperty('--R', R + 'px'); hero.style.setProperty('--gx', cx + 'px'); hero.style.setProperty('--gy', cy + 'px');
+    let cw = Math.min(w, Math.ceil(4.6 * R)), ox = Math.round(cx - cw / 2); if (ox < 0){ ox = 0; cw = w; }
+    const oy = Math.max(0, Math.round(cy - 1.95 * R));
+    const ch = Math.max(1, stacked ? Math.min(h - oy, Math.ceil(cy - oy + 2.1 * R)) : h - oy);   // stacked: nothing is drawn under the cards, so the layer stops ~2 R below the centre
+    glBox.style.left = ox + 'px'; glBox.style.top = oy + 'px'; glBox.style.width = cw + 'px'; glBox.style.height = ch + 'px';
+    geo = { W: cw, H: ch, R, cx: cx - ox, cy: cy - oy };
+    if (gl) gl.setGeometry(geo);
   }
-
-  function pad(n) { return n < 10 ? '0' + n : n; }
-
-  function formatTime(d) {
-    return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  /* the loop runs for the globe only while its canvas is up and on screen */
+  function setLive(){ live.hero = glOn && inView; if (live.hero) start(); }
+  watch(glBox, v => { inView = v; setLive(); });
+  /* crossfade: .webgl on the wrap fades the canvas in over the poster and the poster out (CSS); off again, the poster is back */
+  function show(){ glOn = true; tLast = -1; wrap.classList.add('webgl'); setLive(); }
+  function hide(){ glOn = false; wrap.classList.remove('webgl'); setLive(); }
+  function unmount(why){
+    hide();
+    if (why === 'perf') weakGPU = true;                                       // too slow here: never retried on this page view
+    if (gl){ const h = gl; gl = null; try { h.destroy(); } catch (e) {} }
+    posterOnly(why);
   }
-
-  function addRow(date) {
-    var e = pickEvent();
-    var geo = geos[Math.floor(Math.random() * geos.length)];
-    var payout = e.max > 0
-      ? '+$' + (e.min + Math.random() * (e.max - e.min)).toFixed(2)
-      : '—';
-
-    var row = document.createElement('div');
-    row.className = 'feed-row';
-    row.innerHTML =
-      '<span class="feed-time">' + formatTime(date || new Date()) + '</span>' +
-      '<span class="feed-event">' + e.label + '</span>' +
-      '<span class="feed-geo">' + geo + '</span>' +
-      '<span class="feed-payout">' + payout + '</span>';
-
-    feed.insertBefore(row, feed.firstChild);
-    while (feed.children.length > 12) feed.removeChild(feed.lastChild);
+  function mount(){
+    if (gl || RM || weakGPU || !window.BMGlobe) return;
+    try {
+      gl = window.BMGlobe.mount(glBox, { assetBase: 'globe-assets/', reducedMotion: false, loop: 'external', geometry: geo,
+        onReady: show, onLost: hide, onRestored: show, onFail: unmount });   // onFail('perf'): a software or weak GPU — the poster stays
+    } catch (e) { unmount(e); }   // mount throws when there is no hardware WebGL: the poster stays
   }
-
-  // Seed the feed with back-dated rows at irregular intervals,
-  // so on page load it already looks like a log that's been running.
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var t = Date.now();
-  var seedTimes = [];
-  for (var i = 0; i < 9; i++) {
-    t -= (1 + Math.random() * 14) * 1000; // 1–15s gaps, randomly
-    seedTimes.push(t);
+  /* the WebGL frame: a real delta from the loop's clock (0 on the first frame after the crossfade starts, so it begins at the
+     poster's t = 0; clamped across pauses) */
+  function tick(t){
+    if (!glOn || !inView) return;
+    let dt = tLast < 0 ? 0 : t - tLast; tLast = t; if (dt < 0 || dt > .1) dt = .1;
+    try { gl.render(t, dt); } catch (e) { unmount(e); }   // a throw inside the WebGL frame must not end the page loop: the poster comes back
   }
-  // Insert oldest first so the newest ends up on top
-  seedTimes.reverse().forEach(function(ts) { addRow(new Date(ts)); });
-
-  // Stream new rows on an irregular schedule:
-  // sometimes a quick burst, usually a normal gap, sometimes a lull.
-  function nextDelay() {
-    var r = Math.random();
-    if (r < 0.30) return 250 + Math.random() * 1000;    // burst: events stack up
-    if (r < 0.75) return 1800 + Math.random() * 4200;   // normal traffic
-    return 6000 + Math.random() * 10000;                // quiet stretch
+  if (FINE){
+    hero.addEventListener('pointermove', e => { if (gl) gl.setPointer((e.clientX / innerWidth - .5) * 2, (e.clientY / innerHeight - .5) * 2); }, { passive: true });
+    hero.addEventListener('pointerleave', () => { if (gl) gl.setPointer(0, 0); });
   }
+  return { layout, tick, mount, unmount };
+})();
 
-  function scheduleNext() {
-    setTimeout(function() {
-      addRow();
-      scheduleNext();
-    }, nextDelay());
+/* =====================================================================
+   GLOBE LOADER — three.js and globe.js are not static scripts: they are
+   injected after `load`, in idle time, and only when the WebGL globe will
+   run — no reduced motion, no Save-Data, a hardware WebGL context, the hero
+   in or near the viewport. Otherwise the poster is the globe (no download).
+   ===================================================================== */
+const GLOBE_SCRIPTS = ['globe-assets/vendor/three.min.js', 'globe.js'];   // in this order; three.min.js is a custom r147 build that includes the bloom passes (CONTRACT.md)
+let glState = 'idle';                                                     // idle → probing → waiting (for the hero) → loading → loaded | off
+function posterOnly(why){ try { console.debug('[orbit] globe: poster only —', (why && why.message) || why); } catch (e) {} }
+function saveData(){ const c = navigator.connection; return !!(c && c.saveData); }
+/* the capability probe: a throwaway 1 px WebGL context, refused on a major performance caveat; software renderers are told
+   apart by their renderer string. It runs in a Worker on an OffscreenCanvas: a machine without GPU acceleration can take one
+   to two seconds to set up its first (software) context, and on the main thread that is one long freeze. The answer is
+   'gpu', 'soft' (a software renderer, or a context only without the caveat flag) or 'none' (no WebGL in a worker at all:
+   then the same probe runs on the main thread — quick, since there is no software renderer to set up). Every probe context
+   is released at once (WEBGL_lose_context), not left for the garbage collector beside the globe's own. */
+const SOFT_GL = /swiftshader|llvmpipe|software|basic render|softpipe/i;
+const PROBE_ATTRS = { failIfMajorPerformanceCaveat: true, alpha: true, depth: false, stencil: false, antialias: false };
+function glProbe(canvas, plain, attrs, softRe){                           // self-contained: the worker runs it from its source text
+  let g = null, r = 'none';
+  try { g = canvas.getContext('webgl2', attrs) || canvas.getContext('webgl', attrs); } catch (e) {}
+  if (g){
+    let name = '';
+    try {
+      name = String(g.getParameter(g.RENDERER) || '');
+      if (/^webkit webgl$/i.test(name)){ const x = g.getExtension('WEBGL_debug_renderer_info'); if (x) name = String(g.getParameter(x.UNMASKED_RENDERER_WEBGL) || ''); }
+    } catch (e) {}
+    r = softRe.test(name) ? 'soft' : 'gpu';
+  } else {
+    try { g = plain.getContext('webgl2') || plain.getContext('webgl'); } catch (e) {}
+    if (g) r = 'soft';                                                     // only without failIfMajorPerformanceCaveat: a software path
   }
+  try { const l = g && g.getExtension('WEBGL_lose_context'); if (l) l.loseContext(); } catch (e) {}
+  return r;
+}
+const PROBE_WORKER = "'use strict';\nconst glProbe = " + glProbe.toString() + ";\nself.onmessage = function (e) { let r = 'none'; try { r = glProbe(new OffscreenCanvas(1, 1), new OffscreenCanvas(1, 1), e.data, " + SOFT_GL.toString() + "); } catch (er) {} self.postMessage(r); };";
+function probeGL(done){                                                   // done('gpu' | 'soft' | 'none'); only 'gpu' is hardware WebGL
+  let settled = false;
+  const fin = r => { if (!settled){ settled = true; done(r); } };
+  const onMain = () => { let r = 'none'; try { const c = document.createElement('canvas'), p = document.createElement('canvas'); c.width = c.height = p.width = p.height = 1; r = glProbe(c, p, PROBE_ATTRS, SOFT_GL); } catch (e) {} fin(r); };
+  if (!(window.Worker && window.OffscreenCanvas && window.Blob && window.URL)){ onMain(); return; }
+  let url = null, w = null, timer = 0;
+  try { url = URL.createObjectURL(new Blob([PROBE_WORKER], { type: 'text/javascript' })); w = new Worker(url); }
+  catch (e) { if (url) URL.revokeObjectURL(url); onMain(); return; }      // a worker that cannot start: the main thread
+  const end = () => { clearTimeout(timer); try { w.terminate(); } catch (e) {} URL.revokeObjectURL(url); };
+  timer = setTimeout(() => { end(); fin('soft'); }, 8000);                // no answer in 8 s: far too slow for the globe — the poster stays
+  w.onmessage = e => { end(); if (e.data === 'none') onMain(); else fin(e.data === 'gpu' ? 'gpu' : 'soft'); };
+  w.onerror = ev => { end(); try { ev.preventDefault(); } catch (_) {} onMain(); };
+  w.postMessage(PROBE_ATTRS);
+}
+/* one script after the other: globe.js is fetched only once three.js has loaded, so a blocked three.js costs nothing more */
+function injectGlobe(){
+  if (glState !== 'waiting') return;
+  glState = 'loading';
+  (function load(i){
+    const s = document.createElement('script'); s.src = GLOBE_SCRIPTS[i];
+    s.onload = () => { if (glState !== 'loading') return; if (i + 1 < GLOBE_SCRIPTS.length) load(i + 1); else { glState = 'loaded'; Hero.mount(); } };
+    s.onerror = () => { if (glState === 'loading'){ glState = 'off'; posterOnly('script blocked: ' + GLOBE_SCRIPTS[i]); } };
+    document.body.appendChild(s);
+  })(0);
+}
+function bootGlobe(){
+  if (RM){ posterOnly('reduced motion'); return; }                         // the poster; booted again if reduced motion turns off
+  if (window.BMGlobe){ glState = 'loaded'; Hero.mount(); return; }
+  if (glState !== 'idle') return;
+  if (saveData()){ glState = 'off'; posterOnly('Save-Data'); return; }
+  glState = 'probing';
+  probeGL(r => {
+    if (r !== 'gpu'){ glState = 'off'; document.documentElement.classList.add('soft-gl'); posterOnly('no hardware WebGL'); return; }   // .soft-gl: no backdrop blurs on a software compositor (CSS §14)
+    glState = 'waiting';
+    if (!('IntersectionObserver' in window)){ injectGlobe(); return; }
+    const io = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting){ io.disconnect(); injectGlobe(); } }, { rootMargin: '50% 0px' });
+    io.observe($('#top'));                                                 // the hero in or near the viewport (a page opened at #contact waits)
+  });
+}
+const whenIdle = fn => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 300));
 
-  if (!reduced) scheduleNext();
+/* =====================================================================
+   HERO STATS — count-up inside the bar's own entrance (0.38 s → 0.80 s), ease-out cubic, so
+   every number is final by the time the hero text is at full opacity (brief: 0.8 s). The
+   numbers carry no fade or blur of their own: they appear with the bar, like the labels.
+   Only the digits that stay plausible move: 100 from 90, 99.98 from 99.00 (data-start);
+   24/7 is static, since any other value reads as nonsense. Tabular figures, and every stat
+   column is sized by its label (wider than the number), so the bar never reflows mid-count.
+   ===================================================================== */
+const nums = $$('.num[data-count]').map(el => ({ el, end: parseFloat(el.dataset.count), start: parseFloat(el.dataset.start || el.dataset.count), dec: parseInt(el.dataset.dec || '0', 10), suf: el.dataset.suffix || '' }));
+let countDone = RM;
+if (!RM) nums.forEach(n => { n.el.textContent = n.start.toFixed(n.dec) + n.suf; });
+function countFinal(){ countDone = true; live.count = false; nums.forEach(n => { n.el.textContent = n.end.toFixed(n.dec) + n.suf; }); }
+function countTick(t){
+  if (countDone || t < .38) return;
+  let p = (t - .38) / .42; if (p >= 1){ countFinal(); return; }
+  const e = 1 - Math.pow(1 - p, 3);
+  for (let i = 0; i < nums.length; i++){ const n = nums[i]; n.el.textContent = (n.start + (n.end - n.start) * e).toFixed(n.dec) + n.suf; }
+}
+
+/* =====================================================================
+   LIVE CONSOLE — sample rows, timestamps from the viewer's clock
+   ===================================================================== */
+const conBody = $('#con-body'), conEl = $('#console');
+const EVENTS = [
+  ['Lead verified', 'Home Equity', 'TX', 'delivered', 'ok'],
+  ['Inbound call', 'Debt Settlement', 'FL', 'connected', 'ok'],
+  ['Consent cert issued', 'Home Equity', 'CO'],
+  ['Variant B won', 'Ecommerce', 'CTR +18%', null, 'won'],
+  ['Lead verified', 'Debt Settlement', 'GA', 'delivered', 'ok'],
+  ['Inbound call', 'Home Equity', 'AZ', 'connected', 'ok'],
+  ['Pixel matched', 'Ecommerce', 'CA', 'attributed', 'ok'],
+  ['Lead verified', 'Home Equity', 'NC', 'delivered', 'ok'],
+  ['Consent cert issued', 'Debt Settlement', 'MI'],
+  ['Webhook sent', 'Debt Settlement', 'OH', 'delivered', 'ok'],
+  ['Call qualified', 'Home Equity', 'WA', 'transferred', 'ok'],
+  ['Lead verified', 'Home Equity', 'CA', 'delivered', 'ok']
+];
+const pad = n => (n < 10 ? '0' : '') + n;
+const stamp = d => pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+const ABBR = { 'Home Equity': 'HE', 'Debt Settlement': 'DS', 'Ecommerce': 'Ecom' };   // phone shows the short form as an <abbr> with the full name as its title (CSS swaps .full / .ab); the key sits in the footer
+let evCursor = 0;
+function makeRow(d, isNew){
+  const ev = EVENTS[evCursor]; evCursor = (evCursor + 1) % EVENTS.length;
+  const row = document.createElement('div'); row.className = isNew ? 'row new' : 'row';
+  const won = ev[4] === 'won';
+  const parts = [['t', stamp(d)], ['ev', ev[0]], ['sp', '·'], ['v', ev[1]], [won ? 'sp' : 'sp sp-st', '·'], [won ? 'won' : 'st', ev[2]]];
+  if (ev[3]) parts.push(['sp', '·'], ['ok', ev[3]]);
+  for (let i = 0; i < parts.length; i++){
+    const s = document.createElement('span'); s.className = parts[i][0];
+    if (parts[i][0] === 'v'){
+      const f = document.createElement('span'); f.className = 'full'; f.textContent = parts[i][1];
+      const a = document.createElement('abbr'); a.className = 'ab'; a.title = parts[i][1]; a.textContent = ABBR[parts[i][1]] || parts[i][1];
+      s.appendChild(f); s.appendChild(a);
+    } else s.textContent = parts[i][1];
+    row.appendChild(s);
+  }
+  return row;
+}
+{ const now = Date.now(); for (let i = 8; i >= 0; i--) conBody.appendChild(makeRow(new Date(now - i * 2000 - 1500), false)); }
+let nextRow = 2.0;
+watch(conEl, v => { live.con = v; });
+function consoleTick(t){
+  if (t < nextRow) return;
+  nextRow = t + 1.6 + Math.random() * .8;
+  if (!live.con) return;
+  conBody.appendChild(makeRow(new Date(), true));
+  while (conBody.children.length > 10) conBody.removeChild(conBody.firstChild);
+}
+
+/* =====================================================================
+   PROCESS — satellite on an elliptical track (desktop) / timeline (stacked)
+   ===================================================================== */
+const satCore = $('#sat-core'), satHaloEl = $('#sat-halo'), nodes = $$('#nodes .node'), nodeRings = $$('#nodes .node-ring'), drops = $$('#nodes .drop');
+const steps = $$('.step'), tdot = $('#tdot'), procSec = $('#process');
+const TCX = 600, TCY = 100, TRX = 560, TRY = 86, TH = 222;
+const NODE_T = [144.8, 105.8, 74.2, 35.2].map(d => d * DEG);
+const NODE_U = NODE_T.map(th => .7 * (Math.PI - th) / Math.PI);
+nodes.forEach((n, i) => {
+  const x = (TCX + TRX * Math.cos(NODE_T[i])).toFixed(1), y = (TCY + TRY * Math.sin(NODE_T[i])).toFixed(1);
+  n.setAttribute('cx', x); n.setAttribute('cy', y); nodeRings[i].setAttribute('cx', x); nodeRings[i].setAttribute('cy', y);
+  drops[i].setAttribute('x1', x); drops[i].setAttribute('x2', x); drops[i].setAttribute('y1', (+y + 9).toFixed(1)); drops[i].setAttribute('y2', TH);
+});
+let active = 0, stepTops = null;
+nodes[0].classList.add('active');
+function setActive(i){
+  if (i === active) return;
+  steps[active].classList.remove('active'); nodes[active].classList.remove('active'); nodeRings[active].classList.remove('active');
+  active = i;
+  steps[i].classList.add('active'); nodes[i].classList.add('active'); nodeRings[i].classList.add('active');
+}
+watch(procSec, v => { live.proc = v; });
+let lastSatX = -1, lastSatY = -1;
+function processTick(t){
+  if (!live.proc) return;
+  if (innerWidth >= 1024){
+    const u = frac(t / 16 + NODE_U[0]);
+    const th = u < .7 ? Math.PI - Math.PI * (u / .7) : -Math.PI * ((u - .7) / .3);
+    const x = Math.round((TCX + TRX * Math.cos(th)) * 10) / 10, y = Math.round((TCY + TRY * Math.sin(th)) * 10) / 10, front = Math.sin(th) >= 0;
+    if (x !== lastSatX || y !== lastSatY){
+      lastSatX = x; lastSatY = y;
+      satCore.setAttribute('cx', x); satCore.setAttribute('cy', y); satHaloEl.setAttribute('cx', x); satHaloEl.setAttribute('cy', y);
+      satCore.setAttribute('r', front ? 4 : 3); satHaloEl.setAttribute('opacity', front ? 1 : .55);
+    }
+    let idx = 3; for (let i = 0; i < 4; i++) if (u >= NODE_U[i]) idx = i;
+    setActive(idx);
+  } else {
+    if (!stepTops) stepTops = steps.map(s => s.offsetTop);
+    const p = frac(t / 12), seg = Math.min(2, Math.floor(p * 3)), f = p * 3 - seg;
+    const y = Math.round(stepTops[seg] + (stepTops[seg + 1] - stepTops[seg]) * f);
+    if (y !== lastSatY){ lastSatY = y; tdot.style.transform = 'translateY(' + y + 'px)'; }
+    setActive(Math.min(3, Math.floor(p * 3 + 1e-6)));
+  }
+}
+
+/* =====================================================================
+   VERTICALS — three ambient mini canvases (orbit, US dot-map, bar sweep)
+   ===================================================================== */
+const miniRnd = mulberry32(99);
+const BARH = new Float32Array(28); for (let i = 0; i < 28; i++) BARH[i] = .2 + miniRnd() * .75;
+/* the Debt Settlement card's US dot map: the contiguous US on a 0.5° grid, precomputed offline (_sources/bake/make_us_dots.py)
+   from _sources/maps/land-50m-3600x1800.png (Natural Earth, public domain) — the land cells inside the US outline or close
+   enough to it to be cut partway. A base64 bitmask, row-major (row 0 = 50° N, column 0 = 125° W, cells sampled at their
+   centres), most significant bit first. The dots are drawn inside a clip of US_OUTLINE, which gives the coast and the border
+   a smooth, anti-aliased edge (whole-cell dots alone step in blocks). */
+const US_OUTLINE = [[49,-124.7],[48.4,-124.7],[46.2,-124],[42,-124.4],[40.4,-124.4],[38,-123],[36.5,-121.9],[34.4,-120.5],[33.7,-118.3],[32.5,-117.1],[32.7,-114.7],[31.3,-111],[31.3,-108.2],[31.8,-106.5],[29.8,-104.4],[29.3,-103.3],[28.9,-102.5],[29.8,-101.4],[27.6,-99.5],[26,-97.2],[27.8,-97.4],[29.3,-94.8],[29.1,-90.1],[30.2,-88.5],[30.4,-86.6],[29.9,-84.3],[28.9,-82.7],[27,-82.5],[25.1,-81],[25.2,-80.3],[27.8,-80.4],[30.7,-81.4],[32.1,-80.8],[33.9,-77.9],[35.3,-75.5],[37,-76],[38.9,-75],[40.5,-73.9],[41.3,-71.9],[41.7,-70],[43.1,-70.6],[44.8,-66.9],[47.3,-68.3],[45.3,-71.5],[45,-74.7],[43.7,-79.2],[42.3,-82.9],[43.6,-82.3],[46.5,-84.5],[48,-88],[49,-95.2]];   // [lat, lon]
+const US_DOTS = { rows: 53, cols: 119, lat1: 50, lon0: -125, step: .5,
+  b64: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADf/////////wAAAAAAAAHP//////////4AAAAAAAE////////////AAAAAAAP////////////gAAAABgP////////////4AAAAHgf////////////4AAAA/g/////////////4AAAD/B/////////////4AAB//D/////////////4ADv/+H/////////////wA///8P/////////////wf//+Af/////////////3///gB/////////////////+AD/////////////////8AH/////////////////4AP/////////////////4AP////////////////8QA/////////////////wAB////////////////8AAB////////////////4AAD///////////////7gAAD///////////////+AAAD///////////////sAAAD///////////////wAAAH//////////////+AAAAH//////////////+AAAAP//////////////+AAAAP//////////////8AAAAP//////////////gAAAAP//////////////AAAAAH/////////////4AAAAAD////////////+AAAAAAB////////////8AAAAAAD////////////gAAAAAAD///////////+AAAAAAAAH//////////4AAAAAAAAB//////////wAAAAAAAAAfj////////AAAAAAAAAAAD////+uP+AAAAAAAAAAAD/////AM+AAAAAAAAAAAB///AdAA8AAAAAAAAAAAA//8AAAA8AAAAAAAAAAAAD/gAAAD4AAAAAAAAAAAAD8AAAAHwAAAAAAAAAAAAD4AAAAHwAAAAAAAAAAAADwAAAAHgAAAAAAAAAAAABwAAAAPAAAAAAAAAAAAABgAAAAOAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' };
+const minis = $$('.mini').map(c => ({ c, kind: c.dataset.mini, g: c.getContext('2d'), w: 0, h: 0, d: 1, on: true, off: null, grad: null, metros: null, pulseT: new Float32Array(3), pulseI: new Int8Array(3), nextPulse: 0, pc: 0 }));
+function sizeMini(mn){
+  const r = mn.c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2), w = Math.round(r.width), h = Math.round(r.height);
+  if (!w || !h || (w === mn.w && h === mn.h && d === mn.d)) return;
+  mn.w = w; mn.h = h; mn.d = d; mn.c.width = w * d; mn.c.height = h * d; mn.g.setTransform(d, 0, 0, d, 0, 0); mn.off = null; mn.grad = null;
+}
+function miniOff(mn){
+  const off = document.createElement('canvas'); off.width = mn.c.width; off.height = mn.c.height;
+  const g = off.getContext('2d'); g.scale(mn.d, mn.d); return { off, g };
+}
+/* mini orbit: a small dark lit sphere with two rings that pass behind it, one satellite each */
+const ORB = [{ a: 1.6, b: .36, rot: .22, w: .55, ph: 0 }, { a: 2.0, b: .26, rot: -.32, w: -.42, ph: 2 }];
+function buildOrbitOff(mn){
+  const { off, g } = miniOff(mn), w = mn.w, h = mn.h, cx = w * .5, cy = h * .62, r = 32;
+  const hz = g.createRadialGradient(cx, cy, r * .9, cx, cy, r * 1.9); hz.addColorStop(0, 'rgba(25,131,176,.26)'); hz.addColorStop(1, 'rgba(25,131,176,0)');
+  g.fillStyle = hz; g.fillRect(0, 0, w, h);
+  const body = mn.g.createRadialGradient(cx - 9, cy - 9, 2, cx, cy, r);
+  body.addColorStop(0, '#041922'); body.addColorStop(.7, '#02090c'); body.addColorStop(1, '#082633');
+  mn.grad = body; mn.off = off;
+}
+function drawOrbit(mn, t){
+  if (!mn.off) buildOrbitOff(mn);
+  const g = mn.g, w = mn.w, h = mn.h, cx = w * .5, cy = h * .62, r = 32;
+  g.clearRect(0, 0, w, h); g.drawImage(mn.off, 0, 0, w, h);
+  g.lineWidth = 1;
+  for (let pass = 0; pass < 2; pass++){                                   // pass 0: ring halves behind the sphere; pass 1: in front
+    if (pass === 1){
+      g.fillStyle = mn.grad; g.beginPath(); g.arc(cx, cy, r, 0, TAU); g.fill();
+      g.strokeStyle = 'rgba(43,192,255,.5)'; g.lineWidth = 1.2; g.beginPath(); g.arc(cx, cy, r - .5, Math.PI * 1.02, Math.PI * 1.72); g.stroke();
+      g.globalCompositeOperation = 'lighter'; g.fillStyle = 'rgba(0,171,245,.8)';
+      for (let i = 0; i < 14; i++){ const an = i * .62 + t * .25, rr = r * (.15 + (i % 5) * .17), x = Math.cos(an) * rr, y = Math.sin(an) * rr * .62; if (Math.cos(an + 1.2) < -.1) continue; g.fillRect(cx + x - .75, cy + y - .75, 1.5, 1.5); }
+      g.lineWidth = 1;
+    }
+    for (let k = 0; k < 2; k++){
+      const o = ORB[k], a = r * o.a, b = a * o.b;
+      g.save(); g.translate(cx, cy); g.rotate(o.rot);
+      g.strokeStyle = pass ? 'rgba(0,162,231,.6)' : 'rgba(0,157,224,.22)';
+      g.beginPath(); g.ellipse(0, 0, a, b, 0, pass ? 0 : Math.PI, pass ? Math.PI : TAU); g.stroke();   // y > 0 (lower half) is the near half
+      const ph = o.w * t + o.ph, sxx = Math.cos(ph) * a, syy = Math.sin(ph) * b, front = Math.sin(ph) >= 0;
+      if (front === !!pass){
+        g.fillStyle = pass ? 'rgba(0,174,249,.5)' : 'rgba(0,174,249,.25)'; g.beginPath(); g.arc(sxx, syy, pass ? 6 : 4, 0, TAU); g.fill();
+        g.fillStyle = pass ? '#f3fbff' : '#e6f8ff'; g.beginPath(); g.arc(sxx, syy, pass ? 2.2 : 1.5, 0, TAU); g.fill();
+      }
+      g.restore();
+    }
+  }
+  g.globalCompositeOperation = 'source-over';
+}
+function buildUSOff(mn){
+  const { off, g } = miniOff(mn), w = mn.w, h = mn.h;
+  const lon0 = -125, lon1 = -66, lat0 = 24, lat1 = 50, sc = Math.min((w - 40) / (lon1 - lon0), (h - 16) / ((lat1 - lat0) * 1.3));
+  const mw = (lon1 - lon0) * sc, mh = (lat1 - lat0) * 1.3 * sc, ox = (w - mw) / 2, oy = (h - mh) / 2;
+  const proj = (lat, lon) => [ox + (lon - lon0) * sc, oy + (lat1 - lat) * 1.3 * sc];
+  const bits = atob(US_DOTS.b64), half = US_DOTS.step / 2;
+  g.beginPath();
+  for (let i = 0; i < US_OUTLINE.length; i++){ const p = proj(US_OUTLINE[i][0], US_OUTLINE[i][1]); if (i) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); }
+  g.closePath(); g.clip();                                                // the outline trims the boundary dots: a smooth coast and border
+  g.fillStyle = 'rgba(0,167,238,.55)';
+  for (let r = 0, i = 0; r < US_DOTS.rows; r++) for (let c = 0; c < US_DOTS.cols; c++, i++){
+    if (!((bits.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1)) continue;
+    const p = proj(US_DOTS.lat1 - r * US_DOTS.step + half, US_DOTS.lon0 + c * US_DOTS.step + half); g.fillRect(p[0] - .7, p[1] - .7, 1.4, 1.4);
+  }
+  mn.off = off; mn.metros = US_METROS.map(c => proj(c[1], c[2]));
+  mn.pulseI.fill(-1);
+}
+function drawUS(mn, t){
+  if (!mn.off) buildUSOff(mn);
+  const g = mn.g, w = mn.w, h = mn.h;
+  g.clearRect(0, 0, w, h); g.drawImage(mn.off, 0, 0, w, h);
+  g.globalCompositeOperation = 'lighter';
+  if (t >= mn.nextPulse){ mn.nextPulse = t + 1.1 + Math.random() * .6; const slot = mn.pc % 3; mn.pc++; mn.pulseI[slot] = Math.floor(Math.random() * mn.metros.length); mn.pulseT[slot] = t; }
+  for (let s = 0; s < 3; s++){
+    const mi = mn.pulseI[s]; if (mi < 0) continue; const age = t - mn.pulseT[s]; if (age > 1.3) continue;
+    const p = age / 1.3, m = mn.metros[mi];
+    g.globalAlpha = 1 - p; g.strokeStyle = '#b7e9ff'; g.lineWidth = 1; g.beginPath(); g.arc(m[0], m[1], 2 + 14 * p, 0, TAU); g.stroke();
+  }
+  g.globalAlpha = 1; g.fillStyle = '#f3fbff';
+  for (let i = 0; i < mn.metros.length; i++){ const m = mn.metros[i]; g.fillRect(m[0] - 1.2, m[1] - 1.2, 2.4, 2.4); }
+  g.globalCompositeOperation = 'source-over';
+}
+function drawBars(mn, t){
+  const g = mn.g, w = mn.w, h = mn.h, n = 28, gap = 4, bw = (w - 40 - gap * (n - 1)) / n, sweep = frac(t / 4) * (w + 80) - 40;
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(16, h - 12, w - 32, 1);
+  for (let i = 0; i < n; i++){
+    const x = 20 + i * (bw + gap), bh = (h - 32) * BARH[i], y = h - 13 - bh, k = Math.max(0, 1 - Math.abs(x + bw / 2 - sweep) / 60);
+    g.globalAlpha = .22 + .16 * BARH[i]; g.fillStyle = '#5ec4f0'; g.fillRect(x, y, bw, bh);          // the accent, dimmed by height
+    if (k > 0){ g.globalAlpha = .55 * k; g.fillStyle = '#c3edff'; g.fillRect(x, y, bw, bh); g.globalAlpha = .95 * k; g.fillStyle = '#f3fbff'; g.fillRect(x, y, bw, 1.5); }
+  }
+  g.globalAlpha = .35; g.fillStyle = '#a3e3ff'; g.fillRect(sweep, 19, 1, h - 32); g.globalAlpha = 1;   // the sweep cursor stays inside the bar area
+}
+const MINI_DRAW = { orbit: drawOrbit, usmap: drawUS, bars: drawBars };
+minis.forEach(mn => watch(mn.c, v => { mn.on = v; live.minis = minis.reduce((s, x) => s + (x.on ? 1 : 0), 0); }));
+function minisTick(t){ for (let i = 0; i < minis.length; i++){ const mn = minis[i]; if (!mn.on || !mn.w) continue; MINI_DRAW[mn.kind](mn, t); } }
+
+/* =====================================================================
+   NAV — glass on scroll, scroll-spy with a gliding indicator, phone sheet
+   ===================================================================== */
+const nav = $('#nav'), ind = $('#ind'), navLinks = $$('.nav-links a'), spyLinks = $$('[data-spy]'), menuBtn = $('#menu-btn');
+function onScroll(){ nav.classList.toggle('scrolled', scrollY > 24); }
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+let spyId = '';
+function placeInd(){ const a = navLinks.find(l => l.dataset.spy === spyId); if (a){ ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px'; ind.classList.add('on'); } else ind.classList.remove('on'); }
+function setSpy(id){
+  if (id === spyId) return; spyId = id;
+  spyLinks.forEach(a => a.classList.toggle('active', a.dataset.spy === id));
+  placeInd();
+}
+if ('IntersectionObserver' in window){
+  const spy = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) setSpy(e.target.id); }); }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });   // the hero lights "Home", like the inspo
+  ['top', 'about', 'verticals', 'process', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+}
+/* phone menu: opening moves focus to the first link and makes everything behind the sheet inert; Tab cycles between the
+   toggle and the links; Esc (or the toggle) closes it and gives focus back to the toggle; a tap outside, a link or a wide
+   viewport closes it too */
+const sheetLinks = $$('#sheet a'), menuInert = [$('.skip'), $('.brand'), $('.nav-cta'), $('#main'), $('.footer')];
+const menuOpen = () => nav.classList.contains('open');
+function setMenu(open, refocus){
+  if (open === menuOpen()) return;
+  nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuInert.forEach(el => { if (el) el.inert = open; });
+  if (open) sheetLinks[0].focus(); else if (refocus) menuBtn.focus();
+}
+menuBtn.addEventListener('click', () => setMenu(!menuOpen(), true));
+/* a sheet link closes the sheet (taking the focused link away with it) and hands focus to the section it jumps to, so keyboard
+   and screen-reader users land there rather than on <body>; the scroll itself is the link's own */
+sheetLinks.forEach(a => a.addEventListener('click', () => {
+  setMenu(false, false);
+  const t = document.getElementById(a.hash.slice(1));
+  if (t){ if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }
+}));
+addEventListener('keydown', e => {
+  if (!menuOpen()) return;
+  if (e.key === 'Escape'){ e.preventDefault(); setMenu(false, true); return; }
+  if (e.key !== 'Tab') return;
+  const ring = [menuBtn].concat(sheetLinks), i = ring.indexOf(document.activeElement);
+  if (e.shiftKey ? i <= 0 : i === ring.length - 1){ e.preventDefault(); ring[e.shiftKey ? ring.length - 1 : 0].focus(); }
+});
+document.addEventListener('pointerdown', e => { if (menuOpen() && !nav.contains(e.target)) setMenu(false, false); });
+matchMedia('(min-width: 768px)').addEventListener('change', e => { if (e.matches) setMenu(false, false); });
+
+/* =====================================================================
+   MANIFESTO — wrap each word in .w (with its --i) so the brightness sweep
+   runs word by word; "win" keeps its own span, glued to its full stop
+   ===================================================================== */
+{
+  const q = $('#quote'), frag = document.createDocumentFragment(), nodes = Array.prototype.slice.call(q.childNodes);
+  let wi = 0;
+  const word = content => { const s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', wi++); if (typeof content === 'string') s.textContent = content; else { content.style.setProperty('--i', wi); s.appendChild(content); } return s; };
+  for (let n = 0; n < nodes.length; n++){
+    const node = nodes[n];
+    if (node.nodeType !== 3){
+      const s = word(node), nx = nodes[n + 1], m = nx && nx.nodeType === 3 ? nx.textContent.match(/^[^\s\w]+/) : null;
+      if (m){ s.appendChild(document.createTextNode(m[0])); nx.textContent = nx.textContent.slice(m[0].length); }
+      frag.appendChild(s); continue;
+    }
+    node.textContent.split(/(\s+)/).forEach(tok => { if (tok) frag.appendChild(/^\s+$/.test(tok) ? document.createTextNode(' ') : word(tok)); });
+  }
+  q.textContent = ''; q.appendChild(frag);
+}
+
+/* =====================================================================
+   SCROLL REVEALS — translate only; in view on load means in place on load
+   ===================================================================== */
+const reveals = $$('.reveal');
+if (RM || !('IntersectionObserver' in window)) reveals.forEach(el => el.classList.add('in'));
+else {
+  const vh = innerHeight;
+  const ro = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+  reveals.forEach(el => { if (el.getBoundingClientRect().top < vh) el.classList.add('in'); else ro.observe(el); });
+}
+
+/* =====================================================================
+   HOVER TILT + CURSOR GLOW — fine pointers only (hero ±5°/±4°, big cards ±10°/±8°)
+   ===================================================================== */
+if (FINE && !RM){
+  $$('.card, .tilt').forEach(el => {
+    const hero = el.classList.contains('card'); let rect = null;
+    el.addEventListener('pointerenter', () => { rect = el.getBoundingClientRect(); el.classList.add('tilting'); });
+    el.addEventListener('pointermove', e => {
+      if (!rect) rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left, y = e.clientY - rect.top, fx = x / rect.width - .5, fy = y / rect.height - .5;
+      el.style.setProperty('--ry', (fx * (hero ? 10 : 20)).toFixed(2) + 'deg');
+      el.style.setProperty('--rx', (-fy * (hero ? 8 : 16)).toFixed(2) + 'deg');
+      el.style.setProperty('--mx', x.toFixed(0) + 'px'); el.style.setProperty('--my', y.toFixed(0) + 'px');
+    });
+    el.addEventListener('pointerleave', () => { rect = null; el.classList.remove('tilting'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
+  });
+}
+
+/* =====================================================================
+   COPY EMAIL
+   ===================================================================== */
+const copyBtn = $('#copy'), copyLabel = $('#copy-label'), copyStatus = $('#copy-status'), emailEl = $('#email');
+let copyTimer = 0, sayTimer = 0;
+/* the result also goes to a polite live region (#copy-status): the button's name stays its aria-label, "Copy email address",
+   so the visible Copied / Selected never reaches a screen reader on its own. Emptied first, so a second click is announced again */
+function say(msg){ clearTimeout(sayTimer); copyStatus.textContent = ''; sayTimer = setTimeout(() => { copyStatus.textContent = msg; }, 50); }
+function resetLater(){ clearTimeout(copyTimer); copyTimer = setTimeout(() => { copyBtn.classList.remove('done'); copyLabel.textContent = 'Copy'; copyStatus.textContent = ''; }, 1400); }
+function copied(){ copyBtn.classList.add('done'); copyLabel.textContent = 'Copied'; say('Email address copied'); resetLater(); }
+function selected(){ copyBtn.classList.remove('done'); copyLabel.textContent = 'Selected'; say('Email address selected'); resetLater(); }   // the text is selected, not on the clipboard: say so
+function selectEmail(){ const r = document.createRange(); r.selectNodeContents(emailEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+copyBtn.addEventListener('click', () => {
+  const text = emailEl.textContent.trim();
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(copied, () => { selectEmail(); selected(); });
+  else { selectEmail(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} if (ok) copied(); else selected(); }
+});
+
+/* =====================================================================
+   BOOT — layout, resize, reduced motion, start the loop
+   ===================================================================== */
+Hero.layout();
+minis.forEach(sizeMini);
+let rsTimer = 0;
+function relayout(){ Hero.layout(); minis.forEach(sizeMini); stepTops = null; lastSatY = -1; placeInd(); if (RM) staticFrame(); }
+function scheduleRelayout(){ clearTimeout(rsTimer); rsTimer = setTimeout(relayout, 120); }
+if ('ResizeObserver' in window){ const ro = new ResizeObserver(scheduleRelayout); ro.observe($('#top')); ro.observe($('#hero-copy')); minis.forEach(mn => ro.observe(mn.c)); }
+addEventListener('resize', scheduleRelayout);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleRelayout);
+function staticFrame(){
+  minis.forEach(mn => { if (mn.w) MINI_DRAW[mn.kind](mn, 0); });
+  nums.forEach(n => { n.el.textContent = n.end.toFixed(n.dec) + n.suf; });
+  setActive(0);                                                           // satellite parked on node 01
+  const x = nodes[0].getAttribute('cx'), y = nodes[0].getAttribute('cy');
+  satCore.setAttribute('cx', x); satCore.setAttribute('cy', y); satHaloEl.setAttribute('cx', x); satHaloEl.setAttribute('cy', y);
+  tdot.style.transform = 'translateY(' + steps[0].offsetTop + 'px)';
+}
+tasks.push(Hero.tick, countTick, consoleTick, processTick, minisTick);
+if (RM) staticFrame(); else start();
+setTimeout(() => document.documentElement.classList.add('settled'), 1400);   // entrance done by 0.92 s; drop its keyframes
+/* the WebGL globe: after load, once the poster has been painted (its largest-contentful-paint entry; decoded + two frames
+   where LCP isn't reported; 2.5 s at the latest), in idle time — so the globe's downloads never compete with the first
+   screen — and only if the GLOBE LOADER's conditions hold */
+function afterPoster(fn){
+  const p = $('#globe-poster'), types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+  let done = false, po = null;
+  const go = () => { if (done) return; done = true; clearTimeout(late); if (po) po.disconnect(); whenIdle(fn); };
+  const late = setTimeout(go, 2500);
+  if (types.indexOf('largest-contentful-paint') >= 0){
+    po = new PerformanceObserver(list => { if (list.getEntries().some(e => e.element && e.element.classList && e.element.classList.contains('poster'))) go(); });   // either poster image (the disc copy is the same file)
+    po.observe({ type: 'largest-contentful-paint', buffered: true });
+  } else (p.decode ? p.decode() : Promise.resolve()).then(() => requestAnimationFrame(() => requestAnimationFrame(go)), go);
+}
+if (document.readyState === 'complete') afterPoster(bootGlobe); else addEventListener('load', () => afterPoster(bootGlobe), { once: true });
+/* reduced motion switched on: everything static and the poster back (the WebGL globe is torn down); switched off: back to life */
+RMq.addEventListener('change', e => {
+  RM = e.matches;
+  if (RM){ stop(); countFinal(); staticFrame(); Hero.unmount('reduced motion'); }
+  else { countFinal(); start(); whenIdle(bootGlobe); }
+});
+})();
 </script>
-
 </body>
 </html>
