@@ -167,7 +167,10 @@ canvas{display:block}
 @keyframes rise{from{opacity:0;transform:translateY(var(--dy,10px))}to{opacity:1;transform:none}}
 @keyframes riseBlur{from{opacity:0;transform:translateY(14px);filter:blur(6px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:blur(0)}}
 @keyframes slideX{from{opacity:0;transform:translate(var(--dx),6px)}to{opacity:1;transform:none}}
-@keyframes bloom{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+/* from .01, not 0: Chrome leaves anything painted at opacity 0 out of largest-contentful-paint for good. A poster that is
+   already in the cache is painted in the very first frame, at this keyframe, and at 0 it was never reported — which the
+   globe loader (BOOT) waits for. Measured 2026-11-09 on a repeat visit: poster reported at 0.08 s with .01, never with 0 */
+@keyframes bloom{from{opacity:.01;transform:scale(.96)}to{opacity:1;transform:none}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes breathe{0%,100%{opacity:.9}50%{opacity:1}}
 @keyframes breathe2{0%,100%{opacity:.8}50%{opacity:1}}
@@ -884,11 +887,11 @@ const Hero = (function(){
 
 /* =====================================================================
    GLOBE LOADER — three.js and globe.js are not static scripts: they are
-   injected after `load`, in idle time, and only when the WebGL globe will
+   injected once the poster is on screen, and only when the WebGL globe will
    run — no reduced motion, no Save-Data, a hardware WebGL context, the hero
    in or near the viewport. Otherwise the poster is the globe (no download).
    ===================================================================== */
-const GLOBE_SCRIPTS = ['globe-assets/vendor/three.min.js', 'globe.js'];   // in this order; three.min.js is a custom r147 build that includes the bloom passes (CONTRACT.md)
+const GLOBE_SCRIPTS = ['globe.js', 'globe-assets/vendor/three.min.js'];   // fetched together, run as they land (globe.js reads THREE only at mount); three.min.js is a custom r147 build that includes the bloom passes (CONTRACT.md)
 let glState = 'idle';                                                     // idle → probing → waiting (for the hero) → loading → loaded | off
 function posterOnly(why){ try { console.debug('[orbit] globe: poster only —', (why && why.message) || why); } catch (e) {} }
 function saveData(){ const c = navigator.connection; return !!(c && c.saveData); }
@@ -932,27 +935,36 @@ function probeGL(done){                                                   // don
   w.onerror = ev => { end(); try { ev.preventDefault(); } catch (_) {} onMain(); };
   w.postMessage(PROBE_ATTRS);
 }
-/* one script after the other: globe.js is fetched only once three.js has loaded, so a blocked three.js costs nothing more */
+/* both scripts at once. The moment globe.js lands it starts the globe's data job (BMGlobe.preload: a Worker that downloads
+   and decodes the maps), so the maps come down while three.js is still on its way and while the shaders compile; the globe
+   mounts when both scripts are in. A script that fails to load leaves the poster and drops that job. */
+function dropPreload(){ try { if (window.BMGlobe && window.BMGlobe.preload) window.BMGlobe.preload(null); } catch (e) {} }
 function injectGlobe(){
   if (glState !== 'waiting') return;
   glState = 'loading';
-  (function load(i){
-    const s = document.createElement('script'); s.src = GLOBE_SCRIPTS[i];
-    s.onload = () => { if (glState !== 'loading') return; if (i + 1 < GLOBE_SCRIPTS.length) load(i + 1); else { glState = 'loaded'; Hero.mount(); } };
-    s.onerror = () => { if (glState === 'loading'){ glState = 'off'; posterOnly('script blocked: ' + GLOBE_SCRIPTS[i]); } };
+  let left = GLOBE_SCRIPTS.length;
+  GLOBE_SCRIPTS.forEach(src => {
+    const s = document.createElement('script'); s.src = src; s.fetchPriority = 'high';   // the poster is on screen: nothing of the first screen is waiting behind these
+    s.onload = () => {
+      if (glState !== 'loading') return;
+      if (src === 'globe.js' && !RM){ try { window.BMGlobe.preload({ assetBase: 'globe-assets/' }); } catch (e) {} }
+      if (--left === 0){ glState = 'loaded'; Hero.mount(); }
+    };
+    s.onerror = () => { if (glState === 'loading'){ glState = 'off'; dropPreload(); posterOnly('script blocked: ' + src); } };
     document.body.appendChild(s);
-  })(0);
+  });
 }
 function bootGlobe(){
   if (RM){ posterOnly('reduced motion'); return; }                         // the poster; booted again if reduced motion turns off
-  if (window.BMGlobe){ glState = 'loaded'; Hero.mount(); return; }
+  if (window.BMGlobe && window.THREE){ glState = 'loaded'; Hero.mount(); return; }   // both scripts are in (they load side by side: BMGlobe alone is not enough)
   if (glState !== 'idle') return;
   if (saveData()){ glState = 'off'; posterOnly('Save-Data'); return; }
   glState = 'probing';
   probeGL(r => {
     if (r !== 'gpu'){ glState = 'off'; document.documentElement.classList.add('soft-gl'); posterOnly('no hardware WebGL'); return; }   // .soft-gl: no backdrop blurs on a software compositor (CSS §14)
     glState = 'waiting';
-    if (!('IntersectionObserver' in window)){ injectGlobe(); return; }
+    const hr = $('#top').getBoundingClientRect(), vh = innerHeight || 0;
+    if (!('IntersectionObserver' in window) || (hr.bottom > -vh / 2 && hr.top < vh * 1.5)){ injectGlobe(); return; }   // the hero is in or near the viewport now: no need to wait a frame or two for the observer to say so
     const io = new IntersectionObserver(es => { if (es[es.length - 1].isIntersecting){ io.disconnect(); injectGlobe(); } }, { rootMargin: '50% 0px' });
     io.observe($('#top'));                                                 // the hero in or near the viewport (a page opened at #contact waits)
   });
@@ -1116,24 +1128,38 @@ function staticFrame(){
 tasks.push(Hero.tick, processTick);
 if (RM) staticFrame(); else start();
 setTimeout(() => document.documentElement.classList.add('settled'), 1400);   // entrance done by 0.92 s; drop its keyframes
-/* the WebGL globe: after load, once the poster has been painted (its largest-contentful-paint entry; decoded + two frames
-   where LCP isn't reported; 2.5 s at the latest), in idle time — so the globe's downloads never compete with the first
-   screen — and only if the GLOBE LOADER's conditions hold */
+/* the WebGL globe starts once the poster is on screen, so its downloads never compete with the first screen — and only if
+   the GLOBE LOADER's conditions hold. "On screen" is the poster's own largest-contentful-paint entry, as before. Until
+   2026-11-09 the only other way in was a 2.5 s timer, and every repeat visit took it: a cached poster is painted in the
+   page's first frame, the entrance held it at opacity 0 there, and Chrome never reports what it first painted at 0
+   (measured: the live globe at 2.7 s on a cached visit, 0.5 s on a first one). Two things changed:
+   - the entrance now starts at opacity .01 (CSS, @keyframes bloom), so that first-frame poster is reported;
+   - a browser that still sends no entry no longer waits 2.5 s. Once the page's first paint is reported and the poster is
+     decoded, a poster that came from the cache (complete before this script ran, or transferred smaller than the file:
+     a cache hit or a 304) is in that first paint and the globe starts at once; any other gets 250 ms for its entry
+     (on a first visit it lands 0–70 ms after the first paint), then the globe starts.
+   No load event and no idle wait any more (Safari has no requestIdleCallback: that was a flat 300 ms). 2.5 s stays as
+   the last resort: a tab opened in the background paints nothing. */
 function afterPoster(fn){
-  const p = $('#globe-poster'), types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
-  let done = false, po = null;
-  const go = () => { if (done) return; done = true; clearTimeout(late); if (po) po.disconnect(); whenIdle(fn); };
+  const p = $('#globe-poster'), types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [], obs = [];
+  const early = p.complete && p.naturalWidth > 0;
+  const cached = () => { if (early) return true; try { const e = performance.getEntriesByName(p.currentSrc)[0]; return !!e && e.encodedBodySize > 0 && e.transferSize < e.encodedBodySize; } catch (err) { return false; } };
+  let done = false, decoded = false, painted = false, grace = 0;
+  const go = () => { if (done) return; done = true; clearTimeout(late); clearTimeout(grace); obs.forEach(o => o.disconnect()); fn(); };
   const late = setTimeout(go, 2500);
-  if (types.indexOf('largest-contentful-paint') >= 0){
-    po = new PerformanceObserver(list => { if (list.getEntries().some(e => e.element && e.element.classList && e.element.classList.contains('poster'))) go(); });   // either poster image (the disc copy is the same file)
-    po.observe({ type: 'largest-contentful-paint', buffered: true });
-  } else (p.decode ? p.decode() : Promise.resolve()).then(() => requestAnimationFrame(() => requestAnimationFrame(go)), go);
+  const arm = () => { if (!decoded || !painted || done || grace) return; if (cached()) go(); else grace = setTimeout(go, 250); };
+  const watch = (type, cb) => { try { const o = new PerformanceObserver(cb); o.observe({ type, buffered: true }); obs.push(o); return true; } catch (e) { return false; } };
+  const firstPaint = () => { if (!painted){ painted = true; arm(); } };
+  if (types.indexOf('largest-contentful-paint') >= 0) watch('largest-contentful-paint', l => { if (l.getEntries().some(e => e.element && e.element.classList && e.element.classList.contains('poster'))) go(); });   // either poster image (the disc copy is the same file)
+  if (!(types.indexOf('paint') >= 0 && watch('paint', l => { if (l.getEntries().some(e => e.name === 'first-contentful-paint')) firstPaint(); }))) requestAnimationFrame(() => requestAnimationFrame(firstPaint));
+  const dec = () => { decoded = true; arm(); };
+  (p.decode ? p.decode() : Promise.resolve()).then(dec, dec);             // decode() waits for the file; a broken poster still gets the live globe
 }
-if (document.readyState === 'complete') afterPoster(bootGlobe); else addEventListener('load', () => afterPoster(bootGlobe), { once: true });
+afterPoster(bootGlobe);
 /* reduced motion switched on: everything static and the poster back (the WebGL globe is torn down); switched off: back to life */
 RMq.addEventListener('change', e => {
   RM = e.matches;
-  if (RM){ stop(); staticFrame(); Hero.unmount('reduced motion'); }
+  if (RM){ stop(); staticFrame(); Hero.unmount('reduced motion'); dropPreload(); }
   else { start(); whenIdle(bootGlobe); }
 });
 })();

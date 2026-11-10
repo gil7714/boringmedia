@@ -488,7 +488,7 @@ async function DATA_JOB(job) {
   const err = (kind, message) => { const e = new Error(message); e.kind = kind; return e; };
   async function get(url, buf) {
     let r;
-    try { r = await fetch(url, { credentials: 'same-origin' }); } catch (e) { throw err('fetch', 'fetch failed ' + url); }
+    try { r = await fetch(url, { credentials: 'same-origin', priority: 'low' }); } catch (e) { throw err('fetch', 'fetch failed ' + url); }   // behind three.js when the two download together: it has to be in before anything can compile
     if (!r.ok) throw err('fetch', 'fetch ' + r.status + ' ' + url);
     return buf ? r.arrayBuffer() : r.blob();
   }
@@ -501,6 +501,7 @@ async function DATA_JOB(job) {
     return b;                                   // no ImageBitmap here: the main thread decodes the blob
   }
   const imgs = Promise.all([image(job.urls.coast), image(job.urls.fields), image(job.urls.color)]);
+  imgs.catch(() => {});                         // awaited below, after the light list: a failed map must not surface as an unhandled rejection first
   const buf = await get(job.urls.lights, true);
   /* light list → positions (lifted onto the plates with the tier's ramp), colours (the amber ramp), sizes, seeds */
   const dv = new DataView(buf);
@@ -561,24 +562,53 @@ async function DATA_JOB(job) {
 const WORKER_SRC = `'use strict';
 const DATA_JOB = ${DATA_JOB.toString()};
 self.onmessage = async function (e) {
-  try { const r = await DATA_JOB(e.data); self.postMessage({ ok: true, out: r.out }, r.transfer); }
+  try { const p = DATA_JOB(e.data); self.postMessage({ started: true }); const r = await p; self.postMessage({ ok: true, out: r.out }, r.transfer); }   // 'started': the four requests are out
   catch (er) { self.postMessage({ ok: false, kind: er && er.kind || 'decode', error: String(er && er.message || er) }); }
 };`;
+/* → { p: the job's result, started: resolves once the worker is up and its requests are out (or the job runs on the main
+   thread), drop(): stop a job nobody will use — the worker ends, and bitmaps it already delivered are closed } */
 function runJob(job) {
-  return new Promise((res, rej) => {
-    let url = null, w = null;
+  let url = null, w = null, onStart = null;
+  const started = new Promise(r => { onStart = r; });
+  const end = () => { if (w) { try { w.terminate(); } catch (e) {} URL.revokeObjectURL(url); w = null; } };
+  const p = new Promise((res, rej) => {
+    const local = () => { const j = DATA_JOB(job); onStart(); j.then(r => res(r.out), rej); };   // no Worker: same job on the main thread
     try {
       if (!window.Worker || !window.Blob || !window.URL) throw new Error('no worker');
       url = URL.createObjectURL(new Blob([WORKER_SRC], { type: 'text/javascript' })); w = new Worker(url);
     } catch (e) {
       if (url) URL.revokeObjectURL(url);
-      return DATA_JOB(job).then(r => res(r.out), rej);     // no Worker: same job on the main thread
+      w = null; local(); return;
     }
-    const done = () => { try { w.terminate(); } catch (e) {} URL.revokeObjectURL(url); };
-    w.onmessage = ev => { done(); if (ev.data && ev.data.ok) res(ev.data.out); else { const e = new Error(ev.data && ev.data.error || 'worker failed'); e.kind = ev.data && ev.data.kind || 'decode'; rej(e); } };
-    w.onerror = ev => { done(); try { ev.preventDefault(); } catch (_) {} DATA_JOB(job).then(r => res(r.out), rej); };   // a worker that cannot start (CSP): main thread
+    w.onmessage = ev => {
+      if (ev.data && ev.data.started) { onStart(); return; }
+      end(); onStart();
+      if (ev.data && ev.data.ok) res(ev.data.out); else { const e = new Error(ev.data && ev.data.error || 'worker failed'); e.kind = ev.data && ev.data.kind || 'decode'; rej(e); }
+    };
+    w.onerror = ev => { end(); try { ev.preventDefault(); } catch (_) {} local(); };   // a worker that cannot start (CSP): main thread
     w.postMessage(job);
   });
+  const drop = () => { end(); p.then(d => { for (const k of ['coast', 'fields', 'color']) if (d && d[k] && typeof d[k].close === 'function') d[k].close(); }, () => {}); };
+  return { p, started, drop };
+}
+/* the data job for one tier: the three maps and the light list (Worker: fetch, decode, point attributes, sphere mesh) */
+function dataJob(assetBase, name) {
+  const t = TIERS[name], abs = f => new URL(assetBase + f, document.baseURI).href;
+  const j = runJob({ urls: { coast: abs(CFG.assets.coast), fields: abs(CFG.assets.fields[name]), color: abs(CFG.assets.color[name]), lights: abs(CFG.assets.lights[name]) }, segs: t.segs, plate: CFG.plate, rampT: t.ramp, ramp: RAMP });
+  j.key = assetBase + '|' + name;
+  j.p.catch(() => {});
+  return j;
+}
+/* BMGlobe.preload({ assetBase, width }): the host may start the data job before three.js is in (this file does not need
+   THREE until mount), so the maps download and decode while three.js loads and the programs compile. mount() takes the
+   job over when it is for the same asset base and tier, and starts its own otherwise. preload(null) drops a job that
+   will not be used (three.js failed to load, reduced motion came on). */
+let pre = null;
+function preload(opts) {
+  if (pre) { pre.drop(); pre = null; }
+  if (!opts) return;
+  mark('bmglobe:preload');
+  try { pre = dataJob(opts.assetBase || 'globe-assets/', tierFor(opts.width || window.innerWidth || 1280)); } catch (e) { pre = null; }
 }
 
 /* ------------------------------------------------------- GL helpers */
@@ -663,6 +693,7 @@ function mount(container, opts) {
   const RAMPT = built.ramp;
 
   let ready = false, paused = false, dead = false, failed = false, lost = false, pendingReady = false, hadLoss = false;
+  let job = null;                           // the data job (runJob): preloaded by the host or started in build()
   function fail(err) {
     if (failed || dead) return; failed = true;
     try { console.debug('[orbit] WebGL globe fell back:', err && err.message || err); } catch (e) {}
@@ -790,11 +821,17 @@ function mount(container, opts) {
   async function build() {
     const T0 = performance.now(), ph = []; let tl = T0;
     const lap = name => { const now = performance.now(); ph.push(name + ' ' + Math.round(now - tl)); tl = now; };
-    const abs = f => new URL(assetBase + f, document.baseURI).href;
-    const dataP = runJob({ urls: { coast: abs(CFG.assets.coast), fields: abs(CFG.assets.fields[builtName]), color: abs(CFG.assets.color[builtName]), lights: abs(CFG.assets.lights[builtName]) }, segs: built.segs, plate: CFG.plate, rampT: RAMPT, ramp: RAMP });
-    dataP.catch(() => {});
+    if (pre && pre.key === assetBase + '|' + builtName) job = pre; else if (pre) pre.drop();   // a job the host started early (BMGlobe.preload), if it is this tier's
+    pre = null;
+    if (!job) job = dataJob(assetBase, builtName);
+    const dataP = job.p;
     await ensurePasses(assetBase);
     if (dead) return;
+    /* the worker has to be up, with its requests out, before the compile chain starts: the chain's task boundaries are
+       scheduler.yield() continuations, which run ahead of ordinary tasks, so a worker still waiting for its start-up task
+       did not begin to download until the last program had compiled (0.3–1.0 s after mount on a cold shader cache). A job
+       the host preloaded is long past this; 250 ms at most */
+    await Promise.race([job.started, new Promise(r => setTimeout(r, 250))]); if (dead) return;
     await nextTick(); if (dead) return;             // mount() has returned with the context and renderer up: compiling starts in a task of its own
     /* materials on stand-ins, one program compiled per task: the sphere first (the largest), then the lights, arcs, flashes,
        rings, satellites, specks and halo (compileEach) */
@@ -1154,6 +1191,7 @@ function mount(container, opts) {
 
   function destroy() {
     if (dead) return; dead = true; stopLoop();
+    if (job && !ready) job.drop();          // torn down before the data was used: stop the worker, free its bitmaps
     if (!external) document.removeEventListener('visibilitychange', onVis);
     if (io) io.disconnect();
     canvas.removeEventListener('webglcontextlost', onLost);
@@ -1197,7 +1235,7 @@ function mount(container, opts) {
   function arcsVisible() { let n = 0; for (let i = 0; i < MAXA; i++) if (arcSlot[i] >= 0 && uGlow.value[i] > 0.3 && uHead.value[i] - uTail.value[i] > 0.15) n++; return n; }
 }
 
-window.BMGlobe = { mount, CFG, TIERS, POSTER, version: '3.0.0' };
+window.BMGlobe = { mount, preload, CFG, TIERS, POSTER, version: '3.1.0' };
 /* hosts that ran before this script mount on this event; hosts that run after it find window.BMGlobe */
 try { window.dispatchEvent(new CustomEvent('bmglobe-ready')); } catch (e) {}
 })();
